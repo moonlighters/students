@@ -1,0 +1,14 @@
+log/*.log
+tmp/**/*
+.DS_Store
+doc/api
+doc/app
+coverage
+db/*.sqlite3
+*.swp
+*~
+public/system
+vendor/gems
+config/initializers/recaptcha.rb
+config/database.yml
+config/deploy.rb

@@ -1,0 +1,21 @@
+<h2>Редактировать профиль</h2>
+
+<% form_for @user, :url => user_url( @user ) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :password, "Сменить пароль" %><br/>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= f.submit "Редактировать" %>
+  </p>
+<% end %>
+
+<%= link_to "Мой профиль", user_url %>

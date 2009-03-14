@@ -1,0 +1,24 @@
+<h2>Регистрация</h2>
+
+<% form_for @user, :url => signup_url do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :login %><br/>
+    <%= f.text_field :login %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation %><br/>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= f.submit "Зарегистрироваться" %>
+  </p>
+<% end %>

@@ -1,0 +1,26 @@
+ru:
+  activerecord:
+    models:
+      user: "Пользователь"
+    attributes:
+      user:
+        login: "Логин"
+        password: "Пароль"
+        password_confirmation: "Повторите пароль"
+        remember_me: "Запомнить меня"
+        email: "E-mail"
+        avatar: "Аватар"
+        time_zone: "Часовой пояс"
+  authlogic:
+    error_messages:
+      login_blank: "не должен быть пустым"
+      login_not_found: "не существует"
+      login_invalid: "должен содержать только буквы, цифры, пробелы и .-_@."
+      email_invalid: "имеет недопустимый формат"
+      password_blank: "не должен быть пустым"
+      password_invalid: "неверный"
+      not_active: "Ваш аккаунт не активирован"
+      not_confirmed: "Ваш аккаунт не подтвержден"
+      not_approved: "Ваш аккаунт не утвержден"
+      blank_record: "Нельзя войти с пустой записью"
+      new_record: "Нельзя войти с новой записью"
