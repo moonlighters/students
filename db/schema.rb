@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090203162225) do
+ActiveRecord::Schema.define(:version => 20090316160327) do
+
+  create_table "forums", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
