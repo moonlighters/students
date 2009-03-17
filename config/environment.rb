@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "yaroslav-russian", :lib => "russian", :source => "http://gems.github.com"
   config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9"
+  config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
