@@ -2,6 +2,7 @@ ru:
   activerecord:
     models:
       user: "Пользователь"
+      forum: "Форум"
     attributes:
       user:
         login: "Логин"
@@ -11,6 +12,9 @@ ru:
         email: "E-mail"
         avatar: "Аватар"
         time_zone: "Часовой пояс"
+      forum:
+        title: "Название"
+        description: "Описание"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

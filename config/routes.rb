@@ -38,6 +38,20 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
+
+  map.with_options :controller => "forums" do |m|
+    m.with_options :conditions => { :method => :get } do |mm|
+      mm.forums "forums", :action => "index"
+      mm.new_root_forum "forums/new", :action => "new_root"
+      mm.forum "forums/:id", :action => "show"
+      mm.new_sub_forum "forums/:id/new", :action => "new_sub"
+      mm.edit_forum "forums/:id/edit", :action => "edit"
+    end
+    m.connect "forums", :action => "create", :conditions => { :method => :post }
+    m.connect "forums/:id", :action => "update", :conditions => { :method => :put }
+    m.connect "forums/:id", :action => "destroy", :conditions => { :method => :delete }
+  end
+
   map.resources :users
   map.signup  "signup", :controller => "users", :action => "new", :conditions => {:method => :get}
   map.connect "signup", :controller => "users", :action => "create", :conditions => {:method => :post}

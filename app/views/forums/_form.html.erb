@@ -1,0 +1,17 @@
+<% form_for forum do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field( :parent_id ) if forum.new_record? %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.submit forum.new_record? ? "Создать" : "Обновить" %>
+  </p>
+<% end %>
