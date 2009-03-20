@@ -3,6 +3,7 @@ ru:
     models:
       user: "Пользователь"
       forum: "Форум"
+      forum_topic: "Тема"
     attributes:
       user:
         login: "Логин"
@@ -15,6 +16,10 @@ ru:
       forum:
         title: "Название"
         description: "Описание"
+      forum_topic:
+        title: "Название"
+        description: "Описание"
+        view_count: "Кол-во просмотров"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

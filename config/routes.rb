@@ -52,6 +52,17 @@ ActionController::Routing::Routes.draw do |map|
     m.connect "forums/:id", :action => "destroy", :conditions => { :method => :delete }
   end
 
+  map.with_options :controller => "forum_topics" do |m|
+    m.with_options :conditions => { :method => :get } do |mm|
+      mm.topic "forums/topics/:id/", :action => "show"
+      mm.new_topic "forums/:id/new_topic", :action => "new"
+      mm.edit_topic "forums/topics/:id/edit", :action => "edit"
+    end
+    m.post_topic "forums/topics", :action => "create", :conditions => { :method => :post }
+    m.connect "forums/topics/:id", :action => "update", :conditions => { :method => :put }
+    m.connect "forums/topics/:id", :action => "destroy", :conditions => { :method => :delete }
+  end
+
   map.resources :users
   map.signup  "signup", :controller => "users", :action => "new", :conditions => {:method => :get}
   map.connect "signup", :controller => "users", :action => "create", :conditions => {:method => :post}

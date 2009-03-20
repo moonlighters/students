@@ -1,0 +1,10 @@
+<% unless topics.empty? %>
+  <table>
+    <tr>
+      <th>Название</th>
+      <th>Описание</th>
+      <th>Просмотров</th>
+    </tr>
+    <%= render :partial => "forum_topics/topic", :collection => topics %>
+  </table>
+<% end %>

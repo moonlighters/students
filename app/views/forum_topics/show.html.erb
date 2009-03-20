@@ -1,0 +1,13 @@
+<p>
+  <b>Название:</b>
+  <%=h @topic.title %>
+</p>
+
+<p>
+  <b>Описание:</b>
+  <%=h @topic.description %>
+</p>
+
+
+<%= link_to "Редактировать", edit_topic_path( @topic ) %> |
+<%= link_to "Вверх", forum_path( @topic.forum ) %>

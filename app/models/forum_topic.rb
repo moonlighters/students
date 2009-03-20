@@ -7,4 +7,9 @@ class ForumTopic < ActiveRecord::Base
   before_create do |topic|
     topic.view_count = 0
   end
+
+  def view!
+    self.view_count += 1
+    self.save
+  end
 end
