@@ -1,9 +1,7 @@
-<% form_for :topic, topic,
-          :url => ( topic.new_record? ? post_topic_path : topic_path(topic) ),
-          :html => { :method => ( topic.new_record? ? :post : :put ) } do |f| %>
+<% form_for forum_topic do |f| %>
   <%= f.error_messages %>
 
-  <%= f.hidden_field( :forum_id ) if topic.new_record? %>
+  <%= f.hidden_field( :forum_id ) if forum_topic.new_record? %>
 
   <p>
     <%= f.label :title %><br />
@@ -14,6 +12,6 @@
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.submit topic.new_record? ? "Создать" : "Обновить" %>
+    <%= f.submit forum_topic.new_record? ? "Создать" : "Обновить" %>
   </p>
 <% end %>

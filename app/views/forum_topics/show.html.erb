@@ -1,13 +1,13 @@
 <p>
   <b>Название:</b>
-  <%=h @topic.title %>
+  <%=h @forum_topic.title %>
 </p>
 
 <p>
   <b>Описание:</b>
-  <%=h @topic.description %>
+  <%=h @forum_topic.description %>
 </p>
 
 
-<%= link_to "Редактировать", edit_topic_path( @topic ) %> |
-<%= link_to "Вверх", forum_path( @topic.forum ) %>
+<%= link_to "Редактировать", edit_forum_topic_path( @forum_topic ) %> |
+<%= link_to "Вверх", forum_path( @forum_topic.forum ) %>

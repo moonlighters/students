@@ -54,11 +54,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.with_options :controller => "forum_topics" do |m|
     m.with_options :conditions => { :method => :get } do |mm|
-      mm.topic "forums/topics/:id/", :action => "show"
-      mm.new_topic "forums/:id/new_topic", :action => "new"
-      mm.edit_topic "forums/topics/:id/edit", :action => "edit"
+      mm.forum_topic "forums/topics/:id/", :action => "show"
+      mm.new_forum_topic "forums/:id/new_topic", :action => "new"
+      mm.edit_forum_topic "forums/topics/:id/edit", :action => "edit"
     end
-    m.post_topic "forums/topics", :action => "create", :conditions => { :method => :post }
+    m.forum_topics "forums/topics", :action => "create", :conditions => { :method => :post }
     m.connect "forums/topics/:id", :action => "update", :conditions => { :method => :put }
     m.connect "forums/topics/:id", :action => "destroy", :conditions => { :method => :delete }
   end

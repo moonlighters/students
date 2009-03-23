@@ -1,5 +1,5 @@
 <h1>Создать тему</h1>
 
-<%= render :partial => "form", :locals => {:topic => @topic} %>
+<%= render :partial => "form", :locals => {:forum_topic => @forum_topic} %>
 
-<%= link_to "Назад", forum_path( @topic.forum ) %>
+<%= link_to "Назад", forum_path( @forum_topic.forum ) %>

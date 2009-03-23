@@ -12,9 +12,9 @@
 <%= render :partial => "table", :locals => {:forums => @children} %>
 
 <h2>Темы</h2>
-<%= render :partial => "forum_topics/table", :locals => {:topics => @topics} %>
+<%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
 
-<%= link_to 'Новая тема', new_topic_path( @forum ) %> |
+<%= link_to 'Новая тема', new_forum_topic_path( @forum ) %> |
 
 <%= link_to 'Новый форум', new_sub_forum_path( @forum ) %> |
 <%= link_to 'Редактировать', edit_forum_path( @forum ) %> |

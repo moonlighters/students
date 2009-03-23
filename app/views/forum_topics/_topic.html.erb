@@ -1,7 +1,0 @@
-<tr>
-  <td><%= link_to h(topic.title), topic_path( topic ) %></td>
-  <td><%=h topic.description %></td>
-  <td><%= topic.view_count %></td>
-  <td><%= link_to 'Редактировать', edit_topic_path( topic ) %></td>
-  <td><%= button_to 'Удалить', topic_path( topic ), :method => :delete %></td>
-</tr>
