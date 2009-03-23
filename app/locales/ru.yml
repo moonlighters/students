@@ -3,7 +3,7 @@ ru:
     models:
       user: "Пользователь"
       forum: "Форум"
-      forum_topic: "Тема"
+      forum topic: "Тема"
     attributes:
       user:
         login: "Логин"
