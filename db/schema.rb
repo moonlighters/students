@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090319142656) do
+ActiveRecord::Schema.define(:version => 20090324134339) do
+
+  create_table "forum_posts", :force => true do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "forum_topics", :force => true do |t|
     t.string   "title"

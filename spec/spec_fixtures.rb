@@ -21,3 +21,9 @@ Factory.define :forum_topic do |t|
   t.association :user, :factory => :user
   t.association :forum, :factory => :forum
 end
+
+Factory.define :forum_post do |f|
+  f.body "it's a post\nabout this and that"
+  f.association :user, :factory => :user
+  f.association :topic, :factory => :forum_topic
+end

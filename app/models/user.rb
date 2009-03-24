@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   attr_protected :login
 
   has_many :forum_topics
+  has_many :forum_posts
 end

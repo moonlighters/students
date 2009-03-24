@@ -3,6 +3,9 @@ class ForumTopic < ActiveRecord::Base
 
   belongs_to :forum
   belongs_to :user
+  
+  has_many  :posts,
+            :class_name => "ForumPost"
 
   before_create do |topic|
     topic.view_count = 0
