@@ -4,6 +4,7 @@ ru:
       user: "Пользователь"
       forum: "Форум"
       forum topic: "Тема"
+      forum post: "Сообщение"
     attributes:
       user:
         login: "Логин"
@@ -20,6 +21,8 @@ ru:
         title: "Название"
         description: "Описание"
         view_count: "Кол-во просмотров"
+      forum_post:
+        body: "Сообщение"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

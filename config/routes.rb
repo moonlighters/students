@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -61,6 +62,16 @@ ActionController::Routing::Routes.draw do |map|
     m.forum_topics "forums/topics", :action => "create", :conditions => { :method => :post }
     m.connect "forums/topics/:id", :action => "update", :conditions => { :method => :put }
     m.connect "forums/topics/:id", :action => "destroy", :conditions => { :method => :delete }
+  end
+
+  map.with_options :controller => "forum_posts" do |m|
+    m.with_options :conditions => { :method => :get } do |mm|
+      mm.new_forum_post "forums/topics/:id/new_post", :action => "new"
+      mm.edit_forum_post "forums/posts/:id/edit", :action => "edit"
+    end
+    m.forum_posts "forums/posts", :action => "create", :conditions => { :method => :post }
+    m.forum_post "forums/posts/:id", :action => "update", :conditions => { :method => :put }
+    m.connect "forums/posts/:id", :action => "destroy", :conditions => { :method => :delete }
   end
 
   map.resources :users

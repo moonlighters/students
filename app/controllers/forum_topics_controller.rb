@@ -4,6 +4,7 @@ class ForumTopicsController < ApplicationController
 
   # GET /forums/topics/1
   def show
+    @forum_posts = @forum_topic.posts
     @forum_topic.view!
   end
 

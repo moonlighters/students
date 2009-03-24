@@ -1,0 +1,13 @@
+<% form_for forum_post do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field( :forum_topic_id ) if forum_post.new_record? %>
+
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit forum_post.new_record? ? "Отправить" : "Обновить" %>
+  </p>
+<% end %>

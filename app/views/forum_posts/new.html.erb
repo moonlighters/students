@@ -1,0 +1,5 @@
+<h1>Ответ в тему "<%=h @forum_post.topic.title %>"</h1>
+
+<%= render :partial => "form", :locals => {:forum_post => @forum_post} %>
+
+<%= link_to 'Назад', forum_topic_path( @forum_post.topic ) %>
