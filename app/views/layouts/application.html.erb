@@ -37,22 +37,9 @@ Released for free under a Creative Commons Attribution 2.5 License
         </div>
         <div id="sidebar">
             <div id="login" class="boxed">
-                <h2 class="title">Профиль</h2>
+                <h2 class="title">Учетная запись</h2>
                 <div class="content">
-                <% if current_user %>
-                    <%= link_to_user current_user, :class => "account_login"%>
-                    <ul class="account_actions">
-                        <li><%= link_to "просмотреть", user_url( current_user ) %></li>
-                        <li><%= link_to "редактировать", edit_user_url( current_user ) %></li>
-                        <li><%= link_to "выйти", logout_url %></li>
-                    </ul>
-                <% else %>
-                    <p class="account_login">Вы не вошли на сайт.</p>
-                    <ul>
-                        <li><%= link_to "войти", login_url %></li>
-                        <li><%= link_to "зарегистрироваться", signup_url %></li>
-                    </ul>
-                <% end %>
+                  <%= render "user_sessions/account" %>
                 </div>
             </div>
             <div id="updates" class="boxed">
