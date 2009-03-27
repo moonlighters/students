@@ -1,6 +1,6 @@
 <tr>
   <td><%= link_to h(forum.title), forum_path( forum ) %></td>
   <td><%=h forum.description %></td>
-  <td><%= link_to 'Редактировать', edit_forum_path( forum ) %></td>
-  <td><%= button_to 'Удалить', forum_path( forum ), :method => :delete %></td>
+  <td><%= link_to 'Правка', edit_forum_path( forum ) %>
+    <%= button_to 'X', forum_path( forum ), :method => :delete %></td>
 </tr>

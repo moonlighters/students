@@ -1,6 +1,6 @@
 <tr>
   <td><b><%=h forum_post.user.login %></b><br/>написал(а):</td>
   <td><%= add_br_to_text( h forum_post.body ) %></td>
-  <td><%= link_to 'Редактировать', edit_forum_post_path( forum_post ) %></td>
-  <td><%= button_to 'Удалить', forum_post_path( forum_post ), :method => :delete %></td>
+  <td align="center"><%= link_to 'Править', edit_forum_post_path( forum_post ) %>
+    <%= button_to 'X', forum_post_path( forum_post ), :method => :delete %></td>
 </tr>

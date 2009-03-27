@@ -2,6 +2,6 @@
   <td><%= link_to h(forum_topic.title), forum_topic_path( forum_topic ) %></td>
   <td><%=h forum_topic.description %></td>
   <td><%= forum_topic.view_count %></td>
-  <td><%= link_to 'Редактировать', edit_forum_topic_path( forum_topic ) %></td>
-  <td><%= button_to 'Удалить', forum_topic_path( forum_topic ), :method => :delete %></td>
+  <td align="center"><%= link_to 'Править', edit_forum_topic_path( forum_topic ) %>
+    <%= button_to 'X', forum_topic_path( forum_topic ), :method => :delete %></td>
 </tr>

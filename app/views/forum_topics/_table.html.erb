@@ -1,10 +1,12 @@
 <% unless forum_topics.empty? %>
-  <table>
-    <tr>
-      <th>Название</th>
-      <th>Описание</th>
-      <th>Просмотров</th>
-    </tr>
-    <%= render forum_topics %>
-  </table>
+  <div class="topics-table">
+    <table>
+      <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Просмотров</th>
+      </tr>
+      <%= render forum_topics %>
+    </table>
+  </div>
 <% end %>

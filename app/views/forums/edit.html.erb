@@ -1,4 +1,9 @@
-<h1>Редактировать форум</h1>
+<% @page_title = "Редактирование форума" %>
+<% if @forum.parent %>
+  <h2>Редактирование подфорума в "<%=h @forum.parent.title %>"</h2>
+<% else %>
+  <h2>Редактирование форума</h2>
+<% end %>
 
 <%= render :partial => "form", :locals => {:forum => @forum} %>
 

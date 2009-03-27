@@ -33,14 +33,18 @@ h1, h2, h3 {
 	color: #385B88;
 }
 
+#content h1, #content h2, #content h3 {
+    text-align: center;
+}
+
 h2 {
 	margin-bottom: .5em;
 	font-size: 1.8em;
 }
 
 h3 {
-	margin-bottom: 1em;
-	font-size: 1em;
+	margin-bottom: .3em;
+	font-size: 1.4em;
 }
 
 p, blockquote, ul, ol {
@@ -348,4 +352,31 @@ img.right {
 	width: 700px;
 	margin: 0 auto;
 	font-size: x-small;
+}
+
+.posts-table table {
+  width: 100%;
+  margin: 10px;
+}
+
+.posts-table td {
+  vertical-align: top;
+}
+
+.topics-table table {
+  width: 100%;
+  margin: 10px;
+}
+
+.topics-table td {
+  vertical-align: top;
+}
+
+.forums-table table {
+  width: 100%;
+  margin: 10px;
+}
+
+.forums-table td {
+  vertical-align: top;
 }
