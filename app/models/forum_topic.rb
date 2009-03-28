@@ -5,7 +5,8 @@ class ForumTopic < ActiveRecord::Base
   belongs_to :user
   
   has_many  :posts,
-            :class_name => "ForumPost"
+            :class_name => "ForumPost",
+            :dependent => :destroy
 
   before_create do |topic|
     topic.view_count = 0
