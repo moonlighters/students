@@ -5,7 +5,7 @@ doc/api
 doc/app
 coverage
 db/*.sqlite3
-*.swp
+*.sw*
 *~
 public/system
 vendor/gems
