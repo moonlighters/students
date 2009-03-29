@@ -1,4 +1,5 @@
-<h2>Регистрация</h2>
+<% @page_title = "Регистрация" %>
+<h2>Регистрация пользователя</h2>
 
 <% form_for @user, :url => signup_url do |f| %>
   <%= f.error_messages %>

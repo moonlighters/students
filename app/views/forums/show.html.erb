@@ -1,22 +1,19 @@
-<p>
-  <b>Название:</b>
-  <%=h @forum.title %>
-</p>
+<% @page_title = "Просмотр форума" %>
+<h2>Форум "<%=h @forum.title %>"</h2>
 
-<p>
-  <b>Описание:</b>
-  <%=h @forum.description %>
-</p>
+<h4><%=h( "Описание: " + @forum.description ) if @forum.description %></h4>
 
-<h2>Подфорумы</h2>
-<%= render :partial => "table", :locals => {:forums => @children} %>
+<% unless @children.empty? %>
+  <h3>Подфорумы</h3>
+  <%= render :partial => "table", :locals => {:forums => @children} %>
+<% end %>
 
-<h2>Темы</h2>
-<%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
+<% unless @forum_topics %>
+  <h3>Темы</h3>
+  <%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
+<% end %>
 
 <%= link_to 'Новая тема', new_forum_topic_path( @forum ) %> |
 
 <%= link_to 'Новый форум', new_sub_forum_path( @forum ) %> |
-<%= link_to 'Редактировать', edit_forum_path( @forum ) %> |
-<%= link_to 'Вверх', forum_path( @forum.parent ) %> |
-<%= button_to 'Удалить', forum_path( @forum ), :method => :delete %>
+<%= link_to 'Вверх', forum_path( @forum.parent ) %>

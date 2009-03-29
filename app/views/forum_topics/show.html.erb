@@ -1,15 +1,9 @@
-<p>
-  <b>Название:</b>
-  <%=h @forum_topic.title %>
-</p>
+<% @page_title = "Просмотр темы" %>
+<h2>Тема "<%=h @forum_topic.title %>"</h2>
 
-<p>
-  <b>Описание:</b>
-  <%=h @forum_topic.description %>
-</p>
+<h4><%=h( "Описание: " + @forum_topic.description ) if @forum_topic.description %></h4>
 
 <%= render :partial => "forum_posts/table", :locals => {:forum_posts => @forum_posts} %>
 
 <%= link_to "Ответить", new_forum_post_path( @forum_topic ) %> |
-<%= link_to "Редактировать", edit_forum_topic_path( @forum_topic ) %> |
 <%= link_to "Вверх", forum_path( @forum_topic.forum ) %>

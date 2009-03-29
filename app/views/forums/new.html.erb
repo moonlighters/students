@@ -1,4 +1,9 @@
-<h1>Создать форум</h1>
+<% @page_title = "Создание форума" %>
+<% if @forum.parent %>
+  <h2>Создание подфорума в "<%=h @forum.parent.title %>"</h2>
+<% else %>
+  <h2>Создание форума</h2>
+<% end %>
 
 <%= render :partial => "form", :locals => {:forum => @forum} %>
 
