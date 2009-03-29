@@ -8,7 +8,7 @@
   <%= render :partial => "table", :locals => {:forums => @children} %>
 <% end %>
 
-<% unless @forum_topics %>
+<% unless @forum_topics.empty? %>
   <h3>Темы</h3>
   <%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
 <% end %>
