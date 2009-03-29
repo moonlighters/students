@@ -5,7 +5,7 @@ class ForumTopicsController < ApplicationController
   # GET /forums/topics/1
   def show
     @forum_posts = @forum_topic.posts
-    @forum_topic.view!
+    @forum_topic.view! current_user
   end
 
   # GET /forums/1/new_topic

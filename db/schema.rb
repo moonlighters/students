@@ -9,12 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090324154137) do
+ActiveRecord::Schema.define(:version => 20090326182532) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
     t.integer  "user_id"
     t.integer  "forum_topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forum_topic_viewings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_topic_id"
+    t.integer  "forum_post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
