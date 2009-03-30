@@ -6,4 +6,13 @@ class Forum < ActiveRecord::Base
   has_many  :topics,
             :class_name => "ForumTopic",
             :dependent => :destroy
+  def path
+    f = self
+    path = [self]
+
+    while f = f.parent
+      path.unshift parent
+    end
+    path
+  end
 end

@@ -1,15 +1,16 @@
-<% @page_title = "Просмотр форума" %>
-<h2>Форум "<%=h @forum.title %>"</h2>
+<% @page_title = "Форум \"#{@forum.title}\"" %>
 
-<h4><%=h( "Описание: " + @forum.description ) if @forum.description %></h4>
+<h2><%= forum_path_html @forum %></h2>
+
+<div class="forum-description"><%=h( "Описание: " + @forum.description ) if @forum.description %></div>
 
 <% unless @children.empty? %>
-  <h3>Подфорумы</h3>
+  <h4>Подфорумы</h4>
   <%= render :partial => "table", :locals => {:forums => @children} %>
 <% end %>
 
 <% unless @forum_topics.empty? %>
-  <h3>Темы</h3>
+  <h4>Темы</h4>
   <%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
 <% end %>
 

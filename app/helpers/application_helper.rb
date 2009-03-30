@@ -11,4 +11,13 @@ module ApplicationHelper
     end
     messages
   end
+
+  def forum_path_html ( forum )
+    links = [ link_to( "Форумы", forums_path) ]
+
+    forum.path.each do |f|
+      links << link_to( h( f.title ), forum_path( f ) )
+    end
+    links.join " > "
+  end
 end

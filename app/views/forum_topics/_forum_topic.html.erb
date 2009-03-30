@@ -1,7 +1,12 @@
 <tr>
-  <td><%= link_to h(forum_topic.title), forum_topic_path( forum_topic ) %></td>
-  <td><%=h forum_topic.description %></td>
-  <td><%= forum_topic.view_count %></td>
-  <td align="center"><%= link_to 'Править', edit_forum_topic_path( forum_topic ) %>
-    <%= button_to 'X', forum_topic_path( forum_topic ), :method => :delete %></td>
+  <td>
+    <%= link_to h(forum_topic.title), forum_topic_path( forum_topic ) %>
+    <div class="desc"><%=h forum_topic.description %></div>
+  </td>
+  <td align="center"><%= forum_topic.view_count %></td>
+  <td align="center"><%= forum_topic.posts.count - 1 %></td>
+  <td align="center">
+    <%= button_to 'Правка', edit_forum_topic_path( forum_topic ), :method => :get %>
+    <%= button_to 'X', forum_topic_path( forum_topic ), :method => :delete %>
+  </td>
 </tr>

@@ -26,11 +26,12 @@ legend {
 	display: none;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h2 a {
 	margin: 0;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-weight: normal;
 	color: #385B88;
+  text-decoration: none;
 }
 
 #content h1, #content h2, #content h3 {
@@ -40,6 +41,10 @@ h1, h2, h3 {
 h2 {
 	margin-bottom: .5em;
 	font-size: 1.8em;
+}
+
+h2 a:hover {
+  text-decoration: underline;
 }
 
 h3 {
@@ -365,7 +370,14 @@ img.right {
 
 .topics-table table {
   width: 100%;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #E0E5EC;
+}
+
+.topics-table th, .topics-table td {
+  background-color: #F5F9F7;
+  padding:          5px;
 }
 
 .topics-table td {
@@ -374,9 +386,34 @@ img.right {
 
 .forums-table table {
   width: 100%;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #D0E0E0;
+}
+
+.forums-table th, .forums-table td {
+  background-color: #EEF1F5;
+  padding:          5px;
+}
+
+.forums-table td a {
+  font-size: 120%;
 }
 
 .forums-table td {
   vertical-align: top;
+}
+
+.forum-description, .topic-description {
+  font-weight: bold;
+  font-style:  italic;
+  text-align:  center;
+}
+
+.forums-table .button-to div,
+.forums-table .button-to,
+.topics-table .button-to div,
+.topics-table .button-to {
+ /* float: right;*/
+  display: inline;
 }

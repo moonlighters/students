@@ -1,10 +1,11 @@
 <% unless forum_topics.empty? %>
   <div class="topics-table">
-    <table>
+    <table cellspacing="1">
       <tr>
         <th>Название</th>
-        <th>Описание</th>
-        <th>Просмотров</th>
+        <th width="85px">Просмотров</th>
+        <th width="70px">Ответов</th>
+        <th width="85px"/>
       </tr>
       <%= render forum_topics %>
     </table>
