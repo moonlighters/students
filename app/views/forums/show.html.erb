@@ -1,6 +1,6 @@
 <% @page_title = "Форум \"#{@forum.title}\"" %>
 
-<h2><%= forum_path_html @forum %></h2>
+<h2><%= forum_path_formatted @forum %></h2>
 
 <div class="forum-description"><%=h( "Описание: " + @forum.description ) if @forum.description %></div>
 

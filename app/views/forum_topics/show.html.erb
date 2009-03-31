@@ -1,10 +1,10 @@
 <% @page_title = "Тема \"#{h( @forum_topic.title )}\"" %>
 <h2>
-  <%= forum_path_html @forum_topic.forum %>
-  > <%= link_to h( @forum_topic.title ), forum_topic_path( @forum_topic )%>
+  <%= forum_path_formatted @forum_topic.forum %>
+  > <%= link_to_topic @forum_topic %>
 </h2>
 
-<div class="topic-description"><%=h("(#{@forum_topic.description})" ) if @forum_topic.description %></div>
+<div class="topic-description"><%=h( "(#{@forum_topic.description})" ) if @forum_topic.description %></div>
 
 <%= render :partial => "forum_posts/table", :locals => {:forum_posts => @forum_posts} %>
 

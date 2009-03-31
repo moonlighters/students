@@ -15,7 +15,7 @@ describe ApplicationHelper do
     end
   end
 
-  describe "flash_messages" do
+  describe "#flash_messages" do
     it "should generate empty array if there are no flashes" do
       flash_messages.should == []
     end
