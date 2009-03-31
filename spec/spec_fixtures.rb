@@ -27,3 +27,9 @@ Factory.define :forum_post do |f|
   f.association :user, :factory => :user
   f.association :topic, :factory => :forum_topic
 end
+
+Factory.define :forum_topic_viewing do |v|
+  v.association :user, :factory => :user
+  v.association :topic, :factory => :forum_topic
+  v.association :post, :factory => :forum_post
+end

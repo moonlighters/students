@@ -8,12 +8,6 @@ class ForumTopic < ActiveRecord::Base
             :class_name => "ForumPost",
             :dependent => :destroy
 
-  has_many  :viewings,
-            :class_name => "ForumTopicViewing"
-  has_many  :readers,
-            :through => :viewings,
-            :source => :user
-
   before_create do |topic|
     topic.view_count = 0
   end
