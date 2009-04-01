@@ -417,3 +417,35 @@ img.right {
  /* float: right;*/
   display: inline;
 }
+
+/* field with errors */
+.errorExplanation {
+  padding: 10px;
+  border: 1px;
+  border-style: dashed;
+  background: #FFFFFF;
+}
+
+.errorExplanation h2 {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.fieldWithErrors input {
+  border: dashed 2px #EA672E;
+}
+
+#flash-notice {
+  padding: 3px;
+  background: #D0D0FF;
+}
+
+#flash-warning {
+  padding: 3px;
+  background: #D0FFD0;
+}
+
+#flash-error {
+  padding: 3px;
+  background: #FFD0D0;
+}
