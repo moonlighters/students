@@ -3,4 +3,6 @@
 
 <%= render :partial => "form", :locals => {:forum_topic => @forum_topic} %>
 
+<%= button_to 'Удалить', forum_topic_path( @forum_topic ), :method => :delete %>
+
 <%= link_to "Просмотреть тему", forum_topic_path( @forum_topic ) %> |

@@ -5,8 +5,4 @@
   </td>
   <td align="center"><%= forum_topic.view_count %></td>
   <td align="center"><%= forum_topic.posts.count - 1 %></td>
-  <td align="center">
-    <%= button_to 'Правка', edit_forum_topic_path( forum_topic ), :method => :get %>
-    <%= button_to 'X', forum_topic_path( forum_topic ), :method => :delete %>
-  </td>
 </tr>

@@ -7,4 +7,6 @@
 
 <%= render :partial => "form", :locals => {:forum => @forum} %>
 
+<%= button_to 'Удалить', forum_path( @forum ), :method => :delete %>
+
 <%= link_to 'Назад', forum_path( @forum ) %>
