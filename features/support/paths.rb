@@ -1,13 +1,22 @@
 module NavigationHelpers
   def path_to(page_name)
     case page_name
-    
-    when /список форумов/
-      forums_path
 
     when /главн(?:ую|ая)/
       root_path
     
+    when /список форумов/
+      forums_path
+
+    when /форум(?:е)? (.+)/
+      forum_path( Forum.find_by_title $1 )
+
+    when /создании форума/
+      forums_path
+
+    when /редактировании форума (.+)/
+      forum_path( Forum.find_by_title $1 )
+
     # Add more page name => path mappings here
     
     else

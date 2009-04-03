@@ -90,7 +90,7 @@ end
   attach_file(field, path)
 end
 
-То /^я должен (?:у)?увидеть "([^\"]*)"$/ do |text|
+То /^я должен (?:у)?видеть "([^\"]*)"$/ do |text|
   response.should contain(text)
 end
 
