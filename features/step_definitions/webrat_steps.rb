@@ -1,13 +1,15 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
+
 # Commonly used webrat steps
 # http://github.com/brynary/webrat
+
 
 Допустим /^я зашел на (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-Если /^я иду на (.+)$/ do |page_name|
+Если /^я иду (?:на|в) (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
@@ -106,7 +108,7 @@ end
   field_labeled(label).should be_checked
 end
 
-То /^я должен быть на (.+)$/ do |page_name|
+То /^я должен быть (?:на|в) (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end
 

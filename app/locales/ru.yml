@@ -21,6 +21,7 @@ ru:
         title: "Название"
         description: "Описание"
         view_count: "Кол-во просмотров"
+        post: "Сообщение"
       forum_post:
         body: "Сообщение"
   authlogic:

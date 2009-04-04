@@ -11,11 +11,11 @@ module NavigationHelpers
     when /форум(?:е)? (.+)/
       forum_path( Forum.find_by_title $1 )
 
-    when /создании форума/
-      forums_path
+    when /тем[еау] (.+)/
+      forum_topic_path( ForumTopic.find_by_title $1 )
 
-    when /редактировании форума (.+)/
-      forum_path( Forum.find_by_title $1 )
+    when /редактирование темы (.+)/
+      edit_forum_topic_path( ForumTopic.find_by_title $1 )
 
     # Add more page name => path mappings here
     

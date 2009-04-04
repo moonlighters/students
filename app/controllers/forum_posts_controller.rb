@@ -22,7 +22,7 @@ class ForumPostsController < ApplicationController
 
     respond_to do |format|
       if @forum_post.save
-        flash[:notice] = 'Пост был успешно добавлен.'
+        flash[:notice] = 'Сообщение успешно добавлено.'
         format.html { redirect_to forum_topic_path( @forum_post.topic ) }
       else
         format.html { render :action => "new" }
@@ -34,7 +34,7 @@ class ForumPostsController < ApplicationController
   def update
     respond_to do |format|
       if @forum_post.update_attributes params[:forum_post]
-        flash[:notice] = 'Пост был успешно обновлён.'
+        flash[:notice] = 'Сообщение успешно обновлено.'
         format.html { redirect_to forum_topic_path( @forum_post.topic ) }
       else
         format.html { render :action => "edit" }

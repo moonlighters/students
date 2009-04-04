@@ -24,8 +24,20 @@ class ForumTopicsController < ApplicationController
     @forum_topic.user = current_user
 
     if @forum_topic.save
-      flash[:notice] = 'Тема была успешно создана.'
-      redirect_to forum_topic_path( @forum_topic )
+      # if topic saved we can get it's id
+      post = ForumPost.new  :body => params[:forum_topic][:post],
+                            :user_id => current_user.id,
+                            :forum_topic_id => @forum_topic.id
+      if post.save
+        flash[:notice] = 'Тема успешно создана.'
+        redirect_to forum_topic_path( @forum_topic )
+      else
+        # delete saved topic
+        @forum_topic.delete
+        # add post errors to forum for showing them
+        @forum_topic.errors.add :post, post.errors[:body]
+        render :action => "new"
+      end
     else
       render :action => "new"
     end
@@ -34,7 +46,7 @@ class ForumTopicsController < ApplicationController
   # PUT /forums/topics/1
   def update
     if @forum_topic.update_attributes params[:forum_topic]
-      flash[:notice] = 'Тема была успешно обновлена.'
+      flash[:notice] = 'Тема успешно обновлена.'
       redirect_to forum_topic_path( @forum_topic )
     else
       render :action => "edit"
@@ -46,6 +58,7 @@ class ForumTopicsController < ApplicationController
     forum = @forum_topic.forum
     @forum_topic.destroy
 
+    flash[:notice] = 'Тема удалена'
     redirect_to forum_path( forum )
   end
 

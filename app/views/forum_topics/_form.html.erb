@@ -11,6 +11,14 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </p>
+  
+  <% if forum_topic.new_record? %>
+  <p>
+    <%= f.label :post %><br />
+    <%= f.text_area :post %>
+  </p>
+  <% end %>
+
   <p>
     <%= f.submit forum_topic.new_record? ? "Создать" : "Обновить" %>
   </p>

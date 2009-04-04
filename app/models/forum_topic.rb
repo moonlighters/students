@@ -12,6 +12,8 @@ class ForumTopic < ActiveRecord::Base
     topic.view_count = 0
   end
 
+  attr_accessor :post
+
   def view!( user )
     if user
       v = ForumTopicViewing.find_or_initialize_by_user_id_and_forum_topic_id( user.id, self.id )

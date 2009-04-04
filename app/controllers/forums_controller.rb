@@ -79,6 +79,7 @@ class ForumsController < ApplicationController
     @forum.destroy
 
     respond_to do |format|
+      flash[:notice] = 'Форум удален'
       format.html { redirect_to parent ? forum_path( parent ) : forums_path }
     end
   end
