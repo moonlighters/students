@@ -1,5 +1,5 @@
 Допустим /^я залогинился как (.+)$/ do |login|
-  Допустим "есть пользотель #{login} с паролем 123456"
+  Допустим "есть пользователь #{login} с паролем 123456"
   visit login_path
   fill_in "Логин", :with => login
   fill_in "Пароль", :with => "123456"
@@ -10,11 +10,11 @@ end
 Допустим /^я разлогинен$/ do
   visit root_path
   if response.body =~ /выйти/
-    click_link "выйти"
+    click_ "выйти"
     response.should contain "Вы успешно прекратили сеанс работы!"
   end
 end
 
-Допустим /^есть пользотель (.+) с паролем (.+)$/ do |login, pass|
+Допустим /^есть пользователь (.+) с паролем (.+)$/ do |login, pass|
   Factory :user, :login => login, :password => pass
 end

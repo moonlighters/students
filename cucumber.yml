@@ -1,2 +1,1 @@
-default: --language ru features
-html_report: --format html --language ru features
+default: --language ru --format progress features
