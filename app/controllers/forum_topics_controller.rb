@@ -22,23 +22,21 @@ class ForumTopicsController < ApplicationController
   def create
     @forum_topic = ForumTopic.new params[:forum_topic]
     @forum_topic.user = current_user
+    post = ForumPost.new  :body => params[:forum_topic][:post],
+                          :user_id => (current_user ? current_user.id : nil),
+                          :forum_topic_id => 1
 
-    if @forum_topic.save
-      # if topic saved we can get it's id
-      post = ForumPost.new  :body => params[:forum_topic][:post],
-                            :user_id => current_user.id,
-                            :forum_topic_id => @forum_topic.id
-      if post.save
-        flash[:notice] = 'Тема успешно создана.'
-        redirect_to forum_topic_path( @forum_topic )
-      else
-        # delete saved topic
-        @forum_topic.delete
-        # add post errors to forum for showing them
-        @forum_topic.errors.add :post, post.errors[:body]
-        render :action => "new"
-      end
+    if @forum_topic.valid? and post.valid?
+      @forum_topic.save!
+      post.forum_topic_id = @forum_topic.id
+      post.save!
+
+      flash[:notice] = 'Тема успешно создана.'
+      redirect_to forum_topic_path( @forum_topic )
     else
+      if post.errors[:body]
+        @forum_topic.errors.add :post, post.errors[:body]
+      end
       render :action => "new"
     end
   end
