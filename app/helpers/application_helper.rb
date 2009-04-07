@@ -13,6 +13,6 @@ module ApplicationHelper
   end
 
   def format_time(time)
-    (time+30).strftime("%d.%m.%Y %H:%M"); # +30 for rounding to the nearest minute
+    Russian::strftime time+30, "%H:%M, %d %B %Y"
   end
 end

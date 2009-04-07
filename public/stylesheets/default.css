@@ -464,3 +464,11 @@ img.right {
   vertical-align: top;
 }
 
+.time_small {
+  font-size: x-small;
+}
+
+.post_edited {
+  font-style: italic;
+  font-size: x-small;
+}

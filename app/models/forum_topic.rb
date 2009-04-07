@@ -27,17 +27,13 @@ class ForumTopic < ActiveRecord::Base
   end
 
   def first_unread_post_of( user )
-    if user.nil?
-      nil
-    else
-      last = user.last_forum_posts.of_topic self
-      if last.nil?
-        nil
-      else
-        ForumPost.find_by_forum_topic_id self,
-                                         :conditions => ["id > ?", last.id],
-                                         :order => "id ASC"
-      end
-    end
+    return nil unless user
+
+    last = user.last_forum_posts.of_topic self
+    return nil unless last
+
+    ForumPost.find_by_forum_topic_id self,
+                                     :conditions => ["id > ?", last.id],
+                                     :order => "id"
   end
 end
