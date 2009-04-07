@@ -9,13 +9,16 @@ module NavigationHelpers
       forums_path
 
     when /форум(?:е)? (.+)/
-      forum_path( Forum.find_by_title $1 )
+      forum_path( Forum.find_by_title! $1 )
 
     when /тем[еау] (.+)/
-      forum_topic_path( ForumTopic.find_by_title $1 )
+      forum_topic_path( ForumTopic.find_by_title! $1 )
 
     when /редактирование темы (.+)/
-      edit_forum_topic_path( ForumTopic.find_by_title $1 )
+      edit_forum_topic_path( ForumTopic.find_by_title! $1 )
+
+    when /сообщени[ея] "([^\"]*)"/
+      edit_forum_post_path( ForumPost.find_by_body! $1 )
 
     # Add more page name => path mappings here
     

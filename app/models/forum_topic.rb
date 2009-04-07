@@ -25,4 +25,19 @@ class ForumTopic < ActiveRecord::Base
     self.view_count += 1
     self.save
   end
+
+  def first_unread_post_of( user )
+    if user.nil?
+      nil
+    else
+      last = user.last_forum_posts.of_topic self
+      if last.nil?
+        nil
+      else
+        ForumPost.find_by_forum_topic_id self,
+                                         :conditions => ["id > ?", last.id],
+                                         :order => "id ASC"
+      end
+    end
+  end
 end

@@ -6,7 +6,9 @@
 
 <div class="topic-description"><%=h( "(#{@forum_topic.description})" ) unless @forum_topic.description.empty? %></div>
 
+<% unless @forum_posts.empty? %>
 <%= render :partial => "forum_posts/table", :locals => {:forum_posts => @forum_posts} %>
+<% end %>
 
 <%= link_to "Ответить", new_forum_post_path( @forum_topic ) %> |
 <%= link_to 'Править', edit_forum_topic_path( @forum_topic ) %> |

@@ -32,6 +32,7 @@ class ForumPostsController < ApplicationController
 
   # PUT /forums/posts/1
   def update
+    @forum_post.last_editor = current_user
     respond_to do |format|
       if @forum_post.update_attributes params[:forum_post]
         flash[:notice] = 'Сообщение успешно обновлено.'
@@ -48,6 +49,7 @@ class ForumPostsController < ApplicationController
     @forum_post.destroy
 
     respond_to do |format|
+      flash[:notice] = 'Сообщение удалено.'
       format.html { redirect_to forum_topic_path( topic ) }
     end
   end

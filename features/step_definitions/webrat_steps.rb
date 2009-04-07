@@ -5,7 +5,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 # http://github.com/brynary/webrat
 
 
-Допустим /^я зашел на (.+)$/ do |page_name|
+Допустим /^я зашел (?:на|в) (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 

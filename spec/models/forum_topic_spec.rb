@@ -55,4 +55,31 @@ describe ForumTopic do
       ForumTopicViewing.all.should == []
     end
   end
+  describe "#first_unread_post_of" do
+    before :each do
+      @u = Factory :user
+      @t = Factory :forum_topic
+      @p = Factory :forum_post, :topic => @t
+      @t.view! @u
+    end
+
+    it "should return nil if user is nil" do
+      @t.first_unread_post_of(nil).should be_nil
+    end
+
+    it "should return nil if there are no new posts" do
+      @t.first_unread_post_of(@u).should be_nil
+    end
+
+    it "should return first unread post if there is any" do
+      @p1 = Factory :forum_post, :topic => @t
+      @p2 = Factory :forum_post, :topic => @t
+      @t.first_unread_post_of(@u).should == @p1
+    end
+
+    it "should return nil if topic is unviewed" do
+      @t1 = Factory :forum_topic
+      @t1.first_unread_post_of(@u).should be_nil
+    end
+  end
 end

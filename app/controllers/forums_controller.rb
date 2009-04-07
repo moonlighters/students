@@ -15,6 +15,7 @@ class ForumsController < ApplicationController
   def show
     @children = @forum.children
     @forum_topics = @forum.topics
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb

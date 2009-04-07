@@ -2,6 +2,9 @@
   <td>
     <%= link_to h(forum_topic.title), forum_topic_path( forum_topic ) %>
     <div class="desc"><%=h forum_topic.description %></div>
+    <% if @user and not forum_topic.first_unread_post_of(@user).nil? %>
+      <%= link_to_post forum_topic.first_unread_post_of(@user), :content => "К первому непрочитанному >>" %>
+    <% end %>
   </td>
   <td align="center"><%= forum_topic.view_count %></td>
   <td align="center"><%= forum_topic.posts.count - 1 %></td>

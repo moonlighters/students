@@ -11,4 +11,8 @@ module ApplicationHelper
     end
     messages
   end
+
+  def format_time(time)
+    (time+30).strftime("%d.%m.%Y %H:%M"); # +30 for rounding to the nearest minute
+  end
 end
