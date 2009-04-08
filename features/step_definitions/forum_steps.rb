@@ -8,6 +8,11 @@ end
   Factory :forum, :title => title, :description => desc || "о том о сем"
 end
 
+Допустим /^у меня есть подфорум (.+) на форуме (.+)$/ do |child_title, title|
+  parent = Forum.find_by_title! title
+  Factory :forum, :title => child_title, :parent => parent
+end
+
 Допустим /^у меня есть только форумы (.+)$/ do |titles|
   Forum.delete_all
   Допустим "у меня есть форумы #{titles}"
