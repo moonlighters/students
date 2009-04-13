@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery # :secret => 'cd5d422483a22ae5412c6491ed1d740e'
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user,
+                :smart_post_path
   filter_parameter_logging :password, :password_confirmation
 
   def root
@@ -49,4 +50,9 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end 
+
+    def smart_post_path(post)
+      return nil unless post
+      forum_topic_path( post.topic ) + "#post#{post.id}"
+    end
 end

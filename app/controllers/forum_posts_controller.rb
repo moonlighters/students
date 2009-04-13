@@ -6,6 +6,8 @@ class ForumPostsController < ApplicationController
   def new
     @forum_post = ForumPost.new
     @forum_post.topic = ForumTopic.find params[:id]
+    find_last_posts
+
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -19,11 +21,12 @@ class ForumPostsController < ApplicationController
   def create
     @forum_post = ForumPost.new params[:forum_post]
     @forum_post.user = current_user
+    find_last_posts
 
     respond_to do |format|
       if @forum_post.save
         flash[:notice] = 'Сообщение успешно добавлено.'
-        format.html { redirect_to forum_topic_path( @forum_post.topic ) }
+        format.html { redirect_to smart_post_path( @forum_post ) }
       else
         format.html { render :action => "new" }
       end
@@ -36,7 +39,7 @@ class ForumPostsController < ApplicationController
     respond_to do |format|
       if @forum_post.update_attributes params[:forum_post]
         flash[:notice] = 'Сообщение успешно обновлено.'
-        format.html { redirect_to forum_topic_path( @forum_post.topic ) }
+        format.html { redirect_to smart_post_path( @forum_post ) }
       else
         format.html { render :action => "edit" }
       end
@@ -53,8 +56,15 @@ class ForumPostsController < ApplicationController
       format.html { redirect_to forum_topic_path( topic ) }
     end
   end
+
   private
     def find_forum_post
       @forum_post = ForumPost.find params[:id]
+    end
+
+    def find_last_posts
+      @last_forum_posts = ForumPost.find_all_by_forum_topic_id  @forum_post.topic.id,
+                                                                :order => "id DESC",
+                                                                :limit => 10
     end
 end

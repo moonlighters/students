@@ -2,6 +2,6 @@ module ForumPostsHelper
   def link_to_post(post, options = {})
     return nil unless post
     content = options[:content] || "Сообщение №#{post.id}"
-    link_to h( content ), forum_topic_path( post.topic ) + "#post#{post.id}", options
+    link_to h( content ), smart_post_path( post ), options
   end
 end
