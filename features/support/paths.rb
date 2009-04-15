@@ -5,7 +5,7 @@ module NavigationHelpers
     when /главн(?:ую|ая)/
       root_path
     
-    when /список форумов/
+    when /спис(?:ок|ке) форумов/
       forums_path
 
     when /форум(?:е)? (.+)/
@@ -14,7 +14,7 @@ module NavigationHelpers
     when /тем[еау] (.+)/
       forum_topic_path( ForumTopic.find_by_title! $1 )
 
-    when /редактирование темы (.+)/
+    when /редактировани(?:е|и) темы (.+)/
       edit_forum_topic_path( ForumTopic.find_by_title! $1 )
 
     when /сообщени[ея] "([^\"]*)"/
