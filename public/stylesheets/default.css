@@ -472,3 +472,7 @@ img.right {
   font-style: italic;
   font-size: x-small;
 }
+
+.last_posts_list h4 {
+  text-align: center;
+}

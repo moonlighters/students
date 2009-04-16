@@ -14,6 +14,10 @@ class ForumTopic < ActiveRecord::Base
 
   attr_accessor :post
 
+  cattr_reader :per_page
+  @@per_page = 10
+
+
   def view!( user )
     if user
       v = ForumTopicViewing.find_or_initialize_by_user_id_and_forum_topic_id( user.id, self.id )

@@ -53,6 +53,8 @@ class ApplicationController < ActionController::Base
 
     def smart_post_path(post)
       return nil unless post
-      forum_topic_path( post.topic ) + "#post#{post.id}"
+      topic = post.topic
+      page = 1 + topic.posts.index( post ) / ForumPost.per_page
+      forum_topic_path( post.topic ) + "?page=#{page}#post#{post.id}"
     end
 end

@@ -4,9 +4,11 @@
 <%= render :partial => "form", :locals => {:forum_post => @forum_post} %>
 
 <% unless @last_forum_posts.empty? %>
-<h3>Последние сообщения в теме</h3>
-<h4 align="center">(в обратном порядке)</h4>
-<%= render :partial => "forum_posts/table", :locals => {:forum_posts => @last_forum_posts} %>
+  <div class="last_posts_list">
+    <h3>Последние сообщения в теме</h3>
+    <h4>(в обратном порядке)</h4>
+    <%= render :partial => "forum_posts/table", :locals => {:forum_posts => @last_forum_posts} %>
+  </div>
 <% end %>
 
 <%= link_to 'Назад', forum_topic_path( @forum_post.topic ) %>

@@ -1,1 +1,3 @@
 default: --language ru --format progress features
+autotest: --language ru --format progress
+autotest-all: --language ru --format progress features

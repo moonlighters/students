@@ -5,4 +5,5 @@
     <col width="60 px">
     <%= render forum_posts %>
   </table>
+  <%= will_paginate_posts forum_posts if forum_posts.is_a? WillPaginate::Collection %>
 </div>

@@ -8,4 +8,8 @@ class ForumPost < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :last_editor,
               :class_name => "User"
+
+  cattr_reader :per_page
+  @@per_page = 10
+
 end

@@ -4,7 +4,7 @@ class ForumTopicsController < ApplicationController
 
   # GET /forums/topics/1
   def show
-    @forum_posts = @forum_topic.posts
+    @forum_posts = ForumPost.paginate_by_forum_topic_id @forum_topic.id, :page => params[:page]
     @forum_topic.view! current_user
   end
 
