@@ -33,3 +33,31 @@ Factory.define :forum_topic_viewing do |v|
   v.association :topic, :factory => :forum_topic
   v.association :post, :factory => :forum_post
 end
+
+Factory.define :lesson_type do |t|
+  t.name "лекция"
+end
+
+Factory.define :lesson_subject do |s|
+  s.name "ММФ"
+  s.term 4
+end
+
+Factory.define :group do |g|
+  g.name "7371"
+  g.start_year 2007
+end
+
+Factory.define :teacher do |t|
+  t.name "Сергей Андреевич"
+  t.surname "Тресков"
+  t.phone "33333333"
+  t.email "mail@mail.ru"
+end
+
+Factory.define :lesson_subject_type do |l|
+  l.association :lesson_type, :factory => :lesson_type
+  l.association :subject, :factory => :lesson_subject
+  l.association :group, :factory => :group
+  l.association :teacher, :factory => :teacher
+end

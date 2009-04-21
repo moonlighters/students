@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090406141519) do
+ActiveRecord::Schema.define(:version => 20090421113949) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -46,6 +46,36 @@ ActiveRecord::Schema.define(:version => 20090406141519) do
     t.datetime "updated_at"
   end
 
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "start_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_subject_types", :force => true do |t|
+    t.integer  "lesson_type_id"
+    t.integer  "lesson_subject_id"
+    t.integer  "group_id"
+    t.integer  "teacher_id"
+    t.string   "homepage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_subjects", :force => true do |t|
+    t.string   "name"
+    t.integer  "term"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "authorizable_type"
@@ -57,6 +87,15 @@ ActiveRecord::Schema.define(:version => 20090406141519) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teachers", :force => true do |t|
+    t.string   "name"
+    t.string   "surname"
+    t.string   "phone"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
