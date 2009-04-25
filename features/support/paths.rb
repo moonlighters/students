@@ -20,6 +20,12 @@ module NavigationHelpers
     when /сообщени[ея] "([^\"]*)"/
       edit_forum_post_path( ForumPost.find_by_body! $1 )
 
+    when /спис(?:ок|ке) предметов/
+      lesson_subjects_path
+
+    when /предмет[еу]? (.+)/
+      lesson_subject_path( LessonSubject.find_by_name! $1 )
+
     # Add more page name => path mappings here
     
     else

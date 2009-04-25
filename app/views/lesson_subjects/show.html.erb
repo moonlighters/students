@@ -1,0 +1,16 @@
+<% @page_title = "Просмотр предмета" %>
+<h2>Расписание > Просмотр предмета</h2>
+<p>
+  <b>Название:</b>
+  <%=h @lesson_subject.name %>
+</p>
+
+<p>
+  <b>Семестр:</b>
+  <%=h @lesson_subject.term %>
+</p>
+
+
+
+<%= link_to 'Править', edit_lesson_subject_path(@lesson_subject) %> |
+<%= link_to 'Назад', lesson_subjects_path %>

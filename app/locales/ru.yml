@@ -5,6 +5,7 @@ ru:
       forum: "Форум"
       forum topic: "Тема"
       forum post: "Сообщение"
+      lesson subject: "Предмет"
     attributes:
       user:
         login: "Логин"
@@ -24,6 +25,9 @@ ru:
         post: "Сообщение"
       forum_post:
         body: "Сообщение"
+      lesson_subject:
+        name: "Название"
+        term: "Семестр"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

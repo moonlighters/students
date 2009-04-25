@@ -1,0 +1,15 @@
+<% form_for lesson_subject do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :term %><br />
+    <%= f.text_field :term %>
+  </p>
+  <p>
+    <%= f.submit lesson_subject.new_record? ? "Добавить" : "Обновить" %>
+  </p>
+<% end %>
