@@ -1,4 +1,7 @@
 class LessonSubjectsController < ApplicationController
+
+  before_filter :find_lesson_subject, :only => [:show, :edit, :update, :destroy]
+
   # GET /schedule/subjects
   def index
     @lesson_subjects = LessonSubject.find :all,
@@ -11,8 +14,6 @@ class LessonSubjectsController < ApplicationController
 
   # GET /schedule/subjects/1
   def show
-    @lesson_subject = LessonSubject.find params[:id]
-
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -29,7 +30,6 @@ class LessonSubjectsController < ApplicationController
 
   # GET /schedule/subjects/1/edit
   def edit
-    @lesson_subject = LessonSubject.find params[:id]
   end
 
   # POST /schedule/subjects
@@ -48,8 +48,6 @@ class LessonSubjectsController < ApplicationController
 
   # PUT /schedule/subjects/1
   def update
-    @lesson_subject = LessonSubject.find params[:id]
-
     respond_to do |format|
       if @lesson_subject.update_attributes params[:lesson_subject]
         flash[:notice] = 'Предмет успешно обновлен.'
@@ -62,7 +60,6 @@ class LessonSubjectsController < ApplicationController
 
   # DELETE /schedule/subjects/1
   def destroy
-    @lesson_subject = LessonSubject.find params[:id]
     @lesson_subject.destroy
 
     flash[:notice] = 'Предмет удален'
@@ -70,4 +67,9 @@ class LessonSubjectsController < ApplicationController
       format.html { redirect_to lesson_subjects_path }
     end
   end
+
+  private
+    def find_lesson_subject
+      @lesson_subject = LessonSubject.find params[:id]
+    end
 end

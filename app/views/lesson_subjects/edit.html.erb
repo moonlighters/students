@@ -1,7 +1,8 @@
-<h1>Editing lesson_subject</h1>
+<% @page_title = "Редактирование предмета" %>
+<h1>Редактирование предмета</h1>
 
 <%= render :partial => "form", :locals => {:lesson_subject => @lesson_subject} %>
 
 <%= link_to "Назад", lesson_subjects_path %> |
-<%= link_to "Показать", @lesson_subject %> |
+<%= link_to "Показать", lesson_subject_path( @lesson_subject ) %> |
 <%= button_to 'Удалить', lesson_subject_path( @lesson_subject ), :method => :delete %>
