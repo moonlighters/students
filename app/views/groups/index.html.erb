@@ -1,0 +1,8 @@
+<% @page_title = "Группы" %>
+<h1>Список групп</h1>
+
+<%= render :partial => "table", :locals => {:groups => @groups} %>
+
+<br />
+
+<%= link_to 'Создать группу', new_group_path %>

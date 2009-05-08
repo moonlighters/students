@@ -6,6 +6,7 @@ ru:
       forum topic: "Тема"
       forum post: "Сообщение"
       lesson subject: "Предмет"
+      group: "Группа"
     attributes:
       user:
         login: "Логин"
@@ -28,6 +29,9 @@ ru:
       lesson_subject:
         name: "Название"
         term: "Семестр"
+      group:
+        name: "Название"
+        start_year: "Год начала обучения"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"
