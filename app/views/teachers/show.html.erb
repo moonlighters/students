@@ -1,0 +1,24 @@
+<% full_name = h( @teacher.name ) + " " + h( @teacher.surname ) %>
+<% @page_title = "Преподаватель " + full_name %>
+<h2>Информация о преподавателе</h2>
+<p>
+  <b>Полное имя:</b>
+  <%= full_name %>
+</p>
+
+<% unless @teacher.phone.nil? %>
+<p>
+  <b>Телефон</b>
+  <%=h @teacher.phone %>
+</p>
+<% end %>
+
+<% unless @teacher.phone.nil? %>
+<p>
+  <b>Email:</b>
+  <%=h @teacher.email %>
+</p>
+<% end %>
+
+<%= link_to 'Править', edit_teacher_path(@teacher) %> |
+<%= link_to 'Назад', teachers_path %>

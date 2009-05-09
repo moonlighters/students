@@ -7,6 +7,7 @@ ru:
       forum post: "Сообщение"
       lesson subject: "Предмет"
       group: "Группа"
+      teacher: "Преподаватель"
     attributes:
       user:
         login: "Логин"
@@ -32,6 +33,11 @@ ru:
       group:
         name: "Название"
         start_year: "Год начала обучения"
+      teacher:
+        name: "Имя"
+        surname: "Фамилия"
+        phone: "Телефон"
+        email: "E-mail"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

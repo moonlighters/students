@@ -98,6 +98,18 @@ ActionController::Routing::Routes.draw do |map|
     m.connect "groups/:id", :action => "destroy", :conditions => { :method => :delete }
   end
 
+  map.with_options :controller => "teachers" do |m|
+    m.with_options :conditions => { :method => :get } do |mm|
+      mm.teachers "teachers", :action => "index"
+      mm.new_teacher "teachers/new", :action => "new"
+      mm.teacher "teachers/:id", :action => "show"
+      mm.edit_teacher "teachers/:id/edit", :action => "edit"
+    end
+    m.connect "teachers", :action => "create", :conditions => { :method => :post }
+    m.connect "teachers/:id", :action => "update", :conditions => { :method => :put }
+    m.connect "teachers/:id", :action => "destroy", :conditions => { :method => :delete }
+  end
+
   
 
   map.resources :users
