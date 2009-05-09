@@ -26,6 +26,12 @@ module NavigationHelpers
     when /предмет[еу]? (.+)/
       lesson_subject_path( LessonSubject.find_by_name! $1 )
 
+    when /спис(?:ок|ке) групп/
+      groups_path
+
+    when /групп[аеу] (.+)/
+      group_path( Group.find_by_name! $1 )
+
     # Add more page name => path mappings here
     
     else

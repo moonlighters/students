@@ -39,7 +39,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        flash[:notice] = 'Группа успешно создана.'
+        flash[:notice] = 'Группа успешно добавлена.'
         format.html { redirect_to group_path(@group) }
       else
         format.html { render :action => "new" }
