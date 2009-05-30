@@ -24,7 +24,7 @@
 
 <p>
   <b>Преподаватель:</b>
-  <%=link_to h( teacher.name ), teacher_path( teacher ) %>
+  <%=link_to h( teacher.name+" "+teacher.surname ), teacher_path( teacher ) %>
 </p>
 <% unless homepage.nil? or homepage.empty? %>
   <p>
