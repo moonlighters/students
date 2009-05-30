@@ -6,6 +6,9 @@ class LessonSubject < ActiveRecord::Base
     end
   end
 
+  has_many  :subject_types,
+            :class_name => "LessonSubjectType"
+
   def types_in_group(group)
     subject_types_in_group( group ).map {|st| st.lesson_type}
   end

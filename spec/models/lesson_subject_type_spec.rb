@@ -29,4 +29,27 @@ describe LessonSubjectType do
       s.types_in_group( g2 ).should == [t2]
     end
   end
+
+  describe "#process_homepage_url" do
+    it "should add http:// to an url without it" do
+      st = Factory :lesson_subject_type, :homepage => "ya.ru"
+      st.process_homepage_url
+      st.homepage.should == "http://ya.ru"
+    end
+    it "should not add http:// to an url with it" do
+      st = Factory :lesson_subject_type, :homepage => "http://ya.ru"
+      st.process_homepage_url
+      st.homepage.should == "http://ya.ru"
+    end
+    it "should not add http:// to an empty homepage" do
+      st = Factory :lesson_subject_type, :homepage => ""
+      st.process_homepage_url
+      st.homepage.should == ""
+    end
+    it "should remove http:// if there is no address then" do
+      st = Factory :lesson_subject_type, :homepage => "http://"
+      st.process_homepage_url
+      st.homepage.should == ""
+    end
+  end
 end

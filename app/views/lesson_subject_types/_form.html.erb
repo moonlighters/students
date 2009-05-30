@@ -1,0 +1,31 @@
+<% form_for lesson_subject_type do |f| %>
+  <%= f.error_messages %>
+  <% types = LessonType.find( :all, :order => "name" ) %>
+  <% subjects = LessonSubject.find( :all, :order => "name" ) %>
+  <% groups = Group.find( :all, :order => "name" ) %>
+  <% teachers_list = Teacher.find( :all, :order => "surname" ).map{ |t| [t.surname+" "+t.name, t.id] } %>
+
+  <p>
+    <%= f.label :lesson_type_id %><br />
+    <%= f.collection_select :lesson_type_id, types, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :lesson_subject_id %><br />
+    <%= f.collection_select :lesson_subject_id, subjects, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :group_id %><br />
+    <%= f.collection_select :group_id, groups, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :teacher_id %><br />
+    <%= f.select :teacher_id, teachers_list %>
+  </p>
+  <p>
+    <%= f.label :homepage %><br />
+    <%= f.text_field :homepage %>
+  </p>
+  <p>
+    <%= f.submit lesson_subject_type.new_record? ? "Добавить" : "Обновить" %>
+  </p>
+<% end %>

@@ -1,0 +1,7 @@
+<% @page_title = "Редактирование типа занятия" %>
+<h1>Редактирование типа занятия</h1>
+
+<%= render :partial => "form", :locals => {:lesson_subject_type => @lesson_subject_type} %>
+
+<%= link_to 'Показать', lesson_subject_type_path( @lesson_subject_type ) %> |
+<%= link_to 'Назад', lesson_subject_path( @lesson_subject_type.subject ) %>

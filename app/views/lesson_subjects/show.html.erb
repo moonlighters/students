@@ -1,16 +1,20 @@
-<% @page_title = "Предмет " + h( @lesson_subject.name ) %>
+<% name = @lesson_subject.name %>
+<% @page_title = "Предмет " + h( name ) %>
 <h2>Расписание > Просмотр предмета</h2>
 <p>
   <b>Название:</b>
-  <%=h @lesson_subject.name %>
+  <%=h name %>
 </p>
 
 <p>
   <b>Семестр:</b>
   <%=h @lesson_subject.term %>
 </p>
-
-
-
 <%= link_to 'Править', edit_lesson_subject_path(@lesson_subject) %> |
 <%= link_to 'Назад', lesson_subjects_path %>
+
+<h3>Типы занятий по <%= name %></h3>
+<%= render :partial => "lesson_subject_types/table", :locals => {:lesson_subject_types => @lesson_subject_types} %>
+
+<%= link_to "Добавить тип", new_lesson_subject_type_path( @lesson_subject ) %>
+

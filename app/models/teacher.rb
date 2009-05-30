@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
   validates_presence_of :name, :surname
   validates_format_of :phone,
-                      :if => Proc.new {|t| not t.phone.nil? },
+                      :if => Proc.new {|t| not t.phone.nil? and not t.phone.empty? },
                       :message => "имеет неверный формат, правильные варианты: +7(11)111, 911 и т.п.",
                       :with =>  /^(?:(\+\d)?\d*\(\d+\)|\+?)(\d+-)*\d+$/
                       #         /^

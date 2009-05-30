@@ -14,6 +14,10 @@ class LessonSubjectsController < ApplicationController
 
   # GET /schedule/subjects/1
   def show
+    @lesson_subject_types = LessonSubjectType.find  :all,
+                                                    :order => "group_id, lesson_type_id",
+                                                    :conditions => ["lesson_subject_id = ?", @lesson_subject.id]
+    #@lesson_subject_types = @lesson_subject.subject_types
     respond_to do |format|
       format.html # show.html.erb
     end
