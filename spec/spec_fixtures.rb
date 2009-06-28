@@ -61,3 +61,13 @@ Factory.define :lesson_subject_type do |l|
   l.association :group, :factory => :group
   l.association :teacher, :factory => :teacher
 end
+
+Factory.define :lesson do |l|
+  l.association :group, :factory => :group
+  l.association :subject_type, :factory => :lesson_subject_type
+  l.day_of_week 2
+  l.start_time Time.mktime(1970, "jan", 1, 12, 20)
+  l.duration 1.hour + 35.minutes
+  l.everyweek false
+  l.odd_weeks true
+end

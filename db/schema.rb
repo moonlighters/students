@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090421113949) do
+ActiveRecord::Schema.define(:version => 20090628094656) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -72,6 +72,19 @@ ActiveRecord::Schema.define(:version => 20090421113949) do
 
   create_table "lesson_types", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessons", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "lesson_subject_type_id"
+    t.integer  "term"
+    t.integer  "day_of_week"
+    t.time     "start_time"
+    t.integer  "duration"
+    t.boolean  "everyweek"
+    t.boolean  "odd_weeks"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
