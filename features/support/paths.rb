@@ -32,6 +32,12 @@ module NavigationHelpers
     when /групп[аеу] (.+)/
       group_path( Group.find_by_name! $1 )
 
+    when /спис(?:ок|ке) преподавателей/
+      teachers_path
+
+    when /страничк[аеу] преподавателя (.+) (.+)/
+      teacher_path( Teacher.find_by_name_and_surname! $1, $2 )
+
     # Add more page name => path mappings here
     
     else

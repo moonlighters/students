@@ -39,7 +39,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        flash[:notice] = 'Преподаватель успешно добавлен.'
+        flash[:notice] = "Преподаватель успешно добавлен."
         format.html { redirect_to teacher_path(@teacher) }
       else
         format.html { render :action => "new" }
@@ -51,7 +51,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update_attributes params[:teacher]
-        flash[:notice] = 'Преподаватель успешно обновлен.'
+        flash[:notice] = "Информация о преподавателе успешно обновлена."
         format.html { redirect_to teacher_path(@teacher) }
       else
         format.html { render :action => "edit" }
@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to teachers_path }
-      flash[:notice] = 'Преподаватель удален.'
+      flash[:notice] = 'Информация о преподавателе удалена.'
     end
   end
 
