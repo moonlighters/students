@@ -1,7 +1,7 @@
 <% form_for lesson_subject_type do |f| %>
   <%= f.error_messages %>
   <% types = LessonType.find( :all, :order => "name" ) %>
-  <% subjects = LessonSubject.find( :all, :order => "name" ) %>
+  <% subjects_list = LessonSubject.find( :all, :order => "name" ).map{ |s| ["#{s.name}, #{s.term} сем.", s.id] } %>
   <% groups = Group.find( :all, :order => "name" ) %>
   <% teachers_list = Teacher.find( :all, :order => "surname" ).map{ |t| [t.surname+" "+t.name, t.id] } %>
 
@@ -11,7 +11,7 @@
   </p>
   <p>
     <%= f.label :lesson_subject_id %><br />
-    <%= f.collection_select :lesson_subject_id, subjects, :id, :name %>
+    <%= f.select :lesson_subject_id, subjects_list %>
   </p>
   <p>
     <%= f.label :group_id %><br />
