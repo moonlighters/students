@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -121,6 +120,18 @@ ActionController::Routing::Routes.draw do |map|
     m.connect "teachers/:id", :action => "destroy", :conditions => { :method => :delete }
   end
 
+  map.with_options :controller => "lessons" do |l|
+    l.with_options :conditions => { :method => :get } do |ll|
+      ll.new_lesson "schedule/lessons/new", :action => "new"
+      ll.lesson "schedule/lessons/:id", :action => "show"
+      ll.edit_lesson "schedule/lessons/:id/edit", :action => "edit"
+    end
+    l.lessons "schedule/lessons", :action => "create", :conditions => { :method => :post }
+    l.connect "schedule/lessons/:id", :action => "update", :conditions => { :method => :put }
+    l.connect "schedule/lessons/:id", :action => "destroy", :conditions => { :method => :delete }
+  end
+
+  map.schedule "schedule", :controller => "application", :action => "root"
   
 
   map.resources :users

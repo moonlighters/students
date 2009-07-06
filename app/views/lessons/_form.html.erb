@@ -1,0 +1,47 @@
+<% form_for lesson do |f| %>
+  <%= f.error_messages %>
+  <% types = LessonType.find( :all, :order => "name" ) %>
+  <% subjects_list = LessonSubject.find( :all, :order => "name" ).map{ |s| ["#{s.name}, #{s.term} сем.", s.id] } %>
+  <% groups = Group.find( :all, :order => "name" ) %>
+  <% wdays = [] %>
+  <% Lesson::WDAYS.each_with_index{ |item, i| wdays << [item, i] } %>
+
+  <p>
+    <%= f.label :group_id %><br />
+    <%= f.collection_select :group_id, groups, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :lesson_subject_id %><br />
+    <%= f.select :lesson_subject_id, subjects_list %>
+  </p>
+  <p>
+    <%= f.label :lesson_type_id %><br />
+    <%= f.collection_select :lesson_type_id, types, :id, :name %>
+  </p>
+  <p>
+    <%= f.label :day_of_week %><br />
+    <%= f.select :day_of_week, wdays %>
+  </p>
+  <p>
+    <%= f.label :start_time %><br />
+    <%= select_hour lesson.start_time.hour, :prefix => "start_time", :start_hour => 9 %> часов
+    <%= select_minute lesson.start_time.min, :prefix => "start_time", :minute_step => 5 %> минут
+  </p>
+  <p>
+    <%= f.label :duration %><br />
+    <%= select_hour lesson.duration_hour, :prefix => "duration" %> часов
+    <%= select_minute lesson.duration_min, :prefix => "duration", :minute_step => 5 %> минут
+  </p>
+  <p>
+    <%= f.label :everyweek %>
+    <%= f.check_box :everyweek %>
+  </p>
+  <p>
+    <%= f.label :odd_weeks %>
+    <%= f.check_box :odd_weeks%>
+  </p>
+  <p>
+    <%= f.submit lesson.new_record? ? "Добавить" : "Обновить" %>
+  </p>
+<% end %>
+

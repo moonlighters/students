@@ -1,10 +1,12 @@
 class Lesson < ActiveRecord::Base
   validates_presence_of :group_id,
-                        :lesson_subject_type_id,
                         :term,
                         :day_of_week,
                         :start_time,
                         :duration
+
+  validates_presence_of :lesson_subject_type_id,
+                        :message => " с такими значениями полей Предмет, Тип, Группа не найден. "
 
   DEFAULT_DATE = [1970, "jan", 1]
   BEGIN_TIME = [9, 0]
@@ -35,4 +37,13 @@ class Lesson < ActiveRecord::Base
   def set_start_time(hours, mins = 0)
     self.start_time = Time.mktime(*DEFAULT_DATE + [hours, mins]);
   end
+
+  def duration_hour
+    self.duration/3600
+  end
+  def duration_min
+    self.duration%3600/60
+  end
+
+  WDAYS = %w{Воскресенье Понедельник Вторник Среда Четверг Пятница Суббота}
 end

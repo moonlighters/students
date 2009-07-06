@@ -1,0 +1,39 @@
+<% @page_title = "Просмотр занятия" %>
+<h2>Просмотр занятия</h2>
+  <p>
+    <b>Группа:</b>
+    <%= link_to h( @lesson.group.name ), group_path( @lesson.group ) %>
+  </p>
+  <p>
+    <b>Тип занятия:</b>
+    <%= link_to h( @lesson.subject_type.subject.name ) + ", " + h( @lesson.subject_type.lesson_type.name ),
+                lesson_subject_type_path(@lesson.subject_type) %>
+  </p>
+  <p>
+    <b>День недели:</b>
+    <%= Lesson::WDAYS[@lesson.day_of_week] %> 
+  </p>
+  <p>
+    <b>Время начала:</b>
+    <%= @lesson.start_time.strftime "%H:%M" %>
+  </p>
+  <p>
+    <b>Продолжительность:</b>
+    <%= @lesson.duration_hour %> часов
+    <%= @lesson.duration_min %> минут
+  </p>
+  <p>
+    <b>Частота:</b>
+    <% if @lesson.everyweek %>
+      Еженедельно
+    <% else %>
+      <% if @lesson.odd_weeks %>
+        По нечетным неделям
+      <% else %>
+        По четным неделям
+      <% end %>
+    <% end %>
+  </p>
+
+<%= link_to 'Править', edit_lesson_path(@lesson) %> |
+<%= link_to 'Назад', schedule_path %>

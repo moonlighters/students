@@ -66,7 +66,7 @@ class LessonSubjectTypesController < ApplicationController
 
     flash[:notice] = 'Предмет удален'
     respond_to do |format|
-      format.html { redirect_to lesson_subject_types_path }
+      format.html { redirect_to lesson_subject_path( @lesson_subject_type.subject ) }
     end
   end
 
