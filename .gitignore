@@ -1,5 +1,6 @@
 log/*.log
 tmp/**/*
+.directory
 .DS_Store
 doc/api
 doc/app

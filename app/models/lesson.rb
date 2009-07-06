@@ -6,20 +6,33 @@ class Lesson < ActiveRecord::Base
                         :start_time,
                         :duration
 
-  before_validation :set_term
+  DEFAULT_DATE = [1970, "jan", 1]
+  BEGIN_TIME = [9, 0]
+  END_TIME = [22, 0]
 
+  validates_inclusion_of  :start_time,
+                          :in => Time.mktime(* DEFAULT_DATE+BEGIN_TIME)..Time.mktime(* DEFAULT_DATE+END_TIME),
+                          :message => "должно быть от #{BEGIN_TIME[0]} до #{END_TIME[0]} часов",
+                          :allow_nil => true
+
+  validates_each( :duration ) do |model, attr, value|
+    unless  model.start_time.nil? or
+            model.duration.nil? or
+            model.start_time + value <= Time.mktime(* DEFAULT_DATE+END_TIME)
+      model.errors.add(attr, "должна быть такой, чтобы занятие заканчивалось раньше #{END_TIME[0]} часов" )
+    end
+  end
+                          
+  
   belongs_to  :group
   belongs_to  :subject_type,
               :class_name => "LessonSubjectType",
               :foreign_key => "lesson_subject_type_id"
+  
+  attr_accessor :lesson_subject_id
+  attr_accessor :lesson_type_id
 
-  def set_term
-    unless self.subject_type.nil?
-      self.term = self.subject_type.subject.term
-    end
-  end
-
-  def set_start_time(hours, mins)
-    self.start_time = Time.mktime(1970, "jan", 1, hours, mins);
+  def set_start_time(hours, mins = 0)
+    self.start_time = Time.mktime(*DEFAULT_DATE + [hours, mins]);
   end
 end

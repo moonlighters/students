@@ -1,5 +1,7 @@
 require 'factory_girl'
 
+TERM = 4
+
 Factory.define :forum do |f|
   f.title       "Cool forum"
   f.description "This forum is the best!"
@@ -40,7 +42,7 @@ end
 
 Factory.define :lesson_subject do |s|
   s.name "ММФ"
-  s.term 4
+  s.term TERM
 end
 
 Factory.define :group do |g|
@@ -63,8 +65,9 @@ Factory.define :lesson_subject_type do |l|
 end
 
 Factory.define :lesson do |l|
-  l.association :group, :factory => :group
   l.association :subject_type, :factory => :lesson_subject_type
+  l.association :group, :factory => :group
+  l.term TERM
   l.day_of_week 2
   l.start_time Time.mktime(1970, "jan", 1, 12, 20)
   l.duration 1.hour + 35.minutes
