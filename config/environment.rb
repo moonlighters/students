@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem "cucumber", :version => ">=0.2.2"
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
   config.gem "josevalim-inherited_resources", :lib => 'inherited_resources', :source => "http://gems.github.com"
+  config.gem "justinfrench-formtastic", :lib => 'formtastic', :source  => 'http://gems.github.com'
 
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"

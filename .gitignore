@@ -8,7 +8,6 @@ db/*.sqlite3
 *.sw*
 *~
 public/system
-vendor/gems
 config/initializers/recaptcha.rb
 config/database.yml
 config/deploy.rb
