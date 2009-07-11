@@ -1,25 +1,13 @@
 <% @page_title = "Регистрация" %>
 <h2>Регистрация пользователя</h2>
 
-<% form_for @user, :url => signup_url do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :login %><br/>
-    <%= f.text_field :login %>
-  </p>
-
-  <p>
-    <%= f.label :password %><br/>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
-    <%= f.submit "Зарегистрироваться" %>
-  </p>
+<% semantic_form_for @user, :url => signup_url do |f| %>
+  <%= f.input :login %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+<%# TODO: set sex default value to undefined %>
+  <%= f.input :sex, :label => "Пол" %>
+  <% f.buttons do %>
+    <%= f.commit_button "Зарегистрироваться" %>
+  <% end %>
 <% end %>

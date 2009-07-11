@@ -1,22 +1,14 @@
 <% @page_title = "Редактирование профиля" %>
 <h2>Редактирование профиля и учетной записи</h2>
 
-<% form_for @user, :url => user_url( @user ) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :password, "Сменить пароль" %><br/>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.label :password_confirmation %><br/>
-    <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
-    <%= f.submit "Сохранить" %>
-  </p>
+<% semantic_form_for @user, :url => user_url(@user) do |f| %>
+<%# TODO: set sex default value to undefined %>
+  <%= f.input :sex, :label => "Пол" %>
+  <%= f.input :password, :hint => "вводите только если хотите сменить пароль" %>
+  <%= f.input :password_confirmation %>
+  <% f.buttons do %>
+    <%= f.commit_button "Сохранить" %>
+  <% end %>
 <% end %>
 
 <%= link_to "Мой профиль", user_url %>

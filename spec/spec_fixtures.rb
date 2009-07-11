@@ -13,6 +13,7 @@ Factory.define :user do |u|
   u.login       { Factory.next :username }
   u.password    "123456"
   u.password_confirmation "123456"
+  u.sex         Sex.undefined
 end
 
 Factory.define :forum_topic do |t|

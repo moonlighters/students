@@ -15,4 +15,8 @@ module ApplicationHelper
   def format_time(time)
     Russian::strftime time+30, "%H:%M, %d %B %Y"
   end
+
+  def gender(user, male, female)
+    user.female? ? female : male
+  end
 end

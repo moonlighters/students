@@ -7,6 +7,10 @@ describe User do
       u.update_attributes(:login => "modified_login")
     end.should_not change(u, :login)
   end
+
+  it "should be valid given valid attributes" do
+    Factory :user
+  end
   
   describe "#last_forum_posts#of_topic" do
     before :each do

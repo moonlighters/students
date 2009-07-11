@@ -17,5 +17,11 @@ class User < ActiveRecord::Base
                 find_by_forum_topic_id topic.id
               end
             end
-  # TODO: add gender
+  belongs_to :sex
+
+  validates_presence_of :sex
+
+  def male?; sex.name == "мужской"; end
+  def female?; sex.name == "женский"; end
+  def undefined?; sex.name == "не определился"; end
 end
