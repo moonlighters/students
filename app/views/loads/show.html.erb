@@ -13,7 +13,7 @@
   <i><%= add_br_to_text h(resource.description) %></i><br/>
 <% end %>
 <%# TODO: change verb depending on owner.gender %>
-  Этот файл <%= link_to_user resource.owner %> загрузил <%= format_time resource.created_at %><br/>
+  Этот файл <%= link_to_user resource.owner %> загрузил <%= time_ago_in_words resource.created_at %> назад<br/>
   <strong>Оригинальное название:</strong> <%=h resource.file.original_filename %><br/>
   <strong>Размер:</strong> <%= number_to_human_size resource.file.size %><br/>
   <%= link_to( "Скачать", resource.file.url ) if current_user %>
