@@ -1,0 +1,10 @@
+# TODO: resource_name could be female
+ru:
+  flash:
+    actions:
+      create:
+        notice: "{{resource_name}} успешно создан!"
+      update:
+        notice: "{{resource_name}} успешно обновлен!"
+      destroy:
+        notice: "{{resource_name}} успешно удален!"

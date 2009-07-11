@@ -1,0 +1,9 @@
+# TODO: добавить в formtastic показ base ошибок
+ru:
+  formtastic:
+    yes: 'Да'
+    no: 'Нет'
+    create: 'Создать'
+    save: 'Сохранить'
+    submit: 'Отправить'
+    required: 'Обязательное поле'
