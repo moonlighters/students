@@ -40,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
+  # TODO: may be we could do it prettier
   map.with_options :controller => "forums" do |m|
     m.with_options :conditions => { :method => :get } do |mm|
       mm.forums "forums", :action => "index"
@@ -73,6 +74,8 @@ ActionController::Routing::Routes.draw do |map|
     m.forum_post "forums/posts/:id", :action => "update", :conditions => { :method => :put }
     m.connect "forums/posts/:id", :action => "destroy", :conditions => { :method => :delete }
   end
+
+  map.resources :loads
 
   map.resources :users
   map.signup  "signup", :controller => "users", :action => "new", :conditions => {:method => :get}

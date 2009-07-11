@@ -1,0 +1,21 @@
+<% @page_title = "Загрузки" %>
+<h2>Список загрузок</h2>
+
+<% if current_user_has_role? :upload_moderator %>
+<p>
+  <%= link_to "Добавить", new_resource_path %>
+</p>
+<% end %>
+
+<table>
+  <th>
+    <td>Имя</td>
+    <td>Описание</td>
+  </th>
+  <% collection.each do |res| %>
+  <tr>
+    <td><%= link_to h(res.name), res %></td>
+    <td><%=h res.description %></td>
+  </tr>
+  <% end %>
+</table>

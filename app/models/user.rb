@@ -17,4 +17,5 @@ class User < ActiveRecord::Base
                 find_by_forum_topic_id topic.id
               end
             end
+  # TODO: add gender
 end

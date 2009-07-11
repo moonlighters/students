@@ -1,0 +1,12 @@
+<% @page_title = "Загрузки" %>
+<h2>Добавить загрузку</h2>
+
+<% # TODO: improve view of form %>
+<% semantic_form_for(resource, :html => { :multipart => true }) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
+  <%= f.input :file %>
+  <%= f.buttons %>
+<% end %>
+
+<%= link_to 'К списку загрузок', loads_path %>

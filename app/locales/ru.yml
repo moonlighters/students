@@ -5,6 +5,7 @@ ru:
       forum: "Форум"
       forum topic: "Тема"
       forum post: "Сообщение"
+      load: "Загрузка"
     attributes:
       user:
         login: "Логин"
@@ -23,6 +24,10 @@ ru:
         post: "Сообщение"
       forum_post:
         body: "Сообщение"
+      load:
+        file: "Файл"
+        name: "Имя"
+        description: "Описание"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

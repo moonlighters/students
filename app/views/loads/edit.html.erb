@@ -1,0 +1,13 @@
+<% @page_title = "Загрузки" %>
+<h2>Редактировать загрузку "<%=h Load.find(resource.id).name %>"</h2>
+
+<% semantic_form_for(resource, :html => { :multipart => true }) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
+  <%= f.input :file, :hint => "указывайте файл, только если хотите заменить существующий" %>
+  <%= f.buttons %>
+<% end %>
+
+<%= link_to 'Отменить', resource_path %> |
+<%= link_to 'Удалить', resource_path, :confirm => "Вы действительно хотите безвозвратно удалить загрузку?", :method => :delete %> |
+<%= link_to 'К списку загрузок', collection_path %>

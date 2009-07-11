@@ -33,3 +33,10 @@ Factory.define :forum_topic_viewing do |v|
   v.association :topic, :factory => :forum_topic
   v.association :post, :factory => :forum_post
 end
+
+Factory.define :load do |l|
+  l.name "Keygen"
+  l.description "It works with every soft!"
+  l.association :owner, :factory => :user
+  l.file File.open("Rakefile") # TODO: invent smth better
+end

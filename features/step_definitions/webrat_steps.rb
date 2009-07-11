@@ -96,6 +96,10 @@ end
   response.should contain(text)
 end
 
+То /^я не должен (?:у)?видеть "([^\"]*)"$/ do |text|
+  response.should_not contain(text)
+end
+
 То /^я не должен (?:y)?видеть "([^\"]*)"$/ do |text|
   response.should_not contain(text)
 end
@@ -111,4 +115,3 @@ end
 То /^я должен быть (?:на|в) (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end
-

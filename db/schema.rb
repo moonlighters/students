@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090406141519) do
+ActiveRecord::Schema.define(:version => 20090710150509) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -44,6 +44,17 @@ ActiveRecord::Schema.define(:version => 20090406141519) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "loads", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "roles", :force => true do |t|

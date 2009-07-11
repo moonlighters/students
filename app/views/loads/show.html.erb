@@ -1,0 +1,22 @@
+<% @page_title = "Загрузки" %>
+<h2>Загрузка "<%=h resource.name %>"</h2>
+
+<% if resource.owner? current_user %>
+<p>
+  <%= link_to "Редактировать", edit_resource_path %>
+</p>
+<% end %>
+
+<h3>Описание</h3>
+<p>
+<% unless resource.description.empty? %>
+  <i><%= add_br_to_text h(resource.description) %></i><br/>
+<% end %>
+<%# TODO: change verb depending on owner.gender %>
+  Этот файл <%= link_to_user resource.owner %> загрузил <%= format_time resource.created_at %><br/>
+  <strong>Оригинальное название:</strong> <%=h resource.file.original_filename %><br/>
+  <strong>Размер:</strong> <%= number_to_human_size resource.file.size %><br/>
+  <%= link_to( "Скачать", resource.file.url ) if current_user %>
+</p>
+
+<%= link_to 'К списку загрузок', collection_path %>
