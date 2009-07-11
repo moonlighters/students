@@ -10,7 +10,6 @@ ru:
         login: "Логин"
         password: "Пароль"
         password_confirmation: "Повторите пароль"
-        remember_me: "Запомнить меня"
         email: "E-mail"
         avatar: "Аватар"
         time_zone: "Часовой пояс"
@@ -37,3 +36,10 @@ ru:
       not_approved: "Ваш аккаунт не утвержден"
       blank_record: "Нельзя войти с пустой записью"
       new_record: "Нельзя войти с новой записью"
+    models:
+      user_session: Вход
+    attributes:
+      user_session:
+        login: "Логин"
+        password: "Пароль"
+        remember_me: "Запомнить меня"
