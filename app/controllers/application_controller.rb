@@ -7,13 +7,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'cd5d422483a22ae5412c6491ed1d740e'
 
   helper_method :current_user_session, :current_user,
-                :smart_post_path
+                :smart_post_path, :current_user_has_role?
   filter_parameter_logging :password, :password_confirmation
+
+  rescue_from Acl9::AccessDenied, :with => :access_denied
 
   def root
   end
   
   private
+    def access_denied
+      flash[:warning] = "У вас недостаточно прав для доступа к этому разделу!"
+      redirect_to root_url
+    end
+
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
@@ -56,5 +63,9 @@ class ApplicationController < ActionController::Base
       topic = post.topic
       page = 1 + topic.posts.index( post ) / ForumPost.per_page
       forum_topic_path( post.topic ) + "?page=#{page}#post#{post.id}"
+    end
+
+    def current_user_has_role?(*args)
+      current_user and current_user.has_role? *args
     end
 end
