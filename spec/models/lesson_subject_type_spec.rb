@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe LessonSubjectType do
   it "should be valid given valid attributes" do
-    Factory.build( :lesson_subject_type ).should be_valid
+    Factory :lesson_subject_type
   end
 
   [:lesson_type, :subject, :group, :teacher].each do |field|

@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Group do
   it "should be valid given valid attributes" do
-    Factory.build( :group ).should be_valid
+    Factory :group
   end
 
   [:name, :start_year].each do |field|
@@ -11,12 +11,15 @@ describe Group do
     end
   end
 
-  it "should not be valid with empty name" do
+  it "should not be valid with blank name" do
     Factory.build( :group, :name => "  \t " ).should_not be_valid
   end
 
-  it "should not be valid with start_year not in range 1961..now" do
+  it "should not be valid with start_year equal to 1900" do
     Factory.build( :group, :start_year => 1900).should_not be_valid
+  end
+
+  it "should not be valid with start_year equal to now + 10" do
     Factory.build( :group, :start_year => Time.now.year + 10).should_not be_valid
   end
   

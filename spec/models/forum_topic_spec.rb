@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ForumTopic do
   it "should be valid given valid attributes" do
-    Factory.build( :forum_topic ).should be_valid
+    Factory :forum_topic
   end
   
   it "should be valid given valid attributes without description" do
@@ -15,12 +15,12 @@ describe ForumTopic do
     end
   end
 
-  it "should not be valid with empty title" do
+  it "should not be valid with blank title" do
     Factory.build( :forum_topic, :title => "  \t " ).should_not be_valid
   end
 
   it "should set view_count to 0 when created" do
-    Factory( :forum_topic ).view_count.should == 0
+    Factory.create( :forum_topic ).view_count.should == 0
   end
   
   describe "#view!" do

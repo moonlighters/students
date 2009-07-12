@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ForumPost do
   it "should be valid given valid attributes" do
-    Factory.build( :forum_post ).should be_valid
+    Factory :forum_post
   end
 
   [:body, :topic, :user].each do |field|
@@ -11,7 +11,7 @@ describe ForumPost do
     end
   end
 
-  it "should not be valid with empty body" do
+  it "should not be valid with blank body" do
     Factory.build( :forum_post, :body => " \n\n\n \t " ).should_not be_valid
   end
 end

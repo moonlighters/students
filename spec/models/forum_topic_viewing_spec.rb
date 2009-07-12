@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ForumTopicViewing do
   it "should be valid given valid attributes" do
-    Factory.build( :forum_topic_viewing ).should be_valid
+    Factory :forum_topic_viewing
   end
   
   [:topic, :post, :user].each do |field|
