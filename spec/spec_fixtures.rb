@@ -1,5 +1,7 @@
 require 'factory_girl'
 
+TERM = 4
+
 Factory.define :forum do |f|
   f.title       "Cool forum"
   f.description "This forum is the best!"
@@ -40,4 +42,43 @@ Factory.define :load do |l|
   l.description "It works with every soft!"
   l.association :owner, :factory => :user
   l.file File.open("Rakefile") # TODO: invent smth better
+end
+
+Factory.define :lesson_type do |t|
+  t.name "лекция"
+end
+
+Factory.define :lesson_subject do |s|
+  s.name "ММФ"
+  s.term TERM
+end
+
+Factory.define :group do |g|
+  g.name "7371"
+  g.start_year 2007
+end
+
+Factory.define :teacher do |t|
+  t.name "Сергей Андреевич"
+  t.surname "Тресков"
+  t.phone "33333333"
+  t.email "mail@mail.ru"
+end
+
+Factory.define :lesson_subject_type do |l|
+  l.association :lesson_type, :factory => :lesson_type
+  l.association :subject, :factory => :lesson_subject
+  l.association :group, :factory => :group
+  l.association :teacher, :factory => :teacher
+end
+
+Factory.define :lesson do |l|
+  l.association :subject_type, :factory => :lesson_subject_type
+  l.association :group, :factory => :group
+  l.term TERM
+  l.day_of_week 2
+  l.start_time Time.mktime(1970, "jan", 1, 12, 20)
+  l.duration 1.hour + 35.minutes
+  l.everyweek false
+  l.odd_weeks true
 end

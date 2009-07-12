@@ -1,0 +1,8 @@
+<% @page_title = "Редактирование информации о преподавателе " %>
+<h1>Редактирование информации о преподавателе </h1>
+
+<%= render :partial => "form", :locals => {:teacher => @teacher} %>
+
+<%= link_to "Назад", teachers_path %> |
+<%= link_to "Показать", teacher_path( @teacher ) %> |
+<%= button_to 'Удалить', teacher_path( @teacher ), :method => :delete %>

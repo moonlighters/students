@@ -1,0 +1,8 @@
+<% @page_title = "Предметы" %>
+<h1>Расписание > Предметы</h1>
+
+<%= render :partial => "table", :locals => {:lesson_subjects => @lesson_subjects} %>
+
+<br />
+
+<%= link_to 'Добавить предмет', new_lesson_subject_path %>

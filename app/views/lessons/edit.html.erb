@@ -1,0 +1,8 @@
+<% @page_title = "Редактирование занятия" %>
+<h1>Расписание > Редактирование занятия</h1>
+
+<%= render :partial => "form", :locals => {:lesson => @lesson} %>
+<%=h @text %>
+<%= link_to "Назад", schedule_path %> |
+<%= link_to "Показать", lesson_path( @lesson ) %> |
+<%= button_to 'Удалить', lesson_path( @lesson ), :method => :delete %>

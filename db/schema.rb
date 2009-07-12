@@ -46,6 +46,49 @@ ActiveRecord::Schema.define(:version => 20090711143653) do
     t.datetime "updated_at"
   end
 
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.integer  "start_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_subject_types", :force => true do |t|
+    t.integer  "lesson_type_id"
+    t.integer  "lesson_subject_id"
+    t.integer  "group_id"
+    t.integer  "teacher_id"
+    t.string   "homepage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_subjects", :force => true do |t|
+    t.string   "name"
+    t.integer  "term"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lesson_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessons", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "lesson_subject_type_id"
+    t.integer  "term"
+    t.integer  "day_of_week"
+    t.time     "start_time"
+    t.integer  "duration"
+    t.boolean  "everyweek"
+    t.boolean  "odd_weeks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "loads", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -74,6 +117,15 @@ ActiveRecord::Schema.define(:version => 20090711143653) do
 
   create_table "sexes", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "teachers", :force => true do |t|
+    t.string   "name"
+    t.string   "surname"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

@@ -6,6 +6,10 @@ ru:
       forum topic: "Тема"
       forum post: "Сообщение"
       load: "Загрузка"
+      lesson subject: "Предмет"
+      group: "Группа"
+      teacher: "Преподаватель"
+      lesson subject type: "Тип занятия"
     attributes:
       user:
         login: "Логин"
@@ -28,6 +32,23 @@ ru:
         file: "Файл"
         name: "Имя"
         description: "Описание"
+      lesson_subject:
+        name: "Название"
+        term: "Семестр"
+      group:
+        name: "Название"
+        start_year: "Год начала обучения"
+      teacher:
+        name: "Имя"
+        surname: "Фамилия"
+        phone: "Телефон"
+        email: "E-mail"
+      lesson_subject_type:
+        lesson_type_id: "Тип"
+        lesson_subject_id: "Предмет"
+        group_id: "Группа"
+        teacher_id: "Преподаватель"
+        homepage: "Домашняя страничка"
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

@@ -1,0 +1,8 @@
+<% @page_title = "Преподаватели" %>
+<h1>Список преподавателей</h1>
+
+<%= render :partial => "table", :locals => {:teachers => @teachers} %>
+
+<br />
+
+<%= link_to 'Добавить преподавателя', new_teacher_path %>

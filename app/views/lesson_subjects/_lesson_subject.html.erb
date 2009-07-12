@@ -1,0 +1,5 @@
+    <tr>
+      <td><%= link_to h( lesson_subject.name ), lesson_subject_path( lesson_subject ) %></td>
+      <td><%=h lesson_subject.term %></td>
+      <td><%= link_to 'Править', edit_lesson_subject_path( lesson_subject ) %></td>
+    </tr>

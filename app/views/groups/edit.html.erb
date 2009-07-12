@@ -1,0 +1,8 @@
+<% @page_title = "Редактирование группы " %>
+<h1>Редактирование группы </h1>
+
+<%= render :partial => "form", :locals => {:group => @group} %>
+
+<%= link_to "Назад", groups_path %> |
+<%= link_to "Показать", group_path( @group ) %> |
+<%= button_to 'Удалить', group_path( @group ), :method => :delete %>

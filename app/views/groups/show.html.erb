@@ -1,0 +1,15 @@
+<% @page_title = "Группа " + h( @group.name) %>
+<h2>Просмотр группы</h2>
+<p>
+  <b>Название:</b>
+  <%=h @group.name %>
+</p>
+
+<p>
+  <b>Год начала обучения:</b>
+  <%=h @group.start_year %>
+</p>
+
+
+<%= link_to 'Править', edit_group_path(@group) %> |
+<%= link_to 'Назад', groups_path %>

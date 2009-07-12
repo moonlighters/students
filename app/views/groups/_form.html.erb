@@ -1,0 +1,16 @@
+<% form_for group do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :start_year %><br />
+    <%= f.text_field :start_year %>
+  </p>
+  <p>
+    <%= f.submit group.new_record? ? "Добавить" : "Обновить" %>
+  </p>
+<% end %>
+
