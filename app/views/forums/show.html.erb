@@ -18,4 +18,4 @@
 
 <%= link_to 'Новый форум', new_sub_forum_path( @forum ) %> |
 <%= link_to 'Править', edit_forum_path( @forum ) %> |
-<%= link_to 'Вверх', forum_path( @forum.parent ) %>
+<%= link_to_forum @forum.parent, :caption => 'Вверх' %>

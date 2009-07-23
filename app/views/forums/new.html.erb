@@ -7,4 +7,4 @@
 
 <%= render :partial => "form", :locals => {:forum => @forum} %>
 
-<%= link_to 'Назад', forum_path( @forum ) %>
+<%= link_to_forum @forum.parent, :caption => 'Назад' %>
