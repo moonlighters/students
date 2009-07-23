@@ -39,99 +39,32 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
-  # TODO: may be we could do it prettier
-  map.with_options :controller => "forums" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.forums "forums", :action => "index"
-      mm.new_root_forum "forums/new", :action => "new_root"
-      mm.forum "forums/:id", :action => "show"
-      mm.new_sub_forum "forums/:id/new", :action => "new_sub"
-      mm.edit_forum "forums/:id/edit", :action => "edit"
-    end
-    m.connect "forums", :action => "create", :conditions => { :method => :post }
-    m.connect "forums/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "forums/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
+  map.new_root_forum "forums/new",     :controller => "forums", :action => "new_root"
+  map.new_sub_forum  "forums/:id/new", :controller => "forums", :action => "new_sub"
+  map.resources :forums, :except => [:new]
 
-  map.with_options :controller => "forum_topics" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.forum_topic "forums/topics/:id/", :action => "show"
-      mm.new_forum_topic "forums/:id/new_topic", :action => "new"
-      mm.edit_forum_topic "forums/topics/:id/edit", :action => "edit"
-    end
-    m.forum_topics "forums/topics", :action => "create", :conditions => { :method => :post }
-    m.connect "forums/topics/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "forums/topics/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
+  map.new_forum_topic "forums/:id/new_topic", :controller => "forum_topics", :action => "new"
+  map.resources :forum_topics, :as => "topics",
+                               :path_prefix => "forums",
+                               :except => [:index, :new]
+  
+  map.new_forum_post "forums/topics/:id/new_post", :controller => "forum_posts", :action => "new"
+  map.resources :forum_posts, :as => "posts",
+                              :path_prefix => "forums",
+                              :except => [:index, :new, :show]
 
-  map.with_options :controller => "forum_posts" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.new_forum_post "forums/topics/:id/new_post", :action => "new"
-      mm.edit_forum_post "forums/posts/:id/edit", :action => "edit"
-    end
-    m.forum_posts "forums/posts", :action => "create", :conditions => { :method => :post }
-    m.forum_post "forums/posts/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "forums/posts/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
+  map.resources :lesson_subjects, :as => "subjects",
+                                  :path_prefix => "schedule"
 
-  map.with_options :controller => "lesson_subjects" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.lesson_subjects "schedule/subjects", :action => "index"
-      mm.new_lesson_subject "schedule/subjects/new", :action => "new"
-      mm.lesson_subject "schedule/subjects/:id", :action => "show"
-      mm.edit_lesson_subject "schedule/subjects/:id/edit", :action => "edit"
-    end
-    m.connect "schedule/subjects", :action => "create", :conditions => { :method => :post }
-    m.connect "schedule/subjects/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "schedule/subjects/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
+  map.new_lesson_subject_type "schedule/subjects/:id/new_subject_type",
+                              :controller => "lesson_subject_types", :action => "new"
+  map.resources :lesson_subject_types, :as => "subject_types",
+                                       :path_prefix => "schedule",
+                                       :except => [:new, :index]
 
-  map.with_options :controller => "lesson_subject_types" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.new_lesson_subject_type "schedule/subjects/:id/new_subject_type", :action => "new"
-      mm.lesson_subject_type "schedule/subject_types/:id", :action => "show"
-      mm.edit_lesson_subject_type "schedule/subject_types/:id/edit", :action => "edit"
-    end
-    m.lesson_subject_types "schedule/subject_types", :action => "create", :conditions => { :method => :post }
-    m.connect "schedule/subject_types/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "schedule/subject_types/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
-
-  map.with_options :controller => "groups" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.groups "groups", :action => "index"
-      mm.new_group "groups/new", :action => "new"
-      mm.group "groups/:id", :action => "show"
-      mm.edit_group "groups/:id/edit", :action => "edit"
-    end
-    m.connect "groups", :action => "create", :conditions => { :method => :post }
-    m.connect "groups/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "groups/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
-
-  map.with_options :controller => "teachers" do |m|
-    m.with_options :conditions => { :method => :get } do |mm|
-      mm.teachers "teachers", :action => "index"
-      mm.new_teacher "teachers/new", :action => "new"
-      mm.teacher "teachers/:id", :action => "show"
-      mm.edit_teacher "teachers/:id/edit", :action => "edit"
-    end
-    m.connect "teachers", :action => "create", :conditions => { :method => :post }
-    m.connect "teachers/:id", :action => "update", :conditions => { :method => :put }
-    m.connect "teachers/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
-
-  map.with_options :controller => "lessons" do |l|
-    l.with_options :conditions => { :method => :get } do |ll|
-      ll.new_lesson "schedule/lessons/new", :action => "new"
-      ll.lesson "schedule/lessons/:id", :action => "show"
-      ll.edit_lesson "schedule/lessons/:id/edit", :action => "edit"
-    end
-    l.lessons "schedule/lessons", :action => "create", :conditions => { :method => :post }
-    l.connect "schedule/lessons/:id", :action => "update", :conditions => { :method => :put }
-    l.connect "schedule/lessons/:id", :action => "destroy", :conditions => { :method => :delete }
-  end
-
+  map.resources :groups
+  map.resources :teachers
+  map.resources :lessons, :path_prefix => "schedule", :except => [:index]
   map.schedule "schedule", :controller => "application", :action => "root"
 
   map.resources :loads
@@ -145,7 +78,6 @@ ActionController::Routing::Routes.draw do |map|
   map.logout  "logout", :controller => "user_sessions", :action => "destroy"
 
   map.root :controller => "application", :action => "root"
-
 #    map.connect ':controller/:action/:id'
 #    map.connect ':controller/:action/:id.:format'
 end
