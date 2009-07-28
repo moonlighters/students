@@ -10,8 +10,15 @@ class ForumTopicsController < ApplicationController
 
   # GET /forums/1/new_topic
   def new
-    @forum_topic = ForumTopic.new
-    @forum_topic.forum = Forum.find params[:id]
+    parent_forum = Forum.find params[:id]
+
+    unless current_user
+      flash[:error] = "Необходимо войти на сайт, чтобы создавать темы"
+      redirect_to forum_path( parent_forum ) 
+    else 
+      @forum_topic = ForumTopic.new
+      @forum_topic.forum = parent_forum
+    end
   end
 
   # GET /forums/topics/1/edit

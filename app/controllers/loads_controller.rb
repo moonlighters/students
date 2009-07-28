@@ -15,5 +15,11 @@ class LoadsController < InheritedResources::Base
 
     create!
   end
+
+  def show
+    flash[:warning] = "Необходимо войти на сайт, чтобы скачивать файлы" unless current_user
+
+    show!
+  end
   
 end

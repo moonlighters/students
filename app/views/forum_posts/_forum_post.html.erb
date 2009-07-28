@@ -11,5 +11,5 @@
       <span class="post_edited">Редактировал: <%= link_to_user forum_post.last_editor %>, <%= format_time forum_post.updated_at %></span>
     <% end %>
   </td>
-  <td align="center"><%= link_to 'Править', edit_forum_post_path( forum_post ) %></td>
+  <td align="center"><%= link_to 'Править', edit_forum_post_path( forum_post ) if  current_user %></td>
 </tr>

@@ -4,17 +4,27 @@ class ForumPostsController < ApplicationController
 
   # GET /forums/topics/1/new_post
   def new
-    @forum_post = ForumPost.new
-    @forum_post.topic = ForumTopic.find params[:id]
-    find_last_posts
+    parent_topic = ForumTopic.find params[:id]
+    unless current_user
+      flash[:error] = "Необходимо войти на сайт, чтобы отвечать в темы"
+      redirect_to forum_topic_path( parent_topic ) 
+    else
+      @forum_post = ForumPost.new
+      @forum_post.topic = parent_topic
+      find_last_posts
 
-    respond_to do |format|
-      format.html # new.html.erb
+      respond_to do |format|
+        format.html # new.html.erb
+      end
     end
   end
 
   # GET /forums/posts/1/edit
   def edit
+    unless current_user
+      flash[:error] = "Необходимо войти на сайт, чтобы редактировать сообщения"
+      redirect_to forum_topic_path( @forum_post.topic ) 
+    end 
   end
 
   # POST /forums/posts
