@@ -15,7 +15,7 @@
   Этот файл <%= link_to_user resource.owner %> загрузил<%= gender( resource.owner, "", "а" ) %> <%= time_ago_in_words resource.created_at %> назад<br/>
   <strong>Оригинальное название:</strong> <%=h resource.file.original_filename %><br/>
   <strong>Размер:</strong> <%= number_to_human_size resource.file.size %><br/>
-  <%= link_to( "Скачать", resource.file.url ) if current_user %>
+  <%= current_user ? link_to( "Скачать", resource.file.url ) : "<i>Чтобы скачать файл, войдите на сайт или зарегистрируйтесь</i>" %>
 </p>
 
 <%= link_to 'К списку загрузок', collection_path %>
