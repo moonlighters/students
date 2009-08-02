@@ -9,7 +9,7 @@ describe ForumTopic do
     Factory.build( :forum_topic, :description => nil ).should be_valid
   end
 
-  [:title, :forum, :user].each do |field|
+  [:title, :forum, :owner].each do |field|
     it "should not be valid without #{field}" do
       Factory.build( :forum_topic, field => nil ).should_not be_valid
     end
@@ -80,6 +80,36 @@ describe ForumTopic do
     it "should return nil if topic is unviewed" do
       @t1 = Factory :forum_topic
       @t1.first_unread_post_of(@u).should be_nil
+    end
+  end
+
+  # Acl9
+  it "should set :owner role to user" do
+    user = Factory :user
+    t = Factory :forum_topic, :owner => user
+    user.has_role?( :owner, t).should be_true
+  end
+
+  describe "#owner" do
+    it "should return owner of forum_topic" do
+      user = Factory :user
+      t = Factory :forum_topic, :owner => user
+      t.owner.should == user
+    end
+  end
+
+  describe "#owner?" do
+    it "should return true if user is owner" do
+      user = Factory :user
+      t = Factory :forum_topic, :owner => user
+      t.owner?( user ).should be_true
+    end
+    
+    it "should return false if user isn't owner" do
+      user = Factory :user
+      another_user = Factory :user
+      t = Factory :forum_topic, :owner => user
+      t.owner?( another_user ).should be_false
     end
   end
 end

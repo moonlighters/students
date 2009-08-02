@@ -100,10 +100,6 @@ end
   response.should_not contain(text)
 end
 
-То /^я не должен (?:y)?видеть "([^\"]*)"$/ do |text|
-  response.should_not contain(text)
-end
-
 То /^я должен (?:у)?видеть "(.*)" в поле "(.*)"$/ do |text, field|
   field_labeled(field).value.should == text
 end

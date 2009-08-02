@@ -21,7 +21,7 @@ end
 Factory.define :forum_topic do |t|
   t.title       "cool topic"
   t.description "sdefghj"
-  t.association :user, :factory => :user
+  t.association :owner, :factory => :user
   t.association :forum, :factory => :forum
 end
 

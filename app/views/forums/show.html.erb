@@ -14,7 +14,7 @@
   <%= render :partial => "forum_topics/table", :locals => {:forum_topics => @forum_topics} %>
 <% end %>
 
-<%= link_to( 'Новая тема', new_forum_topic_path( @forum )  ) + " |" if current_user %>
+<%= link_to( 'Новая тема', new_forum_topic_path( @forum )  ) + " |" if can_create_topic? %>
 
 <%= link_to 'Новый форум', new_sub_forum_path( @forum ) %> |
 <%= link_to 'Править', edit_forum_path( @forum ) %> |

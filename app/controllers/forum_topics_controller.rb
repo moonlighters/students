@@ -1,48 +1,48 @@
-class ForumTopicsController < ApplicationController
+class ForumTopicsController < InheritedResources::Base
 
-  before_filter :find_forum_topic, :only => [:show, :edit, :update, :destroy]
+  before_filter :set_forum, :only => [:show, :edit, :update, :destroy]
 
-  # GET /forums/topics/1
-  def show
-    @forum_posts = ForumPost.paginate_by_forum_topic_id @forum_topic.id, :page => params[:page]
-    @forum_topic.view! current_user
+  access_control do
+    allow all, :to => :show
+    allow logged_in, :to => [:new, :create]
+    actions :edit, :update, :destroy do
+      allow :owner, :of => :resource
+      allow :moderator, :of => :forum
+    end
+  end
+
+# GET /forums/topics/1
+def show
+  @forum_posts = ForumPost.paginate_by_forum_topic_id resource.id, :page => params[:page]
+    resource.view! current_user
+
+    show!
   end
 
   # GET /forums/1/new_topic
   def new
-    parent_forum = Forum.find params[:id]
-
-    unless current_user
-      flash[:error] = "Необходимо войти на сайт, чтобы создавать темы"
-      redirect_to forum_path( parent_forum ) 
-    else 
-      @forum_topic = ForumTopic.new
-      @forum_topic.forum = parent_forum
-    end
-  end
-
-  # GET /forums/topics/1/edit
-  def edit
+    @forum_topic = ForumTopic.new
+    @forum_topic.forum = Forum.find params[:id]
   end
 
   # POST /forums/topics
   def create
-    @forum_topic = ForumTopic.new params[:forum_topic]
-    @forum_topic.user = current_user
+    build_resource
+    resource.owner = current_user 
     post = ForumPost.new  :body => params[:forum_topic][:post],
                           :user_id => (current_user ? current_user.id : nil),
                           :forum_topic_id => 1
-
-    if @forum_topic.valid? and post.valid?
-      @forum_topic.save!
-      post.forum_topic_id = @forum_topic.id
+    
+    if resource.valid? and post.valid?
+      resource.save!
+      post.forum_topic_id = resource.id
       post.save!
 
-      flash[:notice] = 'Тема успешно создана.'
-      redirect_to forum_topic_path( @forum_topic )
+      create!
+      flash[:notice] = 'Тема успешно создана.' #TODO: Normal i18n in inherited_resources instead this
     else
       if post.errors[:body]
-        @forum_topic.errors.add :post, post.errors[:body]
+        resource.errors.add :post, post.errors[:body]
       end
       render :action => "new"
     end
@@ -50,25 +50,20 @@ class ForumTopicsController < ApplicationController
 
   # PUT /forums/topics/1
   def update
-    if @forum_topic.update_attributes params[:forum_topic]
-      flash[:notice] = 'Тема успешно обновлена.'
-      redirect_to forum_topic_path( @forum_topic )
-    else
-      render :action => "edit"
-    end
+    update!
+    flash[:notice] = 'Тема успешно обновлена.' if flash[:notice] #TODO: Normal i18n in inherited_resources instead this
   end
 
   # DELETE /forums/topics/1
   def destroy
-    forum = @forum_topic.forum
-    @forum_topic.destroy
-
-    flash[:notice] = 'Тема удалена'
-    redirect_to forum_path( forum )
+    forum = resource.forum
+    
+    destroy! { forum_path( forum ) }
+    flash[:notice] = 'Тема удалена.' if flash[:notice] #TODO: Normal i18n in inherited_resources instead this
   end
 
   private
-    def find_forum_topic
-      @forum_topic = ForumTopic.find params[:id]
+    def set_forum
+      @forum = resource.forum
     end
 end

@@ -1,22 +1,52 @@
 class ForumTopic < ActiveRecord::Base
-  validates_presence_of :title, :user_id, :forum_id
 
+  acts_as_authorization_object
+
+  validates_presence_of :title, :forum_id
+  validates_presence_of :owner
+  
   belongs_to :forum
-  belongs_to :user
   
   has_many  :posts,
             :class_name => "ForumPost",
             :dependent => :destroy
-
-  before_create do |topic|
-    topic.view_count = 0
-  end
 
   attr_accessor :post
 
   cattr_reader :per_page
   @@per_page = 10
 
+  # owner accessors
+
+  def owner
+    @owner ||
+    ( accepted_roles.first.nil? ? nil : accepted_roles.first.users.first )
+  end
+
+  def owner=(user)
+    @owner = user
+  end
+
+  def owner?(u); u == owner; end
+  
+  # This callback applies changing an owner by adding/removing roles
+  def after_save 
+    return unless @owner
+
+    unless accepted_roles.first.nil?
+      accepted_roles.first.users.each do |user|
+        accepts_no_role!( :owner, user ) # unassign previous owners
+      end
+    end
+      
+    accepts_role!( :owner, @owner ) # assign new owner
+  end
+
+  # handling viewing
+
+  before_create do |topic|
+    topic.view_count = 0
+  end
 
   def view!( user )
     if user
@@ -27,7 +57,7 @@ class ForumTopic < ActiveRecord::Base
       v.save
     end
     self.view_count += 1
-    self.save
+    self.save!
   end
 
   def first_unread_post_of( user )

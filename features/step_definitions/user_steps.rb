@@ -1,20 +1,26 @@
-Допустим /^я залогинился как (.+)$/ do |login|
-  Допустим "есть пользователь #{login} с паролем 123456"
+def login_as (user, pass)
   visit login_path
-  fill_in "Логин", :with => login
-  fill_in "Пароль", :with => "123456"
+  fill_in "Логин", :with => user 
+  fill_in "Пароль", :with => pass
   click_button "Войти"
   response.should contain "Вы вошли на сайт"
+end
+
+Допустим /^я залогинился как (.+)$/ do |login|
+  Допустим "есть пользователь #{login} с паролем 123456"
+  login_as login, "123456"
 end
 
 Допустим /^я залогинился с ролью (.+) как (.+)$/ do |role, login|
   Допустим "есть пользователь #{login} с паролем 123456"
   User.find_by_login( login ).has_role! role
-  visit login_path
-  fill_in "Логин", :with => login
-  fill_in "Пароль", :with => "123456"
-  click_button "Войти"
-  response.should contain "Вы вошли на сайт"
+  login_as login, "123456"
+end
+
+Допустим /^я залогинился как (.+), имея  роль (.+) на форуме (.+)$/ do |login, role, forum|
+  Допустим "есть пользователь #{login} с паролем 123456"
+  User.find_by_login( login ).has_role! role, Forum.find_by_name!( forum )
+  login_as login, "123456"
 end
 
 Допустим /^я разлогинен$/ do
