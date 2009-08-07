@@ -11,9 +11,11 @@ class ForumTopicsController < InheritedResources::Base
     end
   end
 
+  actions :all, :except => :index
+
 # GET /forums/topics/1
-def show
-  @forum_posts = ForumPost.paginate_by_forum_topic_id resource.id, :page => params[:page]
+  def show
+    @forum_posts = ForumPost.paginate_by_forum_topic_id resource.id, :page => params[:page]
     resource.view! current_user
 
     show!
@@ -21,8 +23,8 @@ def show
 
   # GET /forums/1/new_topic
   def new
-    @forum_topic = ForumTopic.new
-    @forum_topic.forum = Forum.find params[:id]
+    build_resource
+    resource.forum = Forum.find params[:id]
   end
 
   # POST /forums/topics
@@ -39,7 +41,6 @@ def show
       post.save!
 
       create!
-      flash[:notice] = 'Тема успешно создана.' #TODO: Normal i18n in inherited_resources instead this
     else
       if post.errors[:body]
         resource.errors.add :post, post.errors[:body]
@@ -48,18 +49,11 @@ def show
     end
   end
 
-  # PUT /forums/topics/1
-  def update
-    update!
-    flash[:notice] = 'Тема успешно обновлена.' if flash[:notice] #TODO: Normal i18n in inherited_resources instead this
-  end
-
   # DELETE /forums/topics/1
   def destroy
     forum = resource.forum
     
     destroy! { forum_path( forum ) }
-    flash[:notice] = 'Тема удалена.' if flash[:notice] #TODO: Normal i18n in inherited_resources instead this
   end
 
   private

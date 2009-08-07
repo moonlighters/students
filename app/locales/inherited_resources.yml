@@ -8,3 +8,17 @@ ru:
         notice: "{{resource_name}} успешно обновлен!"
       destroy:
         notice: "{{resource_name}} успешно удален!"
+    forum_topics:
+      create:
+        notice: "Тема успешно создана!"
+      update:
+        notice: "Тема успешно обновлена!"
+      destroy:
+        notice: "Тема успешно удалена!"
+    loads:
+      create:
+        notice: "Загрузка успешно создана!"
+      update:
+        notice: "Загрузка успешно обновлена!"
+      destroy:
+        notice: "Загрузка успешно удалена!"
