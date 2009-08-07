@@ -82,34 +82,4 @@ describe ForumTopic do
       @t1.first_unread_post_of(@u).should be_nil
     end
   end
-
-  # Acl9
-  it "should set :owner role to user" do
-    user = Factory :user
-    t = Factory :forum_topic, :owner => user
-    user.has_role?( :owner, t).should be_true
-  end
-
-  describe "#owner" do
-    it "should return owner of forum_topic" do
-      user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner.should == user
-    end
-  end
-
-  describe "#owner?" do
-    it "should return true if user is owner" do
-      user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner?( user ).should be_true
-    end
-    
-    it "should return false if user isn't owner" do
-      user = Factory :user
-      another_user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner?( another_user ).should be_false
-    end
-  end
 end

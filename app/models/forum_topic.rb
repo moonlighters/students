@@ -1,6 +1,8 @@
 class ForumTopic < ActiveRecord::Base
 
   acts_as_authorization_object
+  
+  acts_as_ownable
 
   validates_presence_of :title, :forum_id
   validates_presence_of :owner
@@ -15,32 +17,6 @@ class ForumTopic < ActiveRecord::Base
 
   cattr_reader :per_page
   @@per_page = 10
-
-  # owner accessors
-
-  def owner
-    @owner ||
-    ( accepted_roles.first.nil? ? nil : accepted_roles.first.users.first )
-  end
-
-  def owner=(user)
-    @owner = user
-  end
-
-  def owner?(u); u == owner; end
-  
-  # This callback applies changing an owner by adding/removing roles
-  def after_save 
-    return unless @owner
-
-    unless accepted_roles.first.nil?
-      accepted_roles.first.users.each do |user|
-        accepts_no_role!( :owner, user ) # unassign previous owners
-      end
-    end
-      
-    accepts_role!( :owner, @owner ) # assign new owner
-  end
 
   # handling viewing
 
