@@ -5,7 +5,7 @@ describe ForumPost do
     Factory :forum_post
   end
 
-  [:body, :topic, :user].each do |field|
+  [:body, :topic, :owner].each do |field|
     it "should not be valid without #{field}" do
       Factory.build( :forum_post, field => nil ).should_not be_valid
     end

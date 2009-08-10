@@ -8,4 +8,13 @@ module ForumPostsHelper
   def will_paginate_posts(collection)
     will_paginate collection, :class => "posts_pagination"
   end
+
+  # TODO: можно ли как-то не дублировать эти проверки, а использовать средства Acl9 ?
+  def can_create_post?
+    current_user
+  end
+
+  def can_edit_post?(post)
+    post.owner?( current_user ) or current_user_has_role?( :moderator, post.topic.forum ) 
+  end
 end

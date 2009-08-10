@@ -17,9 +17,9 @@ end
   login_as login, "123456"
 end
 
-Допустим /^я залогинился как (.+), имея  роль (.+) на форуме (.+)$/ do |login, role, forum|
+Допустим /^я залогинился, имея роль (.+) на форуме (.+), как (.+)$/ do |role, forum, login|
   Допустим "есть пользователь #{login} с паролем 123456"
-  User.find_by_login( login ).has_role! role, Forum.find_by_name!( forum )
+  User.find_by_login( login ).has_role! role, Forum.find_by_title!( forum )
   login_as login, "123456"
 end
 

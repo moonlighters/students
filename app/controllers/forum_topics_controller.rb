@@ -32,7 +32,7 @@ class ForumTopicsController < InheritedResources::Base
     build_resource
     resource.owner = current_user 
     post = ForumPost.new  :body => params[:forum_topic][:post],
-                          :user_id => (current_user ? current_user.id : nil),
+                          :owner => current_user,
                           :forum_topic_id => 1
     
     if resource.valid? and post.valid?

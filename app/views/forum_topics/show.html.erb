@@ -10,6 +10,6 @@
 <%= render :partial => "forum_posts/table", :locals => {:forum_posts => @forum_posts} %>
 <% end %>
 
-<%= link_to( "Ответить", new_forum_post_path( @forum_topic ) ) + " |" if current_user %>
-<%= link_to( 'Править', edit_forum_topic_path( @forum_topic ) )  + " |" if  can_edit_topic? @forum_topic %>
+<%= link_to( "Ответить", new_forum_post_path( @forum_topic ) ) + " |" if can_create_post? %>
+<%= link_to( "Править", edit_forum_topic_path( @forum_topic ) )  + " |" if  can_edit_topic? @forum_topic %>
 <%= link_to "Вверх", forum_path( @forum_topic.forum ) %>

@@ -1,80 +1,57 @@
-class ForumPostsController < ApplicationController
+class ForumPostsController < InheritedResources::Base
+  
+  respond_to :html
 
-  before_filter :find_forum_post, :only => [:edit, :update, :destroy]
+  before_filter :set_forum, :only => [:show, :edit, :update, :destroy]
 
-  # GET /forums/topics/1/new_post
+  access_control do
+    allow logged_in, :to => [:new, :create]
+    actions :edit, :update, :destroy do
+      allow :owner, :of => :resource
+      allow :moderator, :of => :forum
+    end
+  end
+
+  actions :all, :except => [:index, :show]
+
   def new
     parent_topic = ForumTopic.find params[:id]
-    unless current_user
-      flash[:error] = "Необходимо войти на сайт, чтобы отвечать в темы"
-      redirect_to forum_topic_path( parent_topic ) 
-    else
-      @forum_post = ForumPost.new
-      @forum_post.topic = parent_topic
-      find_last_posts
-
-      respond_to do |format|
-        format.html # new.html.erb
-      end
-    end
-  end
-
-  # GET /forums/posts/1/edit
-  def edit
-    unless current_user
-      flash[:error] = "Необходимо войти на сайт, чтобы редактировать сообщения"
-      redirect_to forum_topic_path( @forum_post.topic ) 
-    end 
-  end
-
-  # POST /forums/posts
-  def create
-    @forum_post = ForumPost.new params[:forum_post]
-    @forum_post.user = current_user
+    build_resource
+    resource.topic = parent_topic
     find_last_posts
 
-    respond_to do |format|
-      if @forum_post.save
-        flash[:notice] = 'Сообщение успешно добавлено.'
-        format.html { redirect_to smart_post_path( @forum_post ) }
-      else
-        format.html { render :action => "new" }
-      end
+    new!
+  end
+
+  def create
+    build_resource
+    resource.owner = current_user
+    find_last_posts
+
+    create! do |success, failure|
+      success.html { redirect_to smart_post_path( resource ) }
     end
   end
 
-  # PUT /forums/posts/1
   def update
-    @forum_post.last_editor = current_user
-    respond_to do |format|
-      if @forum_post.update_attributes params[:forum_post]
-        flash[:notice] = 'Сообщение успешно обновлено.'
-        format.html { redirect_to smart_post_path( @forum_post ) }
-      else
-        format.html { render :action => "edit" }
-      end
+    resource.last_editor = current_user
+    update! do |success, failure|
+      success.html { redirect_to smart_post_path( resource ) }
     end
   end
 
-  # DELETE /forums/posts/1
   def destroy
-    topic = @forum_post.topic
-    @forum_post.destroy
-
-    respond_to do |format|
-      flash[:notice] = 'Сообщение удалено.'
-      format.html { redirect_to forum_topic_path( topic ) }
-    end
+    topic = resource.topic
+    destroy! { forum_topic_path( topic ) }
   end
 
   private
-    def find_forum_post
-      @forum_post = ForumPost.find params[:id]
-    end
-
     def find_last_posts
-      @last_forum_posts = ForumPost.find_all_by_forum_topic_id  @forum_post.topic.id,
+      @last_forum_posts = ForumPost.find_all_by_forum_topic_id  resource.topic.id,
                                                                 :order => "id DESC",
                                                                 :limit => 10
+    end
+    def set_forum
+      @forum = resource.topic.forum
     end
 end
