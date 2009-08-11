@@ -12,8 +12,17 @@ module ApplicationHelper
     messages
   end
 
-  def format_time(time)
-    Russian::strftime time+30, "%H:%M, %d %B %Y"
+  def format_time(time, options={})
+    # set default values for :date and :time options
+    [:date, :time].each {|param| options[param] = true unless options.include? param }
+    # check if either time or date will be shown
+    raise ArgumentError, "Invalid format_time options" if not options[:time] and not options[:date]
+
+    month_format = options[:month] == :digits ? ".%m." : " %B "
+    time_format = options[:time] ? "%H:%M" : ""
+    date_format = options[:date] ? "%d#{month_format}%Y" : ""
+    format = ( options[:time] and options[:date] ) ? time_format + ", " + date_format : time_format + date_format
+    Russian::strftime time, format
   end
 
   def gender(user, male, female)
