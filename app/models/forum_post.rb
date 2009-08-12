@@ -19,6 +19,13 @@ class ForumPost < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
   
+  after_create do |post|
+   post.topic.update_last_post!
+  end
+  after_destroy do |post|
+   post.topic.update_last_post!
+  end
+
   # call #not_saving_editor_on_update! if you want to #save and don't want to set last_editor
   # (if you want the post to look like it wasn't edited at all)
   def not_saving_editor_on_update!

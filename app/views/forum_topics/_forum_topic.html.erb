@@ -1,10 +1,14 @@
 <tr>
-  <td>
+  <td style="text-align:left;">
     <%= link_to h(forum_topic.title), forum_topic_path( forum_topic ) %>
     <div class="desc"><%=h forum_topic.description %></div>
-    <%= link_to_post forum_topic.first_unread_post_of( current_user ),
-                     :content => "К первому непрочитанному >>" %>
+    <div class="goto-first-unread">
+      <%= link_to_post  forum_topic.first_unread_post_of( current_user ),
+                        :content => "К первому непрочит. >>",
+                        :title => "Перейти к первому непрочитанному сообщению" %>
+    </div>
   </td>
-  <td align="center"><%= forum_topic.view_count %></td>
-  <td align="center"><%= forum_topic.posts.count - 1 %></td>
+  <td><%= forum_topic.view_count %></td>
+  <td><%= forum_topic.posts.count - 1 %></td>
+  <td><%= format_time forum_topic.last_post.created_at, :month => :digits %></td>
 </tr>
