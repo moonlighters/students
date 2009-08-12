@@ -1,12 +1,13 @@
 class ForumTopicsController < InheritedResources::Base
 
   before_filter :set_forum, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_forum_topic, :only => [:edit, :update, :destroy]
 
   access_control do
     allow all, :to => :show
     allow logged_in, :to => [:new, :create]
     actions :edit, :update, :destroy do
-      allow :owner, :of => :resource
+      allow :owner, :of => :forum_topic
       allow :moderator, :of => :forum
     end
   end
@@ -59,5 +60,8 @@ class ForumTopicsController < InheritedResources::Base
   private
     def set_forum
       @forum = resource.forum
+    end
+    def find_forum_topic
+      resource
     end
 end

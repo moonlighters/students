@@ -3,11 +3,12 @@ class ForumPostsController < InheritedResources::Base
   respond_to :html
 
   before_filter :set_forum, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_forum_post, :only => [:edit, :update, :destroy]
 
   access_control do
     allow logged_in, :to => [:new, :create]
     actions :edit, :update, :destroy do
-      allow :owner, :of => :resource
+      allow :owner, :of => :forum_post
       allow :moderator, :of => :forum
     end
   end
@@ -46,6 +47,9 @@ class ForumPostsController < InheritedResources::Base
   end
 
   private
+    def find_forum_post
+      resource
+    end
     def find_last_posts
       @last_forum_posts = ForumPost.find_all_by_forum_topic_id  resource.topic.id,
                                                                 :order => "id DESC",
