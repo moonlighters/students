@@ -38,4 +38,30 @@ describe Forum do
       [@f1, @f2].each {|x| x.parent.should == @f }
     end
   end
+
+  describe "#has_unread_posts_of?" do
+    before do
+      @u = Factory :user
+      @f = Factory :forum
+      @t = Factory :forum_topic, :forum => @f
+      @p = Factory :forum_post, :topic => @t
+      @f1 = Factory :forum, :parent => @f
+      @t1 = Factory :forum_topic, :forum => @f1
+      @p1 = Factory :forum_post, :topic => @t1
+      
+      @t.view! @u
+      @t1.view! @u
+    end
+    it "should return false if there is no unread posts in topics of this forum" do
+      @f.has_unread_posts_of?( @u ).should be_false
+    end
+    it "should return true if there are unread posts in topics of this forum" do
+      @p2 = Factory :forum_post, :topic => @t
+      @f.has_unread_posts_of?( @u ).should be_true
+    end
+    it "should return true if there are unread posts in topics of any subforum of this forum" do
+      @p3 = Factory :forum_post, :topic => @t1
+      @f.has_unread_posts_of?( @u ).should be_true
+    end
+  end
 end
