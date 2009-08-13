@@ -14,7 +14,7 @@ class ForumsController < ApplicationController
   # GET /forums/1
   def show
     @children = @forum.children
-    @forum_topics = ForumTopic.paginate_by_forum_id @forum.id, :page => params[:page]
+    @forum_topics = ForumTopic.paginate_by_forum_id @forum.id, :page => params[:page], :order => "last_post_id DESC"
 
     respond_to do |format|
       format.html # show.html.erb

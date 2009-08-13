@@ -1,0 +1,42 @@
+acts_as_ownable
+=============
+
+A plugin for making model objects ownable: adding functionality of setting an owner of resource, implemented by giving an "owner" role to user
+
+Acl9 needed
+
+
+Example
+=======
+
+Defining your subject and object classes like that:
+(for more information about acts_as_authorization_* methods see Acl9 documentation)
+
+  class Ownable < ActiveRecord::Base
+    acts_as_authorization_object
+    acts_as_ownable
+  end
+
+  class User < ActiveRecord::Base
+    acts_as_authorization_subject
+  end
+
+  class Role < ActiveRecord::Base
+    acts_as_authorization_role
+  end
+
+... you can set owner of an object:
+
+    ow = Ownable.new :owner => User.first       # like that ...
+    ow.owner = User.first                       # ... or like that
+    ow.save
+
+... then your can get an owner:
+    
+    u = ow.owner
+
+... or check it:
+    
+    ow.owner? User.first    # -> true
+
+Copyright (c) 2009 Moonlighters, released under the MIT license

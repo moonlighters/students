@@ -381,7 +381,12 @@ img.right {
 }
 
 .topics-table td {
-  vertical-align: top;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.topics-table .goto-first-unread {
+  font-size: 12px;
 }
 
 .forums-table table {

@@ -1,8 +1,10 @@
 class LoadsController < InheritedResources::Base
 
+  before_filter :find_load, :only => [:edit, :update, :destroy]
+
   access_control do
     allow all, :to => [:index, :show]
-    allow :owner, :of => :resource, :to => [:edit, :update, :destroy]
+    allow :owner, :of => :load, :to => [:edit, :update, :destroy]
     allow :upload_moderator, :to => [:new, :create]
   end
 
@@ -15,4 +17,9 @@ class LoadsController < InheritedResources::Base
 
     create!
   end
+
+  private
+    def find_load
+      resource
+    end
 end

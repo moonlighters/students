@@ -77,39 +77,30 @@ describe ForumTopic do
       @t.first_unread_post_of(@u).should == @p1
     end
 
-    it "should return nil if topic is unviewed" do
+    it "should return first post of topic if topic is unviewed" do
       @t1 = Factory :forum_topic
-      @t1.first_unread_post_of(@u).should be_nil
+      @p1 = Factory :forum_post, :topic => @t1
+      @p2 = Factory :forum_post, :topic => @t1
+      @t1.first_unread_post_of(@u).should == @p1
     end
   end
 
-  # Acl9
-  it "should set :owner role to user" do
-    user = Factory :user
-    t = Factory :forum_topic, :owner => user
-    user.has_role?( :owner, t).should be_true
-  end
-
-  describe "#owner" do
-    it "should return owner of forum_topic" do
-      user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner.should == user
+  describe "#last_post" do
+    before do
+      @t = Factory :forum_topic
+      @p = Factory :forum_post, :topic => @t
     end
-  end
-
-  describe "#owner?" do
-    it "should return true if user is owner" do
-      user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner?( user ).should be_true
+    it "should return last post in topic after its creation" do
+      @t.last_post.should == @p
     end
-    
-    it "should return false if user isn't owner" do
-      user = Factory :user
-      another_user = Factory :user
-      t = Factory :forum_topic, :owner => user
-      t.owner?( another_user ).should be_false
+    it "should return last post in topic after adding a new one" do
+      @p1 = Factory :forum_post, :topic => @t
+      @t.last_post.should == @p1
+    end
+    it "should return last post in topic after after deleting the last one" do
+      @p1 = Factory :forum_post, :topic => @t
+      @p1.destroy
+      @t.last_post.should == @p
     end
   end
 end

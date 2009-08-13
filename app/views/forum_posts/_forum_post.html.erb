@@ -1,7 +1,7 @@
 <tr>
   <td>
     <a name="post<%= forum_post.id %>"/>
-    <b><%= link_to_user forum_post.user %></b><br/>
+    <b><%= link_to_user forum_post.owner %></b><br/>
     <span class="time_small"><%= format_time forum_post.created_at %></span>
   </td>
   <td>
@@ -11,5 +11,5 @@
       <span class="post_edited">Редактировал: <%= link_to_user forum_post.last_editor %>, <%= format_time forum_post.updated_at %></span>
     <% end %>
   </td>
-  <td align="center"><%= link_to 'Править', edit_forum_post_path( forum_post ) if  current_user %></td>
+  <td align="center"><%= link_to 'Править', edit_forum_post_path( forum_post ) if can_edit_post? forum_post %></td>
 </tr>

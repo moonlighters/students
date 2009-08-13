@@ -2,5 +2,8 @@
   <td>
     <%= link_to h(forum.title), forum_path( forum ) %>
     <div class="desc"><%=h forum.description %></div>
+    <% if forum.has_unread_posts_of? current_user %>
+      <div class="has-unread-posts">(Имеются непрочитанные сообщения!)</div>
+    <% end %>
   </td>
 </tr>
