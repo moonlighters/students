@@ -14,7 +14,7 @@ class ForumTopicsController < InheritedResources::Base
 
   actions :all, :except => :index
 
-# GET /forums/topics/1
+  # GET /forums/topics/1
   def show
     @forum_posts = ForumPost.paginate_by_forum_topic_id resource.id, :page => params[:page]
     resource.view! current_user
