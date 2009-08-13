@@ -1,3 +1,4 @@
-default: --language ru --format progress features
+# in default profile forum_post and forum_navigation features are being run before others to avoid cucumber bug (?)
+default: --language=ru --format=progress features/forum_post.feature features/forum_navigation.feature features
 autotest: --language ru --format progress
 autotest-all: --language ru --format progress features
