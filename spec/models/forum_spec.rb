@@ -64,4 +64,70 @@ describe Forum do
       @f.has_unread_posts_of?( @u ).should be_true
     end
   end
+
+  # moderator!, not_moderator! and moderator?
+
+  def build_tree
+    # Tree:
+    #               root
+    #              /    \
+    #        node1       node2
+    #       /    \      /     \
+    # child1  child2  child3  child4
+    #    |
+    #  grandchild
+    @root = Factory :forum
+    @node1 = Factory :forum, :parent => @root
+    @node2 = Factory :forum, :parent => @root
+    @child1 = Factory :forum, :parent => @node1
+    @child2 = Factory :forum, :parent => @node1
+    @child3 = Factory :forum, :parent => @node2
+    @child4 = Factory :forum, :parent => @node2
+    @grandchild = Factory :forum, :parent => @child1
+    @u = Factory :user
+  end
+  describe "#moderator!" do
+    before do
+      build_tree
+    end
+    it "should give role :moderator for given forum and all its subforums" do
+      @node1.moderator! @u
+
+      [@node1, @child1, @child2, @grandchild].each do |forum|
+        @u.has_role?(:moderator, forum).should be_true
+      end
+      [@root, @node2, @child3, @child4].each do |forum|
+        @u.has_role?(:moderator, forum).should be_false
+      end
+    end
+  end
+  describe "#not_moderator!" do
+    before do
+      build_tree
+    end
+    it "should remove role :moderator for given forum and all its subforums" do
+      @root.moderator! @u
+      @node1.not_moderator! @u
+
+      [@node1, @child1, @child2, @grandchild].each do |forum|
+        @u.has_role?(:moderator, forum).should be_false
+      end
+      [@root, @node2, @child3, @child4].each do |forum|
+        @u.has_role?(:moderator, forum).should be_true
+      end
+    end
+  end
+  describe "#moderator?" do
+    before do
+      build_tree
+    end
+    it "should return true if given user is a moderator" do
+      @root.moderator! @u
+      @root.moderator?( @u ).should be_true
+    end
+    it "should return true if given user is a moderator" do
+      @root.not_moderator! @u
+      @root.moderator?( @u ).should be_false
+    end
+  end
 end

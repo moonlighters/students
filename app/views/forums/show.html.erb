@@ -16,6 +16,6 @@
 
 <%= link_to( 'Новая тема', new_forum_topic_path( @forum )  ) + " |" if can_create_topic? %>
 
-<%= link_to 'Новый форум', new_sub_forum_path( @forum ) %> |
-<%= link_to 'Править', edit_forum_path( @forum ) %> |
+<%= link_to( 'Новый форум', new_sub_forum_path( @forum ) ) + " |" if can_create_forum? %>
+<%= link_to( 'Править', edit_forum_path( @forum ) ) + " |" if can_edit_forum? @forum %>
 <%= link_to_forum @forum.parent, :caption => 'Вверх' %>

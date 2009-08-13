@@ -3,4 +3,4 @@
 
 <%= render :partial => "table", :locals => {:forums => @forums} %>
 
-<%= link_to 'Новый форум', new_root_forum_path %>
+<%= link_to 'Новый форум', new_root_forum_path if can_create_forum? %>

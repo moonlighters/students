@@ -1,29 +1,32 @@
-class ForumsController < ApplicationController
+class ForumsController < InheritedResources::Base
 
-  before_filter :find_forum, :only => [:show, :edit, :update, :new_sub, :destroy]
+  respond_to :html
+
+  actions :all, :except => :new
+
+  access_control do
+    allow all, :to => [:index, :show]
+    allow :administrator
+  end
 
   # GET /forums
   def index
     @forums = Forum.roots
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
+    index!
   end
 
   # GET /forums/1
   def show
-    @children = @forum.children
-    @forum_topics = ForumTopic.paginate_by_forum_id @forum.id, :page => params[:page], :order => "last_post_id DESC"
+    @children = resource.children
+    @forum_topics = ForumTopic.paginate_by_forum_id resource.id, :page => params[:page], :order => "last_post_id DESC"
 
-    respond_to do |format|
-      format.html # show.html.erb
-    end
+    show!
   end
 
   # GET /forums/new
   def new_root
-    @forum = Forum.new
+    build_resource
     @forum.parent = nil
 
     respond_to do |format|
@@ -33,59 +36,18 @@ class ForumsController < ApplicationController
 
   # GET /forums/1/new
   def new_sub
-    # set found forum to parent and create new
-    parent = @forum
-    @forum = Forum.new
-    @forum.parent = parent
+    build_resource
+    @forum.parent = @parent_forum
 
     respond_to do |format|
       format.html { render "new.html.erb" }
     end
   end
-
-  # GET /forums/1/edit
-  def edit
-  end
-
-  # POST /forums
-  def create
-    @forum = Forum.new params[:forum]
-
-    respond_to do |format|
-      if @forum.save
-        flash[:notice] = 'Форум успешно создан.'
-        format.html { redirect_to @forum }
-      else
-        format.html { render "new" }
-      end
-    end
-  end
-
-  # PUT /forums/1
-  def update
-    respond_to do |format|
-      if @forum.update_attributes(params[:forum])
-        flash[:notice] = 'Форум успешно обновлен.'
-        format.html { redirect_to(@forum) }
-      else
-        format.html { render :action => "edit" }
-      end
-    end
-  end
-
+  
   # DELETE /forums/1
   def destroy
-    parent = @forum.parent
-    @forum.destroy
+    parent = resource.parent
 
-    respond_to do |format|
-      flash[:notice] = 'Форум удален'
-      format.html { redirect_to parent ? forum_path( parent ) : forums_path }
-    end
+    destroy! { parent ? forum_path( parent ) : forums_path }
   end
-
-  private
-    def find_forum
-      @forum = Forum.find params[:id]
-    end
 end

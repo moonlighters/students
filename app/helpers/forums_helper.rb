@@ -12,4 +12,13 @@ module ForumsHelper
     return link_to_forum( nil ) unless forum
     ([nil] + forum.ancestors.reverse + [forum]).map { |f| link_to_forum f }.join " > "
   end
+
+  # TODO: можно ли как-то не дублировать эти проверки, а использовать средства Acl9 ?
+  def can_create_forum?
+    current_user_has_role? :administrator
+  end
+
+  def can_edit_forum?(forum)
+    current_user_has_role? :administrator
+  end
 end

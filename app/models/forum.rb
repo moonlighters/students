@@ -1,4 +1,7 @@
 class Forum < ActiveRecord::Base
+  
+  acts_as_authorization_object
+
   validates_presence_of :title, :description
 
   acts_as_tree
@@ -6,6 +9,22 @@ class Forum < ActiveRecord::Base
   has_many  :topics,
             :class_name => "ForumTopic",
             :dependent => :destroy
+
+  def moderator!(user)
+    accepts_role! :moderator, user
+    self.children.each do |forum|
+      forum.moderator! user
+    end
+  end
+  def not_moderator!(user)
+    accepts_no_role! :moderator, user
+    self.children.each do |forum|
+      forum.not_moderator! user
+    end
+  end
+  def moderator?(user)
+    accepts_role? :moderator, user
+  end
 
   def has_unread_posts_of?(user)
     self.topics.each do |topic|
