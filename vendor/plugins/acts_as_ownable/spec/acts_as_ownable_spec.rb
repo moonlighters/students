@@ -48,32 +48,38 @@ describe "acts_as_ownable" do
     end
   end
 
-  it "should set :owner role to user" do
-    user = Factory :user
-    t = Factory :ownable, :owner => user
-    user.has_role?( :owner, t).should be_true
+  before do
+    @user = Factory :user
+    @another_user = Factory :user
+    @o = Factory :ownable, :owner => @user
+  end
+
+  describe "owner=" do
+    it "should set :owner role to user" do
+      @user.has_role?( :owner, @o).should be_true
+    end
+
+    it "should unset previous owner" do
+      #@o.update_attributes! :owner => @another_user
+      @o.owner = @another_user
+      @o.save!
+      @user.has_role?( :owner, @o).should be_false
+    end
   end
 
   describe "#owner" do
     it "should return owner of ownable" do
-      user = Factory :user
-      t = Factory :ownable, :owner => user
-      t.owner.should == user
+      @o.owner.should == @user
     end
   end
 
   describe "#owner?" do
     it "should return true if user is owner" do
-      user = Factory :user
-      t = Factory :ownable, :owner => user
-      t.owner?( user ).should be_true
+      @o.owner?( @user ).should be_true
     end
     
     it "should return false if user isn't owner" do
-      user = Factory :user
-      another_user = Factory :user
-      t = Factory :ownable, :owner => user
-      t.owner?( another_user ).should be_false
+      @o.owner?( @another_user ).should be_false
     end
   end
 end

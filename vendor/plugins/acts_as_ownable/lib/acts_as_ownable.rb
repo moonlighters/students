@@ -15,7 +15,7 @@ module ActiveRecord
         # owner accessors
         def owner
           @owner ||
-          ( accepted_roles.first.nil? ? nil : accepted_roles.first.users.first )
+          ( owner_role.nil? ? nil : owner_role.users.first )
         end
 
         def owner=(user)
@@ -28,14 +28,22 @@ module ActiveRecord
         def after_save 
           return unless @owner
 
-          unless accepted_roles.first.nil?
-            accepted_roles.first.users.each do |user|
+          unless owner_role.nil?
+            owner_role.users.each do |user|
               accepts_no_role!( :owner, user ) # unassign previous owners
             end
           end
             
           accepts_role!( :owner, @owner ) # assign new owner
+
+          # clean up
+          self.reload
+          @owner = nil
         end
+        private
+          def owner_role
+            accepted_roles.detect {|role| role.name == "owner"}
+          end
       end
     end
   end

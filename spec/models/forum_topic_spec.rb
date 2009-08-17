@@ -100,6 +100,7 @@ describe ForumTopic do
     it "should return last post in topic after after deleting the last one" do
       @p1 = Factory :forum_post, :topic => @t
       @p1.destroy
+      @t.reload
       @t.last_post.should == @p
     end
   end
