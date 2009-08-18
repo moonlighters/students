@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   def root
   end
   
+  # GET /info
+  def info
+  end
+
   private
     def access_denied
       flash[:warning] = "У вас недостаточно прав для доступа к этому разделу!"
