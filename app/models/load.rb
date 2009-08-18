@@ -6,20 +6,11 @@ class Load < ActiveRecord::Base
   has_attached_file :file
 
   # TODO: acts_as_taggable
+
+  acts_as_ownable
   
   validates_presence_of :name
   validates_presence_of :owner
   validates_attachment_presence :file, :message => "должен присутствовать"
 
-  def owner
-    unless accepted_roles.first.nil?
-      accepted_roles.first.users.first
-    end
-  end
-
-  def owner=(user)
-    accepts_role!( :owner, user ) if user
-  end
-
-  def owner?(u); u == owner; end
 end

@@ -18,33 +18,4 @@ describe Load do
   it "should not be valid with blank name" do
     Factory.build( :load, :name => "  \t  " ).should_not be_valid
   end
-
-  it "should set :owner role to user" do
-    user = Factory :user
-    l = Factory :load, :owner => user
-    user.has_role?( :owner, l).should be_true
-  end
-
-  describe "#owner" do
-    it "should return owner of load" do
-      user = Factory :user
-      l = Factory :load, :owner => user
-      l.owner == user
-    end
-  end
-
-  describe "#owner?" do
-    it "should return true if user is owner" do
-      user = Factory :user
-      l = Factory :load, :owner => user
-      l.owner?( user ).should be_true
-    end
-    
-    it "should return false if user isn't owner" do
-      user = Factory :user
-      another_user = Factory :user
-      l = Factory :load, :owner => user
-      l.owner?( another_user ).should be_false
-    end
-  end
 end
