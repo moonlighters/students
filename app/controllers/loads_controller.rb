@@ -10,6 +10,14 @@ class LoadsController < InheritedResources::Base
 
   # TODO: will_paginate
 
+  def index
+    unless params[:tags].nil?
+      # TODO: this makes union of all loads with one of tags but we need intersection
+      @loads = Load.tagged_with params[:tags], :on => :tags
+      @tags = params[:tags].split(",").map(&:strip).reject(&:blank?).map {|t| Tag.find_by_name t}
+    end
+  end
+
   # TODO: подправить formtastic (Создать Загрузка) :)
   def create
     build_resource

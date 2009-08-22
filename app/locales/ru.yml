@@ -32,6 +32,7 @@ ru:
         file: "Файл"
         name: "Имя"
         description: "Описание"
+        tag_list: "Теги"
       lesson_subject:
         name: "Название"
         term: "Семестр"

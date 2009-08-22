@@ -2,9 +2,13 @@
 <h2>Редактировать загрузку "<%=h Load.find(resource.id).name %>"</h2>
 
 <% semantic_form_for(resource, :html => { :multipart => true }) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
-  <%= f.input :file, :hint => "указывайте файл, только если хотите заменить существующий" %>
+  <%= f.errors_on :base %>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
+    <%= f.input :file %>
+    <%= f.input :tag_list, :hint => "теги вводить через запятую" %>
+  <% end %>
   <%= f.buttons %>
 <% end %>
 

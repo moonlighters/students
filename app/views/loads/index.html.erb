@@ -1,5 +1,5 @@
 <% @page_title = "Загрузки" %>
-<h2>Список загрузок</h2>
+<h2>Список загрузок<%= " помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags %></h2>
 
 <% if current_user_has_role? :upload_moderator %>
 <p>

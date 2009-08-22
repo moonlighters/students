@@ -43,7 +43,7 @@ class ForumTopicsController < InheritedResources::Base
 
       create!
     else
-      if post.errors[:body]
+      unless post.errors[:body].nil?
         resource.errors.add :post, post.errors[:body]
       end
       render :action => "new"

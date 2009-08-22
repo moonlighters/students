@@ -1,12 +1,15 @@
 <% @page_title = "Загрузки" %>
 <h2>Добавить загрузку</h2>
 
-<% # TODO: improve view of form %>
-<% # TODO: showing of base errors %>
 <% semantic_form_for(resource, :html => { :multipart => true }) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
-  <%= f.input :file %>
+  <%= f.errors_on :base %>
+<%#   TODO: install redinger-validation_reflection %>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :description, :required => false, :input_html => { :rows => 3 } %>
+    <%= f.input :file %>
+    <%= f.input :tag_list, :hint => "теги вводить через запятую" %>
+  <% end %>
   <%= f.buttons %>
 <% end %>
 

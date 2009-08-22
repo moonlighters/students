@@ -67,6 +67,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :lessons, :path_prefix => "schedule", :except => [:index]
   map.schedule "schedule", :controller => "application", :action => "root"
 
+  map.load_tags "loads/tags/:tags", :controller => "loads", :action => "index", :conditions => {:method => :get}
   map.resources :loads
 
   map.resources :users
