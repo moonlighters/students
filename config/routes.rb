@@ -64,6 +64,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :groups
   map.resources :teachers
+  map.info "info", :controller => "application", :action => "info"
+
   map.resources :lessons, :path_prefix => "schedule", :except => [:index]
   map.schedule "schedule", :controller => "application", :action => "root"
 

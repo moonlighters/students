@@ -50,4 +50,12 @@ class ForumsController < InheritedResources::Base
 
     destroy! { parent ? forum_path( parent ) : forums_path }
   end
+  private
+    # Override these 2 methods in the particular controller to change behavior when access denied
+    def access_denied_redirect_url
+      forums_url
+    end
+    def access_denied_message
+      "У вас недостаточно прав для доступа к этому разделу форума!"
+    end
 end

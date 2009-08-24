@@ -64,4 +64,22 @@ class ForumTopicsController < InheritedResources::Base
     def find_forum_topic
       resource
     end
+
+    # Override these 2 methods in the particular controller to change behavior when access denied
+    def access_denied_redirect_url
+      if %w{edit update destroy}.include? action_name
+        forum_topic_url resource
+      else 
+        forums_url
+      end
+    end
+    def access_denied_message
+      if %w{edit update destroy}.include?( action_name ) and not resource.owner?( current_user )
+        "У вас недостаточно прав для редактирования чужих тем!"
+      elsif %w{new create}.include?( action_name )
+        "У вас недостаточно прав, чтобы создавать темы!"
+      else
+        "У вас недостаточно прав для доступа к этому разделу форума!"
+      end
+    end
 end
