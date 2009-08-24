@@ -20,9 +20,21 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    # Override these 2 methods in the particular controller to change behavior when access denied
+    def access_denied_redirect_url
+      root_url
+    end
+    def access_denied_message
+      "У вас недостаточно прав для доступа к этому разделу!"
+    end
+
     def access_denied
-      flash[:warning] = "У вас недостаточно прав для доступа к этому разделу!"
-      redirect_to root_url
+      unless current_user
+        require_user 
+      else
+        flash[:error] = access_denied_message
+        redirect_to access_denied_redirect_url
+      end
     end
 
     def current_user_session
