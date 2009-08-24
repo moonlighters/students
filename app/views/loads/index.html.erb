@@ -1,6 +1,8 @@
 <% @page_title = "Загрузки" %>
 <h2>Список загрузок<%= " помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags %></h2>
 
+<%# TODO: кнопку ввода своих тегов %>
+
 <% if current_user_has_role? :upload_moderator %>
 <p>
   <%= link_to "Добавить", new_resource_path %>

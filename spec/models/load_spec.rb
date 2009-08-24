@@ -9,7 +9,7 @@ describe Load do
     Factory :load
   end
 
-  [:name, :owner, :file].each do |attr|
+  [:name, :owner, :file, :tag_list].each do |attr|
     it "should not be valid without #{attr}" do
       Factory.build( :load, attr => nil ).should_not be_valid
     end

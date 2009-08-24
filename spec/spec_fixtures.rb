@@ -41,7 +41,8 @@ Factory.define :load do |l|
   l.name "Keygen"
   l.description "It works with every soft!"
   l.association :owner, :factory => :user
-  l.file File.open("Rakefile") # TODO: invent smth better
+  l.tag_list "fun, sexy"
+  l.file File.open("Rakefile")
 end
 
 Factory.define :lesson_type do |t|

@@ -9,7 +9,8 @@ class Load < ActiveRecord::Base
   # TODO: hide file with path and url options
   has_attached_file :file
 
-  validates_presence_of :name, :tag_list
+  validates_presence_of :name, :owner
+  validates_presence_of :tag_list, :message => "должны присутствовать"
   validates_attachment_presence :file, :message => "должен присутствовать"
 
 end
