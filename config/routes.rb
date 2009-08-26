@@ -67,7 +67,15 @@ ActionController::Routing::Routes.draw do |map|
   map.info "info", :controller => "application", :action => "info"
 
   map.resources :lessons, :path_prefix => "schedule", :except => [:index]
-  map.schedule "schedule", :controller => "application", :action => "root"
+
+  map.with_options :controller => "schedule", :path_prefix => "schedule" do |m|
+    m.schedule "", :action => "index"
+    m.day_schedule "day/:date", :action => "day"
+    m.today_schedule "day", :action => "day"
+    m.week_schedule "week/:date", :action => "week"
+    m.this_week_schedule "week", :action => "week"
+    m.choose_schedule "choose", :action => "choose"
+  end
 
   map.resources :loads
 

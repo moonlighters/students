@@ -74,4 +74,10 @@ describe ApplicationHelper do
       lambda { format_time @time, :time => false, :date => false }.should raise_error ArgumentError
     end
   end
+
+  describe "#russian downcase" do
+    it "should return string with English and Russian characters downcased " do
+      russian_downcase("абвъыьГДЕЭЮЯabcuvwDEFXYZ").should == "абвъыьгдеэюяabcuvwdefxyz"
+    end
+  end
 end

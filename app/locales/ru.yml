@@ -10,6 +10,7 @@ ru:
       group: "Группа"
       teacher: "Преподаватель"
       lesson subject type: "Тип занятия"
+      lesson: "Занятие"
     attributes:
       user:
         login: "Логин"
@@ -49,6 +50,17 @@ ru:
         group_id: "Группа"
         teacher_id: "Преподаватель"
         homepage: "Домашняя страничка"
+      lesson:
+        group_id: "Группа"
+        lesson_subject_id: "Предмет"
+        lesson_subject_type_id: "Тип занятия"
+        lesson_type_id: "Тип"
+        day_of_week: "День недели"
+        start_time: "Время начала"
+        duration: "Длительность"
+        everyweek: "Каждую неделю?"
+        odd_weeks: "Если не каждую, то по нечётным?"
+
   authlogic:
     error_messages:
       login_blank: "не должен быть пустым"

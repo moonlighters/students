@@ -36,6 +36,42 @@ describe Lesson do
     l.should_not be_valid
   end
 
+  describe "crossing checking: lesson" do
+    # for correctness of this validation start_time must be set with #set_start_time method
+    before do
+      @g = Factory :group
+      @l1 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g
+      @l1.set_start_time 10, 0
+      @l1.save!
+    end
+    
+    it "should not be valid when its end crosses another lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g 
+      l2.set_start_time 9, 30
+      l2.should_not be_valid
+    end
+    it "should not be valid when its beginning crosses another lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g 
+      l2.set_start_time 10, 30
+      l2.should_not be_valid
+    end
+    it "should not be valid when its time is inside another lesson's time" do
+      l2 = Factory.build :lesson, :duration => 30.minutes, :group => @g 
+      l2.set_start_time 10, 30
+      l2.should_not be_valid
+    end
+    it "should not be valid when another lesson's time is inside its time" do
+      l2 = Factory.build :lesson, :duration => 3.hours, :group => @g
+      l2.set_start_time 9, 30
+      l2.should_not be_valid
+    end
+    it "should not be valid when its time equals to another lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g
+      l2.set_start_time 10, 0
+      l2.should_not be_valid
+    end
+  end
+
   describe "#set_start_time" do
     it "should set start_time given hours and minutes" do
       l = Factory :lesson
@@ -49,6 +85,17 @@ describe Lesson do
       l.set_start_time 11
       l.start_time.hour.should == 11
       l.start_time.min.should == 0
+    end
+  end
+  
+  describe "#lessons_for" do
+    it "should return lessons for given group, term and day_of_week" do
+      g1 = Factory :group
+      g2 = Factory :group
+      l1 = Factory :lesson, :group => g1, :term => 1, :day_of_week => 5
+      l2 = Factory :lesson, :group => g2, :term => 2, :day_of_week => 2
+
+      Lesson.lessons_for( g1, 1, 5 ).should == [l1]
     end
   end
 end

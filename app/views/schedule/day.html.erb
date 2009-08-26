@@ -1,0 +1,25 @@
+<% @page_title = "Расписание на день" %>
+<% now = Time.now %>
+<% day_type = if @day.year == now.year
+                case
+                when @day.yday == now.yday : "сегодня,"
+                when @day.yday == now.yday + 1 : "завтра,"
+                when @day.yday == now.yday - 1 : "вчера,"
+                else ""
+                end
+              else
+                ""
+              end %>
+
+<h1>Расписание  на <%=h day_type %> <%=h format_time @day, :time => false %>, <%=h russian_downcase day_of_week( @day.wday ) %></h1>
+
+<% yesterday = @day - 1.day %>
+<% tomorrow = @day + 1.day %>
+<%= link_to_day_schedule tomorrow, @group, :suffix => " >>", :style => "float:right;" %>
+<%= link_to_day_schedule yesterday, @group, :prefix => "<< " %>
+<br/>
+
+<%= render :partial => "day_table", :locals => {:lessons => @lessons} %>
+
+<%= link_to "Добавить", new_lesson_path + "?day_of_week=#{@day.wday}&group_id=#{@group.id}" %> |
+<%= link_to 'Назад', schedule_path %>
