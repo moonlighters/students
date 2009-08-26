@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090822161743) do
+ActiveRecord::Schema.define(:version => 20090825114747) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20090822161743) do
     t.integer  "lesson_subject_type_id"
     t.integer  "term"
     t.integer  "day_of_week"
-    t.time     "start_time"
+    t.datetime "start_time"
     t.integer  "duration"
     t.boolean  "everyweek"
     t.boolean  "odd_weeks"

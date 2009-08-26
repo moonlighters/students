@@ -3,8 +3,7 @@
   <% types = LessonType.find( :all, :order => "name" ) %>
   <% subjects_list = LessonSubject.find( :all, :order => "name" ).map{ |s| ["#{s.name}, #{s.term} сем.", s.id] } %>
   <% groups = Group.find( :all, :order => "name" ) %>
-  <% wdays = [] %>
-  <% Lesson::WDAYS.each_with_index{ |item, i| wdays << [item, i] } %>
+  <% wdays = (0..6).map{ |i| [day_of_week(i), i]} %>
 
   <p>
     <%= f.label :group_id %><br />

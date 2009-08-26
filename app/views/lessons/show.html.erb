@@ -6,12 +6,11 @@
   </p>
   <p>
     <b>Тип занятия:</b>
-    <%= link_to h( @lesson.subject_type.subject.name ) + ", " + h( @lesson.subject_type.lesson_type.name ),
-                lesson_subject_type_path(@lesson.subject_type) %>
+    <%= link_to_subject_type @lesson.subject_type, :subject, :lesson_type %>
   </p>
   <p>
     <b>День недели:</b>
-    <%= Lesson::WDAYS[@lesson.day_of_week] %> 
+    <%= day_of_week @lesson.day_of_week %> 
   </p>
   <p>
     <b>Время начала:</b>
