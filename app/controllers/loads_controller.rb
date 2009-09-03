@@ -22,6 +22,8 @@ class LoadsController < InheritedResources::Base
         @loads = Load.tagged_with params[:tags], :on => :tags
       end
     end
+
+    @all_tags = Tag.all.sort_by {|x| -x.tagging_ids.count}
   end
 
   # TODO: подправить formtastic (Создать Загрузка) :)
