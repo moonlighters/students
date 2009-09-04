@@ -54,7 +54,7 @@ h3 {
 
 p, blockquote, ul, ol {
 	margin-bottom: 1.5em;
-	line-height: 1.8em;
+	/*line-height: 1.8em;*/
 }
 
 p {
@@ -480,4 +480,34 @@ img.right {
 
 .last_posts_list h4 {
   text-align: center;
+}
+
+.download_button {
+  margin: 10px 0;
+  font-size: 3em;
+}
+
+.loads-list li {
+  margin: 5px 0;
+}
+
+.tags-list li {
+  margin: 5px 0;
+}
+
+.load-tag {
+  font-size: 0.75em;
+  color: #3B5B88;
+}
+
+.loads-list-column {
+  width: 250px;
+  padding: 5px;
+  float: left;
+}
+
+.loads-tags-column {
+  width: 190px;
+  padding: 5px;
+  float: right;
 }

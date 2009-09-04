@@ -9,15 +9,22 @@
 </p>
 <% end %>
 
-<table>
-  <th>
-    <td>Имя</td>
-    <td>Описание</td>
-  </th>
+<div class="loads-list-column">
+  <h4>Список файлов</h4>
+  <ul class="loads-list">
   <% collection.each do |res| %>
-  <tr>
-    <td><%= link_to h(res.name), res %></td>
-    <td><%=h res.description %></td>
-  </tr>
+    <li>
+      <%= link_to h(res.name), res, :title => h(res.description) %><br/>
+      <%= links_to_tags res.tags, :class => "load-tag" %>
+    </li>
   <% end %>
-</table>
+  </ul>
+</div>
+<div class="loads-tags-column">
+  <h4>Тэги</h4>
+  <ul class="tags-list">
+    <% @all_tags.each do |t| %>
+      <li><%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
+    <% end %>
+  </ul>
+</div>
