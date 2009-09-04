@@ -13,4 +13,9 @@ class Load < ActiveRecord::Base
   validates_presence_of :tag_list, :message => "должны присутствовать"
   validates_attachment_presence :file, :message => "должен присутствовать"
 
+  def before_destroy
+    # TODO: optimize?
+    Tag.all.find_all {|t| t.tagging_ids.count == 0 }.each {|t| t.destroy }
+  end
+
 end
