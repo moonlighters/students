@@ -22,7 +22,7 @@ describe Lesson do
   [BEGIN_HOUR-1, END_HOUR+1].each do |hour|
     it "should not be valid with start time #{hour} which is not between #{BEGIN_HOUR} and #{END_HOUR} hours" do
       # for correctness of this validation start_time must be set with #set_start_time method
-      l = Factory :lesson
+      l = Factory.build :lesson
       l.set_start_time hour
       l.should_not be_valid
     end
@@ -30,7 +30,7 @@ describe Lesson do
 
   it "should not be valid with end time after #{END_HOUR} hours" do
     # for correctness of this validation start_time must be set with #set_start_time method
-    l = Factory :lesson
+    l = Factory.build :lesson
     l.set_start_time END_HOUR-1
     l.duration = 2.hours
     l.should_not be_valid
