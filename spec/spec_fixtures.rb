@@ -78,7 +78,7 @@ Factory.define :lesson do |l|
   l.association :group, :factory => :group
   l.term TERM
   l.day_of_week 2
-  l.start_time Time.mktime(1970, "jan", 1, 12, 20)
+  l.start_time Time.mktime(*Lesson::DEFAULT_DATE + [12, 20])
   l.duration 1.hour + 35.minutes
   l.everyweek false
   l.odd_weeks true

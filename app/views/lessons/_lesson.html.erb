@@ -1,0 +1,2 @@
+<%= link_to format_time( lesson.start_time, :date => false) + " - " + format_time( lesson.end_time, :date => false ), lesson_path( lesson)  %>
+<br/><%= link_to_subject_type lesson.subject_type, :subject, :lesson_type %>
