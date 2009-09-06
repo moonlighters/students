@@ -1,5 +1,6 @@
 <% @page_title = "Загрузки" %>
-<h2>Список загрузок<%= " помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags %></h2>
+<h2>Список загрузок<%= ", помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags %>
+</h2>
 
 <%# TODO: кнопку ввода своих тегов %>
 
@@ -19,6 +20,7 @@
     </li>
   <% end %>
   </ul>
+  <%= will_paginate collection if collection.is_a? WillPaginate::Collection %>
 </div>
 <div class="loads-tags-column">
   <h4>Тэги</h4>
