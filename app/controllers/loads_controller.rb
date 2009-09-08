@@ -18,10 +18,9 @@ class LoadsController < InheritedResources::Base
         flash[:error] = "Вы выбрали несуществующие теги"
         @tags = nil
         @loads = []
-      else
-        @loads = Load.tagged_with params[:tags], :on => :tags
       end
     end
+    @loads ||= Load.paginate_tagged_with @tags, :page => params[:page]
 
     @all_tags = Tag.all.sort_by {|x| -x.tagging_ids.count}
   end
