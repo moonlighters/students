@@ -1,5 +1,6 @@
 <% @page_title = "Загрузки" %>
-<h2>Список загрузок<%= ", помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags %>
+<h2>Список загрузок<h2>
+<%#     <%= ", помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags +| %>
 </h2>
 
 <%# TODO: кнопку ввода своих тегов %>
@@ -10,23 +11,33 @@
 </p>
 <% end %>
 
+<p>
+  <%= link_to "Все файлы", collection_path %>
+  <%= @tags.map {|t| "&gt; #{link_to_tag t} (#{link_to "X", "?remove_tag=#{t}"}) "} %>
+
+</p>
+
 <div class="loads-list-column">
-  <h4>Список файлов</h4>
-  <ul class="loads-list">
-  <% collection.each do |res| %>
-    <li>
-      <%= link_to h(res.name), res, :title => h(res.description) %><br/>
-      <%= links_to_tags res.tags, :class => "load-tag" %>
-    </li>
+  <h4>Файлы</h4>
+  <% unless collection.empty? %>
+    <ul class="loads-list">
+      <% collection.each do |res| %>
+        <li>
+          <%= link_to h(res.name), res, :title => h(res.description) %><br/>
+          <%= links_to_tags res.tags, :class => "load-tag" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Нет загрузок удовлетворяющих заданным условиям</p>
   <% end %>
-  </ul>
   <%= will_paginate collection if collection.is_a? WillPaginate::Collection %>
 </div>
 <div class="loads-tags-column">
   <h4>Тэги</h4>
   <ul class="tags-list">
     <% @all_tags.each do |t| %>
-      <li><%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
+      <li><%= link_to "+", "?add_tag=#{t.name}", :class => "add-tag-link" %> <%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
     <% end %>
   </ul>
 </div>

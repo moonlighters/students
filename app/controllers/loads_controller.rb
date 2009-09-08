@@ -11,15 +11,26 @@ class LoadsController < InheritedResources::Base
   # TODO: will_paginate
 
   def index
-    unless params[:tags].nil?
-      # TODO: this makes union of all loads with one of tags but we need intersection
-      @tags = params[:tags].split(",").map(&:strip).reject(&:blank?).map {|t| Tag.find_by_name t}
+    unless params[:tags].nil? and params[:add_tag].nil?
+      need_redirect = params[:add_tag] || params[:remove_tag]
+      
+      s = params.delete( :tags ).to_s + ", " + params.delete( :add_tag ).to_s
+      splitted = s.split(",").map(&:strip).reject(&:blank?).uniq
+      splitted.delete( params.delete( :remove_tag ).to_s.strip )
+
+      if need_redirect
+        redirect_to load_tags_path splitted * ", "
+      end
+      
+
+      @tags = splitted.map {|t| Tag.find_by_name t}
       if @tags.any? &:nil?
-        flash[:error] = "Вы выбрали несуществующие теги"
-        @tags = nil
+        flash[:error] = "Похоже вы хотите выбрать несуществующие теги"
+        @tags = []
         @loads = []
       end
     end
+    @tags ||= []
     @loads ||= Load.paginate_tagged_with @tags, :page => params[:page]
 
     @all_tags = Tag.all.sort_by {|x| -x.tagging_ids.count}

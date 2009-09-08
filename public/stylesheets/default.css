@@ -493,6 +493,7 @@ img.right {
 
 .tags-list li {
   margin: 5px 0;
+  list-style: none;
 }
 
 .load-tag {
@@ -510,4 +511,8 @@ img.right {
   width: 190px;
   padding: 5px;
   float: right;
+}
+
+.add-tag-link {
+  text-decoration: none;
 }
