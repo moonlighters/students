@@ -13,7 +13,7 @@
 
 <p>
   <%= link_to "Все файлы", collection_path %>
-  <%= @tags.map {|t| "&gt; #{link_to_tag t} (#{link_to "X", "?remove_tag=#{t}"}) "} %>
+  <%= @tags.map {|t| "&gt; #{link_to_tag t} (#{link_to "X", "?remove_tag=#{t}", :id => "remove-tag-link-#{t}"}) "} %>
 
 </p>
 
@@ -37,7 +37,7 @@
   <h4>Тэги</h4>
   <ul class="tags-list">
     <% @all_tags.each do |t| %>
-      <li><%= link_to "+", "?add_tag=#{t.name}", :class => "add-tag-link" %> <%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
+      <li><%= link_to "+", "?add_tag=#{t.name}", :class => "add-tag-link", :id => "add-tag-link-#{t}" %> <%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
     <% end %>
   </ul>
 </div>
