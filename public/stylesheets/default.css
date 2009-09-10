@@ -491,9 +491,13 @@ img.right {
   margin: 5px 0;
 }
 
+.tags-list {
+  margin-left: 0.8em;
+  list-style: none;
+}
+
 .tags-list li {
   margin: 5px 0;
-  list-style: none;
 }
 
 .load-tag {

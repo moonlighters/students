@@ -18,8 +18,8 @@ class LoadsController < InheritedResources::Base
       splitted = s.split(",").map(&:strip).reject(&:blank?).uniq
       splitted.delete( params.delete( :remove_tag ).to_s.strip )
 
-      if need_redirect
-        redirect_to( splitted.empty? ? loads_path : load_tags_path( splitted * ", " ) )
+      if need_redirect && !splitted.empty?
+        redirect_to load_tags_path( splitted * ", " )
       end
       
 
