@@ -28,7 +28,7 @@ class ScheduleController < ApplicationController
     raise NoGroupError if @group.nil?
 
     @term = term( @day, @group.start_year ) rescue raise( EarlierThenFirstTermError )
-    @lessons = Lesson.lessons_for @group, @term, @day.wday
+    @lessons = Lesson.lessons_for @group, @term, @day.wday, odd_week?( @day )
     
     respond_to do |format|
       format.html # day.html.erb

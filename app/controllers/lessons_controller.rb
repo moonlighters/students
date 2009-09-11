@@ -15,8 +15,8 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new
     @lesson.day_of_week = params[:day_of_week] || 1
     @lesson.group_id = params[:group_id]
-    @lesson.set_start_time 9, 0
-    @lesson.duration = 1.hours + 35.minutes
+    @lesson.set_start_time *Lesson::BEGIN_TIME
+    @lesson.duration = Lesson::DURATION
     @lesson.lesson_subject_id = LessonSubject.first.id
     @lesson.lesson_type_id = LessonType.first.id
     @lesson.everyweek = true

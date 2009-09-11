@@ -43,8 +43,23 @@ describe Lesson do
       @l1 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g
       @l1.set_start_time 10, 0
       @l1.save!
+
+      @l_odd = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g, :everyweek => false, :odd_weeks => true
+      @l_odd.set_start_time 15, 0
+      @l_odd.save!
     end
     
+    it "should be valid when its time doesn't cross another lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g
+      l2.set_start_time 12, 0
+      l2.should be_valid
+    end
+    it "should be valid when its time crosses only another-week lesson's time" do
+      l_even = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g, :everyweek => false, :odd_weeks => false
+      l_even.set_start_time 15, 0
+      l_even.should be_valid
+    end
+
     it "should not be valid when its end crosses another lesson's time" do
       l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g 
       l2.set_start_time 9, 30
@@ -70,6 +85,22 @@ describe Lesson do
       l2.set_start_time 10, 0
       l2.should_not be_valid
     end
+
+    it "should not be valid when it's an everyweek one and its time crosses any not-everyweek lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g
+      l2.set_start_time 15, 0
+      l2.should_not be_valid
+    end
+    it "should not be valid when it's a not-everyweek one and its time crosses any everyweek lesson's time" do
+      l2 = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g, :everyweek => false, :odd_weeks => false
+      l2.set_start_time 10, 0
+      l2.should_not be_valid
+    end
+    it "should not be valid when it's a not-everyweek one and its time crosses a same-week lesson's time" do
+      l_even = Factory.build :lesson, :duration => 1.hour + 35.minutes, :group => @g, :everyweek => false, :odd_weeks => true
+      l_even.set_start_time 15, 0
+      l_even.should_not be_valid
+    end
   end
 
   describe "#set_start_time" do
@@ -89,13 +120,26 @@ describe Lesson do
   end
   
   describe "#lessons_for" do
-    it "should return lessons for given group, term and day_of_week" do
-      g1 = Factory :group
-      g2 = Factory :group
-      l1 = Factory :lesson, :group => g1, :term => 1, :day_of_week => 5
-      l2 = Factory :lesson, :group => g2, :term => 2, :day_of_week => 2
+    before do
+      @g1 = Factory :group
+      @g2 = Factory :group
+      @l1 = Factory :lesson, :group => @g1, :term => 1, :day_of_week => 5
+      @l2 = Factory :lesson, :group => @g2, :term => 2, :day_of_week => 2
 
-      Lesson.lessons_for( g1, 1, 5 ).should == [l1]
+      @l3 = Factory :lesson, :group => @g1, :term => 2, :day_of_week => 3, :everyweek => false, :odd_weeks => true
+      @l4 = Factory :lesson, :group => @g1, :term => 2, :day_of_week => 3, :everyweek => false, :odd_weeks => false
+    end
+    it "should return lessons for given group, term and day_of_week" do
+      Lesson.lessons_for( @g1, 1, 5, :both ).should == [@l1]
+    end
+    it "should return lessons for given group, term and day_of_week and both odd and even weeks" do
+      Lesson.lessons_for( @g1, 2, 3, :both ).should == [@l3, @l4]
+    end
+    it "should return lessons for given group, term and day_of_week and odd weeks" do
+      Lesson.lessons_for( @g1, 2, 3, true ).should == [@l3]
+    end
+    it "should return lessons for given group, term and day_of_week and even weeks" do
+      Lesson.lessons_for( @g1, 2, 3, false ).should == [@l4]
     end
   end
 end

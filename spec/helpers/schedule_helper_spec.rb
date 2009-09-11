@@ -38,4 +38,23 @@ describe ScheduleHelper do
       lambda { term( Time.mktime(2005, 9, 1), 2007 ) }.should raise_error ArgumentError
     end
   end
+
+  describe "#odd_week?" do
+    it "should return true if given date falls on an odd week in the odd term" do
+      odd_week?( Time.mktime 2009, 9, 3).should == true
+      odd_week?( Time.mktime 2002, 9, 8).should == true # In 2002, 1'st September falls on Sunday, and first week starts on 2'nd
+    end
+    it "should return true if given date falls on an odd week in the even term" do
+      odd_week?( Time.mktime 2009, 2, 15).should == true
+      odd_week?( Time.mktime 2003, 2, 16).should == true # In 2003, 9'th February falls on Sunday, and first week starts on 10'th
+    end
+    it "should return false if given date falls on an even week in the odd term" do
+      odd_week?( Time.mktime 2009, 9, 13).should == false
+      odd_week?( Time.mktime 2002, 9, 15).should == false # In 2002, 1'st September falls on Sunday, and first week starts on 2'nd
+    end
+    it "should return false if given date falls on an even week in the odd term" do
+      odd_week?( Time.mktime 2009, 2, 16).should == false
+      odd_week?( Time.mktime 2003, 2, 17).should == false # In 2003, 9'th February falls on Sunday, and first week starts on 10'th
+    end
+  end
 end

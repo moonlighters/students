@@ -80,6 +80,6 @@ Factory.define :lesson do |l|
   l.day_of_week 2
   l.start_time Time.utc(*Lesson::DEFAULT_DATE + [12, 20])
   l.duration 1.hour + 35.minutes
-  l.everyweek false
-  l.odd_weeks true
+  l.everyweek true 
+  l.odd_weeks nil
 end

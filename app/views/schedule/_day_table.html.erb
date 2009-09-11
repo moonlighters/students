@@ -11,10 +11,10 @@
     <col width="120px"><col>
     <tr>
       <td class="lessons-intervals">
-      <% Lesson::STANDARD_INTERVALS.each_with_index do |interval, i| %>
+      <% Lesson::INTERVALS.each_with_index do |interval, i| %>
         <% height = (interval[:end] - interval[:start])/Lesson::SECONDS_PER_PIXEL %>
         <% margin_top = ( i == 0 ?  (interval[:start] - Lesson::BEGIN_TIME_OBJ) :
-                                    (interval[:start] - Lesson::STANDARD_INTERVALS[i-1][:end]) ) / Lesson::SECONDS_PER_PIXEL %>
+                                    (interval[:start] - Lesson::INTERVALS[i-1][:end]) ) / Lesson::SECONDS_PER_PIXEL %>
         <div class="lesson-div" style="height:<%= height - 2 %>px; margin-top: <%= margin_top%>px">
           <table> 
             <td>

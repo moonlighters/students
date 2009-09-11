@@ -12,10 +12,12 @@ class Lesson < ActiveRecord::Base
   BEGIN_TIME = [9, 0]
   END_TIME = [22, 0]
 
+  START_DATES = [ [2, 9], [9, 1] ] # 9'th February for even terms, 1'st September for odd ones
+
   BEGIN_TIME_OBJ = Time.utc(* DEFAULT_DATE+BEGIN_TIME)
   END_TIME_OBJ = Time.utc(* DEFAULT_DATE+END_TIME)
 
-  SECONDS_PER_PIXEL = 50 # scale for drawing lessons
+  SECONDS_PER_PIXEL = 100 # scale for drawing lessons
 
   validates_inclusion_of  :start_time,
                           :in => BEGIN_TIME_OBJ..END_TIME_OBJ,
@@ -31,7 +33,8 @@ class Lesson < ActiveRecord::Base
   end
 
   def validate
-    that_day_lessons = Lesson.lessons_for self.group, self.term, self.day_of_week
+    odd_week = self.everyweek? ? :both : self.odd_weeks?
+    that_day_lessons = Lesson.lessons_for self.group, self.term, self.day_of_week, odd_week
 
     crossing_lesson = nil
     that_day_lessons.each do |lesson|
@@ -58,10 +61,12 @@ class Lesson < ActiveRecord::Base
   attr_accessor :lesson_subject_id
   attr_accessor :lesson_type_id
 
-  STANDARD_INTERVALS = (0..6).map do |i|
-    start = Time.utc(* DEFAULT_DATE + [9, 0]) + i*(1.hour + 45.minutes)
+  DURATION = 1.hour + 35.minutes
+  BREAK_DURATION = 10.minutes
+  INTERVALS = (0..6).map do |i|
+    start = Time.utc(* DEFAULT_DATE + [9, 0]) + i*(DURATION + BREAK_DURATION)
     { :start => start,
-      :end => start + 1.hour + 35.minutes }
+      :end => start + DURATION }
   end
 
   def set_start_time(hours, mins = 0)
@@ -79,8 +84,15 @@ class Lesson < ActiveRecord::Base
     self.start_time + self.duration
   end
 
-  def Lesson.lessons_for(group, term, day_of_week)
-    find_all_by_group_id_and_term_and_day_of_week( group, term, day_of_week, :order => "start_time" )
-    #TODO: not-everyweek lessons support
+  def Lesson.lessons_for(group, term, day_of_week, odd_week = :both)
+    if odd_week == :both
+      find_all_by_group_id_and_term_and_day_of_week( group, term, day_of_week, :order => "start_time" )
+    else
+      # TODO: How to search for boolean attributes without this {:true => true} ???
+      find  :all,
+            :conditions => [ "group_id = :group AND term = :term AND day_of_week = :day_of_week AND (everyweek = :true OR everyweek = :false AND odd_weeks = :odd_week)",
+                             { :group => group, :term => term, :day_of_week => day_of_week, :odd_week => odd_week, :true => true, :false => false } ],
+            :order => "start_time"
+    end
   end
 end

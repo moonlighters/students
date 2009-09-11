@@ -1,3 +1,5 @@
+require 'date'
+
 module ScheduleHelper
   include ApplicationHelper
   
@@ -22,5 +24,19 @@ module ScheduleHelper
     else
       (date.year - start_year)*2   # February to August - 2, 4, 6, ...
     end
+  end
+
+  def odd_week?(date)
+    today = Date.new date.year, date.month, date.day
+
+    term_starts = (0..1).map do |i|
+      date = Date.new( * [today.year] + Lesson::START_DATES[i] ) 
+      date += 1 if date.cwday == 7
+      date
+    end
+
+    term =  (today > term_starts[0] and today < term_starts[1]) ? 0 : 1
+    
+    (today.cweek - term_starts[term].cweek + 1) % 2 == 1
   end
 end
