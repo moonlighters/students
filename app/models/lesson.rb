@@ -17,7 +17,7 @@ class Lesson < ActiveRecord::Base
   BEGIN_TIME_OBJ = Time.utc(* DEFAULT_DATE+BEGIN_TIME)
   END_TIME_OBJ = Time.utc(* DEFAULT_DATE+END_TIME)
 
-  SECONDS_PER_PIXEL = 100 # scale for drawing lessons
+  SECONDS_PER_PIXEL = 100.0 # scale for drawing lessons
 
   validates_inclusion_of  :start_time,
                           :in => BEGIN_TIME_OBJ..END_TIME_OBJ,
@@ -64,9 +64,9 @@ class Lesson < ActiveRecord::Base
   DURATION = 1.hour + 35.minutes
   BREAK_DURATION = 10.minutes
   INTERVALS = (0..6).map do |i|
-    start = Time.utc(* DEFAULT_DATE + [9, 0]) + i*(DURATION + BREAK_DURATION)
-    { :start => start,
-      :end => start + DURATION }
+    start_time = Time.utc(* DEFAULT_DATE + [9, 0]) + i*(DURATION + BREAK_DURATION)
+    
+    Lesson.new :start_time => start_time, :duration => DURATION
   end
 
   def set_start_time(hours, mins = 0)

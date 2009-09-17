@@ -57,4 +57,30 @@ describe ScheduleHelper do
       odd_week?( Time.mktime 2003, 2, 17).should == false # In 2003, 9'th February falls on Sunday, and first week starts on 10'th
     end
   end
+  
+  def render(*params)
+    render ActionView::TemplateHandler::render *params
+  end
+
+  describe "#lessons_column" do
+    before do
+      @lessons = [ Factory( :lesson, :duration => 1.hour ), Factory( :lesson, :duration => 2.hours ) ]
+      @lessons[0].set_start_time Lesson::BEGIN_TIME[0] + 1, 0
+      @lessons[1].set_start_time Lesson::BEGIN_TIME[0] + 2, 30
+
+      @hour_height = 1.hour/Lesson::SECONDS_PER_PIXEL
+      @int_height = Lesson::DURATION/Lesson::SECONDS_PER_PIXEL
+      @break_height = Lesson::BREAK_DURATION/Lesson::SECONDS_PER_PIXEL
+    end
+    it "should return a formatted list of lesson intervals" do
+      lessons_column( Lesson::INTERVALS[1..2] ).should == 
+        "<div class=\"lesson-div\" style=\"height: #{@int_height -2}px; margin-top: #{@int_height + @break_height}px;\"><table><td></td></table></div>"+
+        "<div class=\"lesson-div\" style=\"height: #{@int_height -2}px; margin-top: #{@break_height}px;\"><table><td></td></table></div>"
+    end
+    it "should return a formatted list of lessons" do
+      ( lessons_column( @lessons ) {|l, i| i.to_s } ).should == 
+        "<div class=\"lesson-div\" style=\"height: #{@hour_height -2}px; margin-top: #{@hour_height}px;\"><table><td>0</td></table></div>"+
+        "<div class=\"lesson-div\" style=\"height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px;\"><table><td>1</td></table></div>"
+    end
+  end
 end

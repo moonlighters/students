@@ -1,49 +1,17 @@
-<style type="text/css">
-  .lessons-table { width: 100%; border: 3px double #999999 }
-  .lesson-div { border-bottom: 1px solid #999999; border-top: 1px solid #999999; width: 100% }
-  .lesson-div table { width:100%; height:100%; }
-  .lesson-div td { vertical-align: middle; text-align: center; }
-  .lessons-intervals { border-right: 1px solid #999999; vertical-align: top}
-  .lessons { border-left: 1px solid #999999; vertical-align: top}
-</style>
 <table class="lessons-table" cellpadding="0">
   <tbody>
     <col width="120px"><col>
     <tr>
       <td class="lessons-intervals">
-      <% Lesson::INTERVALS.each_with_index do |interval, i| %>
-        <% height = (interval[:end] - interval[:start])/Lesson::SECONDS_PER_PIXEL %>
-        <% margin_top = ( i == 0 ?  (interval[:start] - Lesson::BEGIN_TIME_OBJ) :
-                                    (interval[:start] - Lesson::INTERVALS[i-1][:end]) ) / Lesson::SECONDS_PER_PIXEL %>
-        <div class="lesson-div" style="height:<%= height - 2 %>px; margin-top: <%= margin_top%>px">
-          <table> 
-            <td>
-              <%= i + 1 %>)
-              <%=h format_time( interval[:start], :date => false) %>
-              -
-              <%=h format_time( interval[:end], :date => false) %>
-            </td>
-          </table>
-        </div>
-      <% end %>
+        <%= lessons_column Lesson::INTERVALS do |interval, index|
+              render :partial => "lessons/interval", :locals => {:interval => interval, :index => index}
+            end %>
       </td>
 
-      <!-- TODO: Apply some DRY -->
-
       <td class="lessons">
-
-      <% @lessons.each_with_index do |lesson, i| %>
-        <% height = (lesson.end_time - lesson.start_time)/Lesson::SECONDS_PER_PIXEL %>
-        <% margin_top = ( i == 0 ?  ( lesson.start_time - Lesson::BEGIN_TIME_OBJ ) :
-                                    (lesson.start_time - @lessons[i-1].end_time) ) / Lesson::SECONDS_PER_PIXEL %>
-        <div class="lesson-div" style="height:<%= height - 2 %>px; margin-top: <%= margin_top %>px">
-          <table> 
-            <td>
-              <%= render lesson %>
-            </td>
-          </table>
-        </div>
-      <% end %>
+        <%= lessons_column @lessons do |lesson, index|
+              render :partial => "lessons/day_cell", :locals => {:lesson => lesson}
+            end %>
       </td>
     </tr>
   </tbody>
