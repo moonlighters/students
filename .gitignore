@@ -12,3 +12,4 @@ public/system
 config/initializers/recaptcha.rb
 config/database.yml
 config/deploy.rb
+config/initializers/paperclip.rb

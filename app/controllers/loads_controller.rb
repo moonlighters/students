@@ -4,6 +4,7 @@ class LoadsController < InheritedResources::Base
 
   access_control do
     allow all, :to => [:index, :show]
+    allow logged_in, :to => :download
     allow :owner, :of => :load, :to => [:edit, :update, :destroy]
     allow :upload_moderator, :to => [:new, :create]
   end
@@ -42,6 +43,16 @@ class LoadsController < InheritedResources::Base
     resource.owner = current_user
 
     create!
+  end
+
+  #GET /loads/1/download
+  def download
+    resource.update_attribute :download_counter, resource.download_counter + 1
+
+    f = resource.file
+    send_file f.path,
+              :filename => Russian.translit( params[:filename] || f.original_filename ),
+              :type => f.content_type
   end
 
   private

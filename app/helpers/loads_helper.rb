@@ -11,4 +11,9 @@ module LoadsHelper
     names = ts.map(&:name) * ", "
     link_to h(names), load_tags_path( :tags => names ), options
   end
+
+  def download_counter(ld)
+    dc = ld.download_counter
+    (dc > 0) ? "скачивали #{dc} #{Russian.pluralize( dc, "раз", "раза", "раз" )}" : "не скачивали ни разу"
+  end
 end

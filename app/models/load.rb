@@ -9,7 +9,10 @@ class Load < ActiveRecord::Base
   @@per_page = 10
 
   # TODO: hide file with path and url options
-  has_attached_file :file
+  has_attached_file :file,
+                    # to prevent direct links
+                    :url => "/loads/:id/download/:translit_filename",
+                    :path => ":rails_root/public/system/:load_top_secret/:id/:original_filename"
 
   validates_presence_of :name, :owner
   validates_presence_of :tag_list, :message => "должны присутствовать"

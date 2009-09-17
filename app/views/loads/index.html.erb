@@ -1,7 +1,5 @@
 <% @page_title = "Загрузки" %>
-<h2>Список загрузок<h2>
-<%#     <%= ", помеченных тег#{Russian.p( @tags.count, "ом", "ами", "ами" )} #{links_to_tags @tags}" if @tags +| %>
-</h2>
+<h2>Список загрузок</h2>
 
 <%# TODO: кнопку ввода своих тегов %>
 
@@ -23,7 +21,8 @@
     <ul class="loads-list">
       <% collection.each do |res| %>
         <li>
-          <%= link_to h(res.name), res, :title => h(res.description) %><br/>
+          <%= link_to h(res.name), res, :title => h(res.description) %>
+          <i>(<%= download_counter res %>)</i><br/>
           <%= links_to_tags res.tags, :class => "load-tag" %>
         </li>
       <% end %>

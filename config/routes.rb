@@ -77,7 +77,10 @@ ActionController::Routing::Routes.draw do |map|
     m.choose_schedule "choose", :action => "choose"
   end
 
-  map.load_tags "loads/tags/:tags", :controller => "loads", :action => "index", :conditions => {:method => :get}
+  map.with_options :controller => "loads", :conditions => {:method => :get}, :path_prefix => "loads" do |m|
+    m.load_tags "tags/:tags", :action => "index"
+    m.load_download ":id/download/:filename", :action => "download", :filename => /.+/
+  end
   map.resources :loads
 
   map.resources :users

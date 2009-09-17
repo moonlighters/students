@@ -8,17 +8,18 @@
 <% end %>
 
 <p>
-<% unless resource.description.empty? %>
-  Описание: <i><%= add_br_to_text h(resource.description) %></i><br/>
-<% end %>
+  Этот файл <%= link_to_user resource.owner %> загрузил<%= gender( resource.owner, "", "а" ) %>
+  <%= time_ago_in_words resource.created_at %> назад
+  <br/>Его <%= download_counter resource %>
 </p>
-<p>Этот файл <%= link_to_user resource.owner %> загрузил<%= gender( resource.owner, "", "а" ) %> <%= time_ago_in_words resource.created_at %> назад<br/>
-<p><strong>Оригинальное название:</strong> <%=h resource.file.original_filename %><br/></p>
-<p><strong>Размер:</strong> <%= number_to_human_size resource.file.size %><br/></p>
-<p><strong>Тэги:</strong> <%= links_to_tags resource.tags %><br/></p>
+<% unless resource.description.empty? %>
+  <p><strong>Описание:</strong> <i><%= add_br_to_text h(resource.description) %></i></p>
+<% end %>
+<p><strong>Исходное имя файла:</strong> <%=h resource.file.original_filename %></p>
+<p><strong>Размер:</strong> <%= number_to_human_size resource.file.size %></p>
+<p><strong>Тэги:</strong> <%= links_to_tags resource.tags %></p>
 <p>
-  <%= current_user ? link_to( "Скачать", resource.file.url, :class => :download_button ) :
-                     "<i>Чтобы скачать файл, войдите на сайт или зарегистрируйтесь</i>" %>
+  <%= link_to( "Скачать", resource.file.url, :class => :download_button ) %>
 </p>
 
 <%= link_to 'К списку загрузок', collection_path %>
