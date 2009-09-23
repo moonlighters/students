@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090917123727) do
+ActiveRecord::Schema.define(:version => 20090923093217) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20090917123727) do
     t.boolean  "odd_weeks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "room"
   end
 
   create_table "loads", :force => true do |t|

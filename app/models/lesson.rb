@@ -3,7 +3,8 @@ class Lesson < ActiveRecord::Base
                         :term,
                         :day_of_week,
                         :start_time,
-                        :duration
+                        :duration,
+                        :room
 
   validates_presence_of :lesson_subject_type_id,
                         :message => " с такими значениями полей Предмет, Тип, Группа не найден. "

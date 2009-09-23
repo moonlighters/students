@@ -61,6 +61,7 @@ ru:
         duration: "Длительность"
         everyweek: "Каждую неделю?"
         odd_weeks: "Если не каждую, то по нечётным?"
+        room: "Аудитория"
 
   authlogic:
     error_messages:

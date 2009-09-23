@@ -32,6 +32,10 @@
     <%= select_minute lesson.duration_min, :prefix => "duration", :minute_step => 5 %> минут
   </p>
   <p>
+    <%= f.label :room %>
+    <%= f.text_field :room, :size => 10 %>
+  </p>
+  <p>
     <%= f.label :everyweek %>
     <%= f.check_box :everyweek %>
   </p>

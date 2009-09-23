@@ -22,6 +22,10 @@
     <%= @lesson.duration_min %> минут
   </p>
   <p>
+    <b>Аудитория:</b>
+    <%=h @lesson.room %>
+  </p>
+  <p>
     <b>Частота:</b>
     <% if @lesson.everyweek %>
       Еженедельно
