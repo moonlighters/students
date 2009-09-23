@@ -119,7 +119,7 @@ describe Lesson do
     end
   end
   
-  describe "#lessons_for" do
+  describe ".lessons_for" do
     before do
       @g1 = Factory :group
       @g2 = Factory :group
@@ -140,6 +140,47 @@ describe Lesson do
     end
     it "should return lessons for given group, term and day_of_week and even weeks" do
       Lesson.lessons_for( @g1, 2, 3, false ).should == [@l4]
+    end
+  end
+  describe ".term" do
+    it "should return value for examinations if given date is in January or June" do
+      Lesson.term( Time.mktime(2008, 1, 1), 2007 ).should == Lesson::NO_TERM_EXAMINATIONS
+      Lesson.term( Time.mktime(2009, 6, 9), 2007 ).should == Lesson::NO_TERM_EXAMINATIONS
+    end
+    it "should return an even Lesson.term if given date is from February to May" do
+      Lesson.term( Time.mktime(2008, 2, 1), 2007 ).should == 2
+      Lesson.term( Time.mktime(2010, 5, 9), 2007 ).should == 6
+    end
+    it "should return value for vacation if given date is from July to August" do
+      Lesson.term( Time.mktime(2008, 7, 1), 2007 ).should == Lesson::NO_TERM_VACATION
+      Lesson.term( Time.mktime(2009, 8, 9), 2007 ).should == Lesson::NO_TERM_VACATION
+    end
+    it "should return an odd Lesson.term if given date is from September to December" do
+      Lesson.term( Time.mktime(2007, 10, 10), 2007 ).should == 1
+      Lesson.term( Time.mktime(2009, 9, 9), 2007 ).should == 5
+    end
+    it "should raise an exception if given date is earlier then studying start" do
+      lambda { Lesson.term( Time.mktime(2007, 2, 1), 2007 ) }.should raise_error ArgumentError
+      lambda { Lesson.term( Time.mktime(2005, 9, 1), 2007 ) }.should raise_error ArgumentError
+    end
+  end
+
+  describe ".odd_week?" do
+    it "should return true if given date falls on an odd week in the odd term" do
+      Lesson.odd_week?( Time.mktime 2009, 9, 3).should == true
+      Lesson.odd_week?( Time.mktime 2002, 9, 8).should == true # In 2002, 1'st September falls on Sunday, and first week starts on 2'nd
+    end
+    it "should return true if given date falls on an odd week in the even term" do
+      Lesson.odd_week?( Time.mktime 2009, 2, 15).should == true
+      Lesson.odd_week?( Time.mktime 2003, 2, 16).should == true # In 2003, 9'th February falls on Sunday, and first week starts on 10'th
+    end
+    it "should return false if given date falls on an even week in the odd term" do
+      Lesson.odd_week?( Time.mktime 2009, 9, 13).should == false
+      Lesson.odd_week?( Time.mktime 2002, 9, 15).should == false # In 2002, 1'st September falls on Sunday, and first week starts on 2'nd
+    end
+    it "should return false if given date falls on an even week in the odd term" do
+      Lesson.odd_week?( Time.mktime 2009, 2, 16).should == false
+      Lesson.odd_week?( Time.mktime 2003, 2, 17).should == false # In 2003, 9'th February falls on Sunday, and first week starts on 10'th
     end
   end
 end

@@ -1,8 +1,8 @@
 require 'parsedate'
 
 class ScheduleController < ApplicationController
-  include ApplicationHelper
-  include ScheduleHelper
+  include ApplicationHelper # NOTE: just for format_date function... Maybe place this function it somwhere else?
+
   # Exception classes
   class BadDateError < StandardError
   end
@@ -27,8 +27,8 @@ class ScheduleController < ApplicationController
     @group = params[:group_id] ?  Group.find( params[:group_id] ) : nil # TODO: current_user.group
     raise NoGroupError if @group.nil?
 
-    @term = term( @day, @group.start_year ) rescue raise( EarlierThenFirstTermError )
-    @lessons = Lesson.lessons_for @group, @term, @day.wday, odd_week?( @day )
+    @term = Lesson.term( @day, @group.start_year ) rescue raise( EarlierThenFirstTermError )
+    @lessons = Lesson.lessons_for @group, @term, @day.wday, Lesson.odd_week?( @day )
     
     respond_to do |format|
       format.html # day.html.erb

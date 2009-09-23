@@ -19,7 +19,18 @@
 <%= link_to_day_schedule yesterday, @group, :prefix => "<< " %>
 <br/>
 
-<%= render :partial => "day_table", :locals => {:lessons => @lessons} %>
+<% if @lessons.blank? %>
+  <div class="no-lessons">
+    Занятий нет
+    <% if @term == Lesson::NO_TERM_VACATION %>
+      (каникулы!!!)
+    <% elsif @term == Lesson::NO_TERM_EXAMINATIONS %>
+      (сессия)
+    <% end %>
+  </div>
+<% else %>
+  <%= render :partial => "day_table", :locals => {:lessons => @lessons} %>
+<% end %>
 
 <%= link_to "Добавить", new_lesson_path + "?day_of_week=#{@day.wday}&group_id=#{@group.id}" %> |
 <%= link_to 'Назад', schedule_path %>

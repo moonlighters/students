@@ -14,32 +14,6 @@ module ScheduleHelper
     link_to h( content ), url, options
   end
 
-  def term(date, start_year)
-    raise ArgumentError, "given date is earlier then studying start date" if date.year < start_year or
-                                                                            (date.year == start_year and date.month <= 8)
-    if date.month >= 9
-      (date.year - start_year)*2 + 1   # September to December - 1, 3, 5, ...
-    elsif date.month == 1
-      (date.year - start_year)*2 - 1   # January - 1, 3, 5, ...
-    else
-      (date.year - start_year)*2   # February to August - 2, 4, 6, ...
-    end
-  end
-
-  def odd_week?(date)
-    today = Date.new date.year, date.month, date.day
-
-    term_starts = (0..1).map do |i|
-      date = Date.new( * [today.year] + Lesson::START_DATES[i] ) 
-      date += 1 if date.cwday == 7
-      date
-    end
-
-    term =  (today > term_starts[0] and today < term_starts[1]) ? 0 : 1
-    
-    (today.cweek - term_starts[term].cweek + 1) % 2 == 1
-  end
-
   def lessons_column(collection)
   # draws rectangles for lessons, putting the HTML returned by block into them
     html = ""

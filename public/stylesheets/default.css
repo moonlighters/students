@@ -546,3 +546,7 @@ img.right {
   border-left: 1px solid #999999;
   vertical-align: top
 }
+.no-lessons {
+  text-align: center;
+  font-size: 2em;
+}
