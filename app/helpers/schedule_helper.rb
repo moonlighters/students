@@ -2,14 +2,30 @@ require 'date'
 
 module ScheduleHelper
   include ApplicationHelper
+
+  def week_caption(start_date=nil)
+    start_date ||= Time.now
+    format_time( start_date, :time => false, :month => :digits ) +
+      " - " +
+      format_time( start_date + 6.days, :time => false, :month => :digits )
+  end
   
-  def link_to_day_schedule(date=nil, group=nil, options = {})
-    actual_date = date || Time.now
-    content = options.delete(:content) || format_time( actual_date, :time => false )
+  def link_to_schedule(date=nil, day_or_week=:day, options = {})
+    date ||= Time.now
+    is_it_week = (day_or_week == :week)
+    
+    content = options.delete(:content)
+    if content.blank?
+      content = is_it_week ? week_caption( date ) : format_time( date, :time => false )
+    end
     prefix = options.delete(:prefix) || ""
     suffix = options.delete(:suffix) || ""
+    group = options.delete(:group)
+
     content = prefix + content + suffix
-    url = date ? day_schedule_path( format_time( date, :format => :ansi, :time => false ) ) : today_schedule_path
+    url = is_it_week ? 
+            week_schedule_path( format_time( date, :format => :ansi, :time => false ) ) :
+            day_schedule_path( format_time( date, :format => :ansi, :time => false ) )
     url += "?group_id=#{group.id}" if group
     link_to h( content ), url, options
   end

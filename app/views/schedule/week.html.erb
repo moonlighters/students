@@ -1,2 +1,14 @@
-<h1>Schedule#week</h1>
-<p>Find me in app/views/schedule/week.html.erb</p>
+<% @page_title = "Расписание на неделю" %>
+
+<h1>Расписание на неделю <br/><%=h week_caption @week_start %></h1>
+
+<% prev_week = @week_start - 7.days %>
+<% next_week = @week_start + 7.days %>
+<%= link_to_schedule next_week, :week, :group => @group, :suffix => " >>", :style => "float:right;" %>
+<%= link_to_schedule prev_week, :week, :group => @group, :prefix => "<< " %>
+<br/>
+
+<%= render :partial => "week_table", :locals => {:lessons_batches => @lessons_batches} %>
+
+<%= link_to "Добавить", new_lesson_path + "&group_id=#{@group.id}" %> |
+<%= link_to 'Назад', schedule_path %>

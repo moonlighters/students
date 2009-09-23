@@ -524,7 +524,7 @@ img.right {
 
 .lessons-table {
   width: 100%;
-  border: 3px double #999999
+  border: 3px double #999999;
 }
 .lesson-div {
   border-bottom: 1px solid #999999;
@@ -540,7 +540,7 @@ img.right {
 }
 .lessons-intervals {
   border-right: 1px solid #999999;
-  vertical-align: top
+  vertical-align: top;
 }
 .lessons {
   border-left: 1px solid #999999;
@@ -549,4 +549,42 @@ img.right {
 .no-lessons {
   text-align: center;
   font-size: 2em;
+}
+
+/* lesson types: */
+a.lesson-week-cell, a:hover.lesson-week-cell {
+  color: #999999;
+  text-decoration: none;
+}
+
+.lektsiya {
+  font-weight: bold;
+}
+.seminar {
+  font-weight: normal;
+}
+.sdacha {
+  font-weight: normal;
+  font-style: italic;
+}
+.praktika {
+  font-weight: normal;
+  text-decoration: underline;
+}
+.konsultatsiya {
+  font-weight: normal;
+  text-decoration: underline;
+}
+.room {
+  color: #0000dd;
+}
+.lesson-wday-cell {
+  height: 1.5em;
+  font-size: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #999999;
+}
+.lesson-wday-link {
+  text-decoration: none;
 }

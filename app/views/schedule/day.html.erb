@@ -15,8 +15,8 @@
 
 <% yesterday = @day - 1.day %>
 <% tomorrow = @day + 1.day %>
-<%= link_to_day_schedule tomorrow, @group, :suffix => " >>", :style => "float:right;" %>
-<%= link_to_day_schedule yesterday, @group, :prefix => "<< " %>
+<%= link_to_schedule tomorrow, :day, :group => @group, :suffix => " >>", :style => "float:right;" %>
+<%= link_to_schedule yesterday, :day, :group => @group, :prefix => "<< " %>
 <br/>
 
 <% if @lessons.blank? %>

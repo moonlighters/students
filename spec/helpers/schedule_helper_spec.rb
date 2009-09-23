@@ -3,21 +3,45 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe ScheduleHelper do
   include ScheduleHelper
 
-  describe "#link_to_day_schedule" do
-    it "should return link to day schedule given no params" do
-      link_to_day_schedule.should == "<a href=\"/schedule/day\">" + format_time( Time.now, :time => false ) + "</a>"
+  describe "#week_caption" do
+    it "should return '[date1] - [date2]'-like week caption" do
+      time = Time.mktime 2009, 6, 1  # Monday
+      week_caption(time).should == "01.06.2009 - 07.06.2009"
+    end
+  end
+
+  describe "#link_to_schedule" do
+    before do
+      @g = Factory :group
+      @t = Time.mktime 2009, 6, 1  # Monday
+      @t_week = week_caption @t
+
+      @t_ansi = format_time @t, :format => :ansi, :time => false
+      @t_text = format_time @t, :time => false
+    end
+    it "should return link to today schedule given no params" do
+      text_now = format_time( Time.now, :time => false )
+      ansi_now = format_time( Time.now, :format => :ansi, :time => false )
+      link_to_schedule.should == "<a href=\"/schedule/day/#{ansi_now}\">#{text_now}</a>"
     end
     it "should return link to day schedule with given content" do
-      link_to_day_schedule(nil, nil, :content => "content").should == "<a href=\"/schedule/day\">content</a>"
+      link_to_schedule(@t, :day, :content => "content").should == "<a href=\"/schedule/day/#{@t_ansi}\">content</a>"
     end
     it "should return link to day schedule with given prefix and suffix" do
-      link_to_day_schedule(nil, nil, :prefix => "pre",
-                                     :suffix => "suf").should == "<a href=\"/schedule/day\">pre" + format_time( Time.now, :time => false ) + "suf</a>"
+      link_to_schedule(@t, :day, :prefix => "pre", :suffix => "suf").should ==
+        "<a href=\"/schedule/day/#{@t_ansi}\">pre#{@t_text}suf</a>"
     end
     it "should return link to day schedule for given day and group" do
-      g = Factory :group
-      t = Time.mktime 2004, 3, 1
-      link_to_day_schedule(t, g, :content => "content").should == "<a href=\"/schedule/day/2004-03-01?group_id=#{g.id}\">content</a>"
+      link_to_schedule(@t, :day, :content => "content", :group => @g).should ==
+        "<a href=\"/schedule/day/#{@t_ansi}?group_id=#{@g.id}\">content</a>"
+    end
+
+    it "should return link to week schedule with default caption" do
+      link_to_schedule(@t, :week).should == "<a href=\"/schedule/week/#{@t_ansi}\">#{@t_week}</a>"
+    end
+    it "should return link to week schedule with given caption, suffix, prefix and group" do
+      link_to_schedule(@t, :week, :content => "content", :prefix => "<", :suffix => ">", :group => @g).should ==
+        "<a href=\"/schedule/week/#{@t_ansi}?group_id=#{@g.id}\">&lt;content&gt;</a>"
     end
   end
   

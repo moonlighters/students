@@ -28,7 +28,7 @@ class LessonsController < ApplicationController
 
   # GET /schedule/lessons/1/edit
   def edit
-    @lesson.lesson_subject_id = @lesson.subject_type.subject.id
+    @lesson.lesson_subject_id = @lesson.subject.id
     @lesson.lesson_type_id = @lesson.subject_type.lesson_type.id
   end
 

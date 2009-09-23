@@ -1,0 +1,37 @@
+<div style="width: 100%; overflow: auto;">
+  <div style="width:720px;">
+    <table class="lessons-table" cellpadding="0">
+      <tbody>
+        <col width="120px"/><col/>
+        <tr>
+          <td class="lesson-wday-cell"/>
+          <% 0.upto 5 do |i|  %>
+            <td class="lesson-wday-cell">
+              <% day = @week_start + i.days %>
+              <%= link_to_schedule  day,
+                                    :day,
+                                    :group => @group,
+                                    :content => Russian::strftime( day , "%a" ),
+                                    :class => "lesson-wday-link" %>
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td class="lessons-intervals">
+            <%= lessons_column Lesson::INTERVALS do |interval, index|
+                  render :partial => "lessons/interval", :locals => {:interval => interval, :index => index}
+                end %>
+          </td>
+
+          <% 0.upto 5 do |i|  %>
+            <td class="lessons" width="100px">
+              <%= lessons_column @lessons_batches[i] do |lesson, index|
+                    render :partial => "lessons/week_cell", :locals => {:lesson => lesson}
+                  end %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
