@@ -50,7 +50,8 @@ Factory.define :lesson_type do |t|
 end
 
 Factory.define :lesson_subject do |s|
-  s.name "ММФ"
+  s.name "Методы МатФизики"
+  s.short_name "ММФ"
   s.term TERM
 end
 
@@ -82,4 +83,5 @@ Factory.define :lesson do |l|
   l.duration 1.hour + 35.minutes
   l.everyweek true 
   l.odd_weeks nil
+  l.room "429"
 end

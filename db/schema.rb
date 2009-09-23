@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090923093217) do
+ActiveRecord::Schema.define(:version => 20090923101749) do
 
   create_table "forum_posts", :force => true do |t|
     t.text     "body"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20090923093217) do
     t.integer  "term"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_name"
   end
 
   create_table "lesson_types", :force => true do |t|

@@ -39,6 +39,7 @@ class LessonSubjectsController < ApplicationController
   # POST /schedule/subjects
   def create
     @lesson_subject = LessonSubject.new params[:lesson_subject]
+    set_short_name
 
     respond_to do |format|
       if @lesson_subject.save
@@ -52,8 +53,10 @@ class LessonSubjectsController < ApplicationController
 
   # PUT /schedule/subjects/1
   def update
+    @lesson_subject.attributes = params[:lesson_subject]
+    set_short_name
     respond_to do |format|
-      if @lesson_subject.update_attributes params[:lesson_subject]
+      if @lesson_subject.save 
         flash[:notice] = 'Предмет успешно обновлен.'
         format.html { redirect_to lesson_subject_path( @lesson_subject ) }
       else
@@ -75,5 +78,9 @@ class LessonSubjectsController < ApplicationController
   private
     def find_lesson_subject
       @lesson_subject = LessonSubject.find params[:id]
+    end
+
+    def set_short_name
+      @lesson_subject.short_name = @lesson_subject.name if @lesson_subject.short_name.blank?
     end
 end

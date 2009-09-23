@@ -1,5 +1,7 @@
 class LessonSubject < ActiveRecord::Base
   validates_presence_of :name, :term
+  validates_presence_of :short_name,
+                        :if => Proc.new {|s| not s.name.blank? }
   validates_each :term do |model, attr, value|
     if value and value <= 0
       model.errors.add(attr, "должен быть числом больше 0")

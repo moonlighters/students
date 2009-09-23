@@ -1,11 +1,18 @@
 <% name = @lesson_subject.name %>
+<% short_name = @lesson_subject.short_name %>
 <% @page_title = "Предмет " + h( name ) %>
 <h2>Расписание > Просмотр предмета</h2>
 <p>
   <b>Название:</b>
   <%=h name %>
 </p>
-
+<% if not short_name.blank? and short_name != name %>
+  <p>
+    <b>Сокращенное название:</b>
+    <%=h short_name %>
+  </p>
+<% end %>
+</p>
 <p>
   <b>Семестр:</b>
   <%=h @lesson_subject.term %>

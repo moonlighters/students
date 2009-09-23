@@ -36,6 +36,7 @@ ru:
         tag_list: "Теги"
       lesson_subject:
         name: "Название"
+        short_name: "Сокращённое название"
         term: "Семестр"
       group:
         name: "Название"

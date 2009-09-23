@@ -5,7 +5,7 @@ describe LessonSubject do
     Factory :lesson_subject
   end
 
-  [:name, :term].each do |field|
+  [:name, :short_name, :term].each do |field|
     it "should not be valid without #{field}" do
       Factory.build( :lesson_subject, field => nil ).should_not be_valid
     end
