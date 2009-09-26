@@ -44,6 +44,9 @@ module NavigationHelpers
     when /страничк[аеу] преподавателя (.+) (.+)/
       teacher_path( Teacher.find_by_name_and_surname! $1, $2 )
 
+    when /страничк[аеу] пользователя (.+)/
+      user_path( User.find_by_login! $1 )
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in features/support/paths.rb"

@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
               end
             end
   belongs_to :sex
+  belongs_to :group
 
   validates_presence_of :sex
 

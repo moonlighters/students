@@ -2,7 +2,7 @@
 <h2>Просмотр занятия</h2>
   <p>
     <b>Группа:</b>
-    <%= link_to h( @lesson.group.name ), group_path( @lesson.group ) %>
+    <%= link_to_group @lesson.group %>
   </p>
   <p>
     <b>Тип занятия:</b>

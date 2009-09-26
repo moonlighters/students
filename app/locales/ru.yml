@@ -19,6 +19,8 @@ ru:
         email: "E-mail"
         avatar: "Аватар"
         time_zone: "Часовой пояс"
+        sex_id: "Пол"
+        group_id: "Группа"
       forum:
         title: "Название"
         description: "Описание"
@@ -84,3 +86,5 @@ ru:
         login: "Логин"
         password: "Пароль"
         remember_me: "Запомнить меня"
+  edit_account: "Аккаунт"
+  edit_profile: "Профиль"

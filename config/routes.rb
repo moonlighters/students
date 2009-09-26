@@ -83,9 +83,20 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :loads
 
-  map.resources :users
-  map.signup  "signup", :controller => "users", :action => "new", :conditions => {:method => :get}
-  map.connect "signup", :controller => "users", :action => "create", :conditions => {:method => :post}
+  map.resources :users, :only => [:new, :create, :show]
+  map.with_options :controller => "users" do |m|
+    m.with_options :conditions => {:method => :get} do |mm|
+      mm.signup  "signup", :action => "new"
+      mm.connect "signup", :action => "create"
+      mm.profile "profile", :action => "edit_profile"
+      mm.account "account", :action => "edit_account"
+    end
+    m.connect "signup", :action => "create", :conditions => {:method => :post}
+    m.with_options :conditions => {:method => :put} do |mm|
+      mm.connect "profile", :action => "update_profile"
+      mm.connect "account", :action => "update_account"
+    end
+  end
 
   map.login   "login", :controller => "user_sessions", :action => "new", :conditions => {:method => :get}
   map.connect "login", :controller => "user_sessions", :action => "create", :conditions => {:method => :post}

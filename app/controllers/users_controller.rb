@@ -22,17 +22,27 @@ class UsersController < ApplicationController
     @user = params[:id] ? User.find( params[:id] ) : current_user
   end
 
-  def edit
+  def edit_profile
     @user = current_user
   end
-  
-  def update
-    @user = current_user # makes our views "cleaner" and more consistent
-    if @user.update_attributes params[:user] 
-      flash[:notice] = "Профиль обновлен!"
-      redirect_to user_url( @user )
-    else
-      render :action => :edit
-    end
+  alias edit_account edit_profile
+
+  def update_profile
+    update :edit_profile
   end
+
+  def update_account
+    update :edit_account
+  end
+  
+  private
+    def update(action)
+      @user = current_user # makes our views "cleaner" and more consistent
+      if @user.update_attributes params[:user] 
+        flash[:notice] = Russian.t( action ) + " обновлён!"
+        redirect_to :action => action
+      else
+        render :action => action
+      end
+    end
 end

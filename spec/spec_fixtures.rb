@@ -16,6 +16,7 @@ Factory.define :user do |u|
   u.password    "123456"
   u.password_confirmation "123456"
   u.sex         Sex.undefined
+  u.association :group, :factory => :group
 end
 
 Factory.define :forum_topic do |t|

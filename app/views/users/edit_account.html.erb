@@ -1,0 +1,12 @@
+<% @page_title = "Редактирование учетной записи" %>
+<h2>Редактирование учетной записи</h2>
+
+<% semantic_form_for @user, :url => account_url do |f| %>
+  <%= f.input :password, :hint => "вводите только если хотите сменить пароль" %>
+  <%= f.input :password_confirmation %>
+  <% f.buttons do %>
+    <%= f.commit_button "Сохранить" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Редактировать профиль", profile_path %>

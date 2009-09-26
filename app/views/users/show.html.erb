@@ -1,32 +1,25 @@
 <% @page_title = "Просмотр профиля" %>
 <h2>Пользователь <%= h @user.login %></h2>
 
-<p>
-  <b>Login count:</b>
-  <%=h @user.login_count %>
+<% time_since_last_request = Time.now - @user.last_request_at %>
+<p align="center">
+  <% if time_since_last_request < 5.minutes %>
+    <b>Online</b>
+  <% else %>
+    <b>Offline</b>, <%=h gender(@user, "вышел", "вышла") %> <%= time_ago_in_words @user.last_request_at %> назад
+  <% end %>
 </p>
 
 <p>
-  <b>Last request at:</b>
-  <%=h @user.last_request_at %>
+  <b>Пол:</b>
+  <%=h @user.sex.name %>
 </p>
 
 <p>
-  <b>Last login at:</b>
-  <%=h @user.last_login_at %>
-</p>
-
-<p>
-  <b>Current login at:</b>
-  <%=h @user.current_login_at %>
-</p>
-
-<p>
-  <b>Last login ip:</b>
-  <%=h @user.last_login_ip %>
-</p>
-
-<p>
-  <b>Current login ip:</b>
-  <%=h @user.current_login_ip %>
+  <b>Группа:</b>
+  <% if @user.group.blank? %>
+    <i>(не указана)</i>
+  <% else %>
+    <%= link_to_group @user.group %>
+  <% end %>
 </p>
