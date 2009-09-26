@@ -588,3 +588,13 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
 .lesson-wday-link {
   text-decoration: none;
 }
+.online {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #008000;
+}
+.offline{
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #800000;
+}

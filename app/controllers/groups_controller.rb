@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
-
+    @users = @group.users
     respond_to do |format|
       format.html # show.html.erb
     end

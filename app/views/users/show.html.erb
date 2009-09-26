@@ -4,9 +4,9 @@
 <% time_since_last_request = Time.now - @user.last_request_at %>
 <p align="center">
   <% if time_since_last_request < 5.minutes %>
-    <b>Online</b>
+    <span class="online">Online</span>
   <% else %>
-    <b>Offline</b>, <%=h gender(@user, "вышел", "вышла") %> <%= time_ago_in_words @user.last_request_at %> назад
+    <span class="offline">Offline</span>, <%=h gender(@user, "вышел", "вышла") %> <%= time_ago_in_words @user.last_request_at %> назад
   <% end %>
 </p>
 

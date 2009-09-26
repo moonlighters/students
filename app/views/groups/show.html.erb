@@ -9,7 +9,17 @@
   <b>Год начала обучения:</b>
   <%=h @group.start_year %>
 </p>
-
-
+<p>
+<% unless @users.empty? %>
+  <b>Список студентов:</b>
+  <ul>
+    <% @users.each do |user| %>
+      <li><%= link_to_user( user ) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <i>Студентов нет</i>
+<% end %>
+</p>
 <%= link_to 'Править', edit_group_path(@group) %> |
 <%= link_to 'Назад', groups_path %>
