@@ -18,6 +18,9 @@ class ForumTopic < ActiveRecord::Base
             :class_name => "ForumPost",
             :dependent => :destroy
 
+  has_many  :forum_topic_viewings,
+            :dependent => :destroy
+
   belongs_to  :last_post,
               :class_name => "ForumPost"
 

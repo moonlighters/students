@@ -9,7 +9,8 @@ class LessonSubject < ActiveRecord::Base
   end
 
   has_many  :subject_types,
-            :class_name => "LessonSubjectType"
+            :class_name => "LessonSubjectType",
+            :dependent => :destroy
 
   def types_in_group(group)
     subject_types_in_group( group ).map {|st| st.lesson_type}

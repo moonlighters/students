@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
 
   attr_protected :login
 
-  has_many  :forum_topics
-  has_many  :forum_posts
-  has_many  :forum_topic_viewings
+  has_many  :forum_topic_viewings,
+            :dependent => :destroy
+
   has_many  :last_forum_posts,
             :through => :forum_topic_viewings,
             :source => :post do

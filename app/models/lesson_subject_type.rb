@@ -11,6 +11,9 @@ class LessonSubjectType < ActiveRecord::Base
   belongs_to :group
   belongs_to :teacher
 
+  has_many  :lessons,
+            :dependent => :destroy
+
   def process_homepage_url
     unless self.homepage.nil? or self.homepage.empty?
       if self.homepage.starts_with? "http://"

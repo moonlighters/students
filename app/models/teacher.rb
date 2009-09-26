@@ -17,5 +17,6 @@ class Teacher < ActiveRecord::Base
                       #           \d+            - and some digits at the end, anyway
                       #         $/
   
-  has_many  :lesson_subject_types
+  has_many  :lesson_subject_types,
+            :dependent => :destroy
 end
