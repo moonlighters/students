@@ -39,7 +39,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        flash[:notice] = "Преподаватель успешно добавлен."
+        flash[:notice] = "Преподаватель успешно зарегистрирован."
         format.html { redirect_to teacher_path(@teacher) }
       else
         format.html { render :action => "new" }
