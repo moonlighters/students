@@ -73,6 +73,15 @@ describe ApplicationHelper do
     it "should raise an exception given both :time and :date options false" do
       lambda { format_time @time, :time => false, :date => false }.should raise_error ArgumentError
     end
+    it "should return string with formatted time in ansi format" do
+      format_time( @time, :format => :ansi ).should == "2009-03-14 21:09"
+    end
+  end
+  describe "#ansi_date" do
+    it "should return date in ansi format" do
+      time = Time.mktime 2009, 3, 14, 21, 9, 46 # The time of the first commit in our project :)
+      ansi_date( time ).should == "2009-03-14"
+    end
   end
 
   describe "#russian downcase" do

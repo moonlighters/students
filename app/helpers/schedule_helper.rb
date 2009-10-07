@@ -23,10 +23,15 @@ module ScheduleHelper
     group = options.delete(:group)
 
     content = prefix + content + suffix
-    url = is_it_week ? 
-            week_schedule_path( format_time( date, :format => :ansi, :time => false ) ) :
-            day_schedule_path( format_time( date, :format => :ansi, :time => false ) )
-    url += "?group_id=#{group.id}" if group
+    if group
+      url = is_it_week ? 
+              week_schedule_for_group_path(group, ansi_date( date ) ) :
+              day_schedule_for_group_path(group, ansi_date( date ) )
+    else
+      url = is_it_week ? 
+              week_schedule_path( ansi_date( date ) ) :
+              day_schedule_path( ansi_date( date ) )
+    end
     link_to h( content ), url, options
   end
 

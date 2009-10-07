@@ -32,6 +32,10 @@ module ApplicationHelper
     end
     Russian::strftime time, format
   end
+  # A wrapper:
+  def ansi_date(time)
+    format_time time, :time => false, :format => :ansi
+  end
 
   def day_of_week(wday)
     Russian::strftime Time.utc(1970, 1, 4) + wday.days, "%A"

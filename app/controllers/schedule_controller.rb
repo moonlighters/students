@@ -2,6 +2,7 @@ require 'parsedate'
 
 class ScheduleController < ApplicationController
   include ApplicationHelper # NOTE: just for format_date function... Maybe place this function it somwhere else?
+  before_filter :set_collections, :only => [:choose, :apply]
 
   # Exception classes
   class BadDateError < StandardError
@@ -94,26 +95,39 @@ class ScheduleController < ApplicationController
   end
 
   def choose
+    apply_params(true)
+  end
+
+  def apply
   end
   
   private
     def reditect_to_chooser(format)
-      date = @day.nil? ? "" : format_time(@day, :time => false, :format => :ansi)
+      date = @day.nil? ? "" : ansi_date( @day )
       format.html do
         redirect_to choose_schedule_path + "?group_id=#{params[:group_id]}&date=" + date
       end
     end
 
-    def apply_params
+    def apply_params(no_raise = false)
       unless params[:date]
         now = Time.now
         @day =  now.hour >= 18 ? now + 1.day : now
       else
         date_params = ParseDate.parsedate params[:date]
-        @day = Time.mktime( *date_params ) rescue raise( BadDateError )
+        begin
+          @day = Time.mktime *date_params
+        rescue
+          raise( BadDateError ) if not no_raise
+        end
       end
 
-      @group = params[:group_id] ?  Group.find( params[:group_id] ) : nil # TODO: current_user.group
-      raise NoGroupError if @group.nil?
+      current_user_group = current_user ? current_user.group : nil
+      @group = params[:group_id] ?  Group.find_by_id( params[:group_id] ) : current_user_group
+      raise NoGroupError if @group.nil? and not no_raise
+    end
+
+    def set_collections
+      @groups = Group.find :all, :order => "name"
     end
 end

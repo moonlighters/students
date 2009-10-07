@@ -16,12 +16,12 @@ describe ScheduleHelper do
       @t = Time.mktime 2009, 6, 1  # Monday
       @t_week = week_caption @t
 
-      @t_ansi = format_time @t, :format => :ansi, :time => false
+      @t_ansi = ansi_date @t
       @t_text = format_time @t, :time => false
     end
     it "should return link to today schedule given no params" do
       text_now = format_time( Time.now, :time => false )
-      ansi_now = format_time( Time.now, :format => :ansi, :time => false )
+      ansi_now = ansi_date Time.now
       link_to_schedule.should == "<a href=\"/schedule/day/#{ansi_now}\">#{text_now}</a>"
     end
     it "should return link to day schedule with given content" do
@@ -33,7 +33,7 @@ describe ScheduleHelper do
     end
     it "should return link to day schedule for given day and group" do
       link_to_schedule(@t, :day, :content => "content", :group => @g).should ==
-        "<a href=\"/schedule/day/#{@t_ansi}?group_id=#{@g.id}\">content</a>"
+        "<a href=\"/schedule/group/#{@g.id}/day/#{@t_ansi}\">content</a>"
     end
 
     it "should return link to week schedule with default caption" do
@@ -41,7 +41,7 @@ describe ScheduleHelper do
     end
     it "should return link to week schedule with given caption, suffix, prefix and group" do
       link_to_schedule(@t, :week, :content => "content", :prefix => "<", :suffix => ">", :group => @g).should ==
-        "<a href=\"/schedule/week/#{@t_ansi}?group_id=#{@g.id}\">&lt;content&gt;</a>"
+        "<a href=\"/schedule/group/#{@g.id}/week/#{@t_ansi}\">&lt;content&gt;</a>"
     end
   end
   

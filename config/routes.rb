@@ -68,14 +68,22 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :lessons, :path_prefix => "schedule", :except => [:index]
 
-  map.with_options :controller => "schedule", :path_prefix => "schedule" do |m|
+  map.with_options :controller => "schedule", :path_prefix => "schedule", :conditions => {:method => :get} do |m|
     m.schedule "", :action => "index"
+    # Day schedule routes
     m.day_schedule "day/:date", :action => "day"
+    m.day_schedule_for_group "group/:group_id/day/:date/", :action => "day"
     m.today_schedule "day", :action => "day"
+    m.today_schedule_for_group "group/:group_id/day", :action => "day"
+    # Week schedule routes
     m.week_schedule "week/:date", :action => "week"
+    m.week_schedule_for_group "group/:group_id/week/:date/", :action => "week"
     m.this_week_schedule "week", :action => "week"
+    m.this_week_schedule_for_group "group/:group_id/week/", :action => "week"
+    # Chooser routes
     m.choose_schedule "choose", :action => "choose"
   end
+  map.apply_schedule "schedule/apply", :controller => "schedule", :action => "apply", :conditions => {:method => :post}
 
   map.with_options :controller => "loads", :conditions => {:method => :get}, :path_prefix => "loads" do |m|
     m.load_tags "tags/:tags", :action => "index"
