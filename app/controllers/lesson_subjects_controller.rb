@@ -4,8 +4,11 @@ class LessonSubjectsController < ApplicationController
 
   # GET /schedule/subjects
   def index
-    @lesson_subjects = LessonSubject.find :all,
-                                          :order => "name, term"
+    @terms = LessonSubject.terms
+    @lesson_subjects = {}
+    @terms.each do |term|
+      @lesson_subjects[term] = LessonSubject.find_all_by_term term, :order => "name"
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -19,4 +19,8 @@ class LessonSubject < ActiveRecord::Base
   def subject_types_in_group(group)
     LessonSubjectType.find_all_by_lesson_subject_id_and_group_id self.id, group.id
   end
+
+  def LessonSubject.terms
+    LessonSubject.find( :all, :group => "term").map( &:term )
+  end
 end

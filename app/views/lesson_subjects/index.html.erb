@@ -1,7 +1,10 @@
 <% @page_title = "Предметы" %>
 <h1>Расписание > Предметы</h1>
 
-<%= render :partial => "table", :locals => {:lesson_subjects => @lesson_subjects} %>
+<% @terms.each do |term| %>
+  <h5><%= term %> семестр</h5>
+  <%= render :partial => "table", :locals => {:lesson_subjects => @lesson_subjects[term]} %>
+<% end %>
 
 <br />
 
