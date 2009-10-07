@@ -1,21 +1,18 @@
 <% form_for lesson do |f| %>
   <%= f.error_messages %>
-  <% types = LessonType.find( :all, :order => "name" ) %>
-  <% subjects_list = LessonSubject.find( :all, :order => "name" ).map{ |s| ["#{s.name}, #{s.term} сем.", s.id] } %>
-  <% groups = Group.find( :all, :order => "name" ) %>
   <% wdays = (0..6).map{ |i| [day_of_week(i), i]} %>
 
   <p>
     <%= f.label :group_id %><br />
-    <%= f.collection_select :group_id, groups, :id, :name %>
+    <%= f.collection_select :group_id, @groups, :id, :name %>
   </p>
   <p>
     <%= f.label :lesson_subject_id %><br />
-    <%= f.select :lesson_subject_id, subjects_list %>
+    <%= f.select :lesson_subject_id, @subjects_list %>
   </p>
   <p>
     <%= f.label :lesson_type_id %><br />
-    <%= f.collection_select :lesson_type_id, types, :id, :name %>
+    <%= f.collection_select :lesson_type_id, @types, :id, :name %>
   </p>
   <p>
     <%= f.label :day_of_week %><br />

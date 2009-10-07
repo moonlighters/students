@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
 
   before_filter :find_lesson, :only => [:show, :edit, :update, :destroy]
+  before_filter :set_collections_for_form, :only => [:new, :create, :edit, :update]
   
   # GET /schedule/lessons/1
   def show
@@ -12,14 +13,14 @@ class LessonsController < ApplicationController
 
   # GET /schedule/lessons/new
   def new
-    @lesson = Lesson.new
-    @lesson.day_of_week = params[:day_of_week] || 1
-    @lesson.group_id = params[:group_id]
+    @lesson = Lesson.new  :day_of_week => params[:day_of_week] || 1,
+                          :group_id => params[:group_id],
+                          :duration => Lesson::DURATION,
+                          :lesson_subject_id => LessonSubject.first.id,
+                          :lesson_type_id => LessonType.first.id,
+                          :everyweek => true
+
     @lesson.set_start_time *Lesson::BEGIN_TIME
-    @lesson.duration = Lesson::DURATION
-    @lesson.lesson_subject_id = LessonSubject.first.id
-    @lesson.lesson_type_id = LessonType.first.id
-    @lesson.everyweek = true
 
     respond_to do |format|
       format.html # new.html.erb
@@ -90,5 +91,11 @@ class LessonsController < ApplicationController
     def set_aux_fields
       @lesson.lesson_subject_id = params[:lesson][:lesson_subject_id].to_i
       @lesson.lesson_type_id = params[:lesson][:lesson_type_id].to_i
+    end
+
+    def set_collections_for_form
+      @types = LessonType.find( :all, :order => "name" )
+      @subjects_list = LessonSubject.find( :all, :order => "name" ).map{ |s| ["#{s.name}, #{s.term} сем.", s.id] }
+      @groups = Group.find( :all, :order => "name" )
     end
 end
