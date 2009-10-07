@@ -21,7 +21,7 @@ module ApplicationHelper
     month_format = options[:month] == :digits ? ".%m." : " %B "
     time_format = options[:time] ? "%H:%M" : ""
     if options[:date]
-      date_format = options[:format] == :ansi ? "%Y-%m-%d" : "%d#{month_format}%Y"
+      date_format = options[:format] == :ansi ? "%Y-%m-%d" : "%e#{month_format}%Y"
     else
       date_format = ""
     end

@@ -6,7 +6,7 @@ describe ScheduleHelper do
   describe "#week_caption" do
     it "should return '[date1] - [date2]'-like week caption" do
       time = Time.mktime 2009, 6, 1  # Monday
-      week_caption(time).should == "01.06.2009 - 07.06.2009"
+      week_caption(time).should == " 1.06.2009 -  7.06.2009"
     end
   end
 
