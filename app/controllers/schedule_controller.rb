@@ -2,7 +2,7 @@ require 'parsedate'
 
 class ScheduleController < ApplicationController
   include ApplicationHelper # NOTE: just for format_date function... Maybe place this function it somwhere else?
-  before_filter :set_collections, :only => [:choose, :apply]
+  before_filter :set_collections, :only => :choose
 
   # Exception classes
   class BadDateError < StandardError
@@ -12,7 +12,17 @@ class ScheduleController < ApplicationController
   class NoGroupError < StandardError
   end
 
+  # GET /schedule/
   def index
+    if current_user_group
+      respond_to do |format|
+        format.html { redirect_to today_schedule_path }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to choose_schedule_path }
+      end
+    end
   end
 
   # GET /schedule/day/2009-08-20
@@ -29,7 +39,7 @@ class ScheduleController < ApplicationController
   rescue BadDateError
     respond_to do |format|
       flash[:error] = "Неверная дата: \"#{params[:date]}\""
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   rescue EarlierThenFirstTermError
     respond_to do |format|
@@ -39,12 +49,12 @@ class ScheduleController < ApplicationController
                       @group.name +
                       " - " +
                       "1.09.#{@group.start_year}"
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   rescue NoGroupError
     respond_to do |format|
       flash[:error] = "Группа не была указана"
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   end
 
@@ -73,7 +83,7 @@ class ScheduleController < ApplicationController
   rescue BadDateError
     respond_to do |format|
       flash[:error] = "Неверная дата: \"#{params[:date]}\""
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   rescue EarlierThenFirstTermError
     respond_to do |format|
@@ -85,24 +95,38 @@ class ScheduleController < ApplicationController
                       @group.name +
                       " - " +
                       "1.09.#{@group.start_year}"
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   rescue NoGroupError
     respond_to do |format|
       flash[:error] = "Группа не была указана"
-      reditect_to_chooser format
+      redirect_to_chooser format
     end
   end
 
   def choose
     apply_params(true)
+    respond_to do |format|
+      format.html # choose.html.erb
+    end
   end
 
   def apply
+    raise "Wrong date param" unless params[:date].is_a?( Hash )
+
+    date =  params[:date][:year] + "-" + params[:date][:month] + "-" + params[:date][:day]
+
+    path = params[:type] == "week" ?
+            week_schedule_for_group_path( params[:group_id], date ) :
+            day_schedule_for_group_path( params[:group_id], date )
+
+    respond_to do |format|
+      format.html{ redirect_to path }
+    end
   end
   
   private
-    def reditect_to_chooser(format)
+    def redirect_to_chooser(format)
       date = @day.nil? ? "" : ansi_date( @day )
       format.html do
         redirect_to choose_schedule_path + "?group_id=#{params[:group_id]}&date=" + date
@@ -122,7 +146,6 @@ class ScheduleController < ApplicationController
         end
       end
 
-      current_user_group = current_user ? current_user.group : nil
       @group = params[:group_id] ?  Group.find_by_id( params[:group_id] ) : current_user_group
       raise NoGroupError if @group.nil? and not no_raise
     end

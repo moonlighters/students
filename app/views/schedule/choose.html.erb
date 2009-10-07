@@ -1,2 +1,19 @@
-<h1>Schedule#choose</h1>
-<p>Find me in app/views/schedule/choose.html.erb</p>
+<% @page_title = "Выбрать расписание" %>
+<h1>Выберите расписание</h1>
+
+<% selected_group_id = @group ? @group.id : nil %>
+<% form_tag :action => :apply do %>
+  <p>
+    Группа<br/>
+    <%= select_tag "group_id", options_from_collection_for_select(@groups, "id", "name", selected_group_id ) %>
+  </p>
+  <p>
+    Дата<br/>
+    <%= select_date @day, :start_year => Group::MIN_START_YEAR, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= radio_button_tag "type", "day", true %> На день<br/>
+    <%= radio_button_tag "type", "week" %> На неделю
+  </p>
+  <%= submit_tag "Показать" %>
+<% end %>

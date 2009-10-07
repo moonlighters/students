@@ -1,7 +1,12 @@
 <% @page_title = "Расписание на неделю" %>
 
-<h1>Расписание на неделю <br/><%=h week_caption @week_start %></h1>
-
+<h1>Расписание</h1>
+<h2>Группа <%= link_to_group @group %></h2>
+<h3>На неделю <%=h week_caption @week_start %></h1>
+<p>
+  <%= link_to "Другое расписание", choose_schedule_path %> |
+  <%= link_to_schedule @day, :day, :group => @group, :content => "На день" %>
+</p>
 <% prev_week = @week_start - 7.days %>
 <% next_week = @week_start + 7.days %>
 <%= link_to_schedule next_week, :week, :group => @group, :suffix => " >>", :style => "float:right;" %>
