@@ -65,5 +65,8 @@ describe ScheduleHelper do
         "<div class=\"lesson-div\" style=\"height: #{@hour_height -2}px; margin-top: #{@hour_height}px;\"><table><td>0</td></table></div>"+
         "<div class=\"lesson-div\" style=\"height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px;\"><table><td>1</td></table></div>"
     end
+    it "should not fail given nil as a collection" do
+      lessons_column( nil ).should == ""
+    end
   end
 end

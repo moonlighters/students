@@ -13,15 +13,18 @@ module ApplicationHelper
   end
 
   def format_time(time, options={})
-    # set default values for :date and :time options
-    [:date, :time].each {|param| options[param] = true unless options.include? param }
+    # set default values for :date, :time and :year options
+    [:date, :time, :year].each {|param| options[param] = true unless options.include? param }
+
     # check if either time or date will be shown
     raise ArgumentError, "Invalid format_time options" if not options[:time] and not options[:date]
 
-    month_format = options[:month] == :digits ? ".%m." : " %B "
+    delimiter = options[:month] == :digits ? "." : " "
+    month_format = delimiter + ( options[:month] == :digits ? "%m" : "%B")
     time_format = options[:time] ? "%H:%M" : ""
     if options[:date]
-      date_format = options[:format] == :ansi ? "%Y-%m-%d" : "%e#{month_format}%Y"
+      year_format = options[:year] ? delimiter + "%Y" : ""
+      date_format = options[:format] == :ansi ? "%Y-%m-%d" : "%e#{month_format}" + year_format
     else
       date_format = ""
     end

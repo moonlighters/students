@@ -7,7 +7,7 @@ class Lesson < ActiveRecord::Base
   END_TIME = [22, 0]
 
   START_DATES = [ [2, 9], [9, 1] ] # 9'th February for even terms, 1'st September for odd ones
-                                   # (for odd_week? function)
+                                   # (for odd_week? and term functions)
 
   BEGIN_TIME_OBJ = Time.utc(* DEFAULT_DATE+BEGIN_TIME)
   END_TIME_OBJ = Time.utc(* DEFAULT_DATE+END_TIME)
@@ -51,7 +51,7 @@ class Lesson < ActiveRecord::Base
 
   def validate
     odd_week = self.everyweek? ? :both : self.odd_weeks?
-    that_day_lessons = Lesson.lessons_for self.group, self.term, self.day_of_week, odd_week
+    that_day_lessons = Lesson.lessons_for( self.group, self.term, self.day_of_week, odd_week ) || []
 
     crossing_lesson = nil
     that_day_lessons.each do |lesson|
@@ -107,6 +107,11 @@ class Lesson < ActiveRecord::Base
   #         Class methods
   # -------------------------------
   def Lesson.lessons_for(group, term, day_of_week, odd_week = :both)
+    # Check if there is any schedule for given group and term
+    return [] if term == NO_TERM_VACATION or term == NO_TERM_EXAMINATIONS
+    return nil if find_by_group_id_and_term( group, term ).nil?
+
+    # Otherwise - just find lessons for :both odd and even weeks, or for requested week only
     if odd_week == :both
       find_all_by_group_id_and_term_and_day_of_week( group, term, day_of_week, :order => "start_time" )
     else
@@ -123,7 +128,7 @@ class Lesson < ActiveRecord::Base
   def Lesson.term(date, start_year)
     raise ArgumentError, "given date is earlier then studying start date" if date.year < start_year or
                                                                             (date.year == start_year and date.month <= 8)
-    if date.month == 1
+    if date.month == 1 or (date.month == 2 and date.day < START_DATES.first[1])
       NO_TERM_EXAMINATIONS            # January - examinations
     elsif date.month <= 5
       (date.year - start_year)*2      # February to May - 2, 4, 6, ...

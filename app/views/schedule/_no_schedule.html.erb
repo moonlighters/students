@@ -1,0 +1,15 @@
+<h3>Расписание не найдено</h3>
+<p>
+  Не найдено расписание для группы <%= link_to_group @group %> на
+  <% if @no_day_schedule %>
+    <%= @term %> семестр.
+    <%# link_to "Добавить!" %>
+  <% else # @no_week_schedule %>
+    <% if @terms[0] == @terms[6] %>
+      <%= @terms[0] %> семестр.
+    <% else %>
+      <%= @terms[0] %> - <%= @terms[6] %> семестры.
+    <% end %>
+    <%# link_to "Добавить!" %>
+  <% end %>
+</p>

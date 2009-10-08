@@ -1,6 +1,14 @@
 <% @page_title = "Выбрать расписание" %>
 <h1>Выберите расписание</h1>
 
+<% if @my_group %>
+  <ul>
+    <li><%= link_to_schedule(nil, :day) %></li>
+    <li><%= link_to_schedule(nil, :week) %></li>
+  </ul>
+  <h3>Другое</h3>
+<% end %>
+
 <% selected_group_id = @group ? @group.id : nil %>
 <% form_tag :action => :apply do %>
   <p>

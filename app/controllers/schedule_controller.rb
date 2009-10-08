@@ -33,6 +33,7 @@ class ScheduleController < ApplicationController
     
     @lessons = Lesson.lessons_for @group, @term, @day.wday, Lesson.odd_week?( @day )
     
+    @no_day_schedule = @lessons.nil?
     respond_to do |format|
       format.html # day.html.erb
     end
@@ -47,8 +48,8 @@ class ScheduleController < ApplicationController
                       format_time(@day, :time => false, :month => :digits) +
                       " раньше начала занятий группы " +
                       @group.name +
-                      " - " +
-                      "1.09.#{@group.start_year}"
+                      " (" +
+                      "1.09.#{@group.start_year})"
       redirect_to_chooser format
     end
   rescue NoGroupError
@@ -66,17 +67,19 @@ class ScheduleController < ApplicationController
     @week_end = @week_start + 6.days
 
     @lessons_batches = []
+    @terms = []
     begin
       6.downto 0 do |i|
         day = @week_start + i.days
-        term = Lesson.term( day, @group.start_year ) rescue raise( EarlierThenFirstTermError )
-        @lessons_batches[i] = Lesson.lessons_for @group, term, day.wday, Lesson.odd_week?( day )
+        @terms[i] = Lesson.term( day, @group.start_year ) rescue raise( EarlierThenFirstTermError )
+        @lessons_batches[i] = Lesson.lessons_for @group, @terms[i], day.wday, Lesson.odd_week?( day )
       end
     rescue EarlierThenFirstTermError
-      # if there are no lessons in array
-      raise EarlierThenFirstTermError if @lessons_batches.count {|l| not l.nil? } == 0
+      # if there are no lessons in array (therefore, an error occured at last week day)
+      raise EarlierThenFirstTermError if only_nils? @lessons_batches
     end
     
+    @no_week_schedule = only_nils? @lessons_batches
     respond_to do |format|
       format.html # week.html.erb
     end
@@ -105,7 +108,8 @@ class ScheduleController < ApplicationController
   end
 
   def choose
-    apply_params(true)
+    apply_params (true)
+    @my_group = current_user_group
     respond_to do |format|
       format.html # choose.html.erb
     end
@@ -152,5 +156,9 @@ class ScheduleController < ApplicationController
 
     def set_collections
       @groups = Group.find :all, :order => "name"
+    end
+
+    def only_nils?(array)
+      array.count {|item| not item.nil? } == 0
     end
 end

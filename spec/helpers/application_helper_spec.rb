@@ -61,8 +61,14 @@ describe ApplicationHelper do
     it "should return string with formatted time" do
       format_time( @time ).should == "21:09, 14 марта 2009"
     end
+    it "should return string with formatted time without year" do
+      format_time( @time, :year => false ).should == "21:09, 14 марта"
+    end
     it "should return string with formatted time with month as digits" do
       format_time( @time, :month => :digits ).should == "21:09, 14.03.2009"
+    end
+    it "should return string with formatted time with month as digits and without year" do
+      format_time( @time, :month => :digits, :year => false ).should == "21:09, 14.03"
     end
     it "should return string with formatted time without time" do
       format_time( @time, :time => false ).should == "14 марта 2009"

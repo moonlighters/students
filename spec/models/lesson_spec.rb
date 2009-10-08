@@ -123,6 +123,8 @@ describe Lesson do
     before do
       @g1 = Factory :group
       @g2 = Factory :group
+      @g_fake = Factory :group # This one has no schedule
+
       @l1 = Factory :lesson, :group => @g1, :term => 1, :day_of_week => 5
       @l2 = Factory :lesson, :group => @g2, :term => 2, :day_of_week => 2
 
@@ -141,14 +143,21 @@ describe Lesson do
     it "should return lessons for given group, term and day_of_week and even weeks" do
       Lesson.lessons_for( @g1, 2, 3, false ).should == [@l4]
     end
+    it "should return an empty array, if there's no lessons for given group, term and day_of_week and even weeks" do
+      Lesson.lessons_for( @g1, 2, 6, false ).should == []
+    end
+    it "should return nil, if there's no schedule for given group and term at all" do
+      Lesson.lessons_for( @g_fake, 2, 3, false ).should == nil
+    end
   end
   describe ".term" do
     it "should return value for examinations if given date is in January or June" do
       Lesson.term( Time.mktime(2008, 1, 1), 2007 ).should == Lesson::NO_TERM_EXAMINATIONS
+      Lesson.term( Time.mktime(2008, 2, 1), 2007 ).should == Lesson::NO_TERM_EXAMINATIONS
       Lesson.term( Time.mktime(2009, 6, 9), 2007 ).should == Lesson::NO_TERM_EXAMINATIONS
     end
     it "should return an even Lesson.term if given date is from February to May" do
-      Lesson.term( Time.mktime(2008, 2, 1), 2007 ).should == 2
+      Lesson.term( Time.mktime(2008, 2, 11), 2007 ).should == 2
       Lesson.term( Time.mktime(2010, 5, 9), 2007 ).should == 6
     end
     it "should return value for vacation if given date is from July to August" do

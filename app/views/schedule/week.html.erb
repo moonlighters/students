@@ -2,7 +2,7 @@
 
 <h1>Расписание</h1>
 <h2>Группа <%= link_to_group @group %></h2>
-<h3>На неделю <%=h week_caption @week_start %></h1>
+<h3>На неделю <%=h week_caption @week_start, :long %></h1>
 <p>
   <%= link_to "Другое расписание", choose_schedule_path %> |
   <%= link_to_schedule @day, :day, :group => @group, :content => "На день" %>
@@ -13,7 +13,11 @@
 <%= link_to_schedule prev_week, :week, :group => @group, :prefix => "<< " %>
 <br/>
 
-<%= render :partial => "week_table", :locals => {:lessons_batches => @lessons_batches} %>
+<% if @no_week_schedule %>
+  <%= render :partial => "no_schedule" %>
+<% else %>
+  <%= render :partial => "week_table", :locals => {:lessons_batches => @lessons_batches} %>
+<% end %>
 
 <%= link_to "Добавить", new_lesson_path + "&group_id=#{@group.id}" %> |
 <%= link_to 'Назад', schedule_path %>
