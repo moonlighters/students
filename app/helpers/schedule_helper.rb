@@ -57,7 +57,7 @@ module ScheduleHelper
       margin_top = ( i == 0 ?  ( item.start_time - Lesson::BEGIN_TIME_OBJ ) :
                                   (item.start_time - collection[i-1].end_time) ) / Lesson::SECONDS_PER_PIXEL
       td_class = unless item.type.nil?
-        options[:apply_style] ? Russian.translit( item.type.name ) : ""
+        options[:apply_style] ? Russian.translit( item.type.name ) : nil
       end
       div_style = "height: #{height - 2}px; margin-top: #{margin_top}px;"
       html += content_tag( :div, :class => "lesson-div", :style => div_style ) do

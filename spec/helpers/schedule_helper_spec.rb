@@ -4,9 +4,14 @@ describe ScheduleHelper do
   include ScheduleHelper
 
   describe "#week_caption" do
-    it "should return '[date1] - [date2]'-like week caption" do
-      time = Time.mktime 2009, 6, 1  # Monday
-      week_caption(time).should == " 1.06.2009 -  7.06.2009"
+    before do
+      @time = Time.mktime 2009, 6, 1  # Monday
+    end
+    it "should return '[date1] - [date2]'-like week caption with short year format" do
+      week_caption(@time).should == " 1.06 -  7.06"
+    end
+    it "should return '[date1] - [date2]'-like week caption with long year format" do
+      week_caption(@time, :long).should == " 1.06.2009 -  7.06.2009"
     end
   end
 
@@ -17,12 +22,10 @@ describe ScheduleHelper do
       @t_week = week_caption @t
 
       @t_ansi = ansi_date @t
-      @t_text = format_time @t, :time => false
+      @t_text = format_time @t, :time => false, :year => false
     end
     it "should return link to today schedule given no params" do
-      text_now = format_time( Time.now, :time => false )
-      ansi_now = ansi_date Time.now
-      link_to_schedule.should == "<a href=\"/schedule/day/#{ansi_now}\">#{text_now}</a>"
+      link_to_schedule.should == "<a href=\"/schedule/day\">На ближайший день</a>"
     end
     it "should return link to day schedule with given content" do
       link_to_schedule(@t, :day, :content => "content").should == "<a href=\"/schedule/day/#{@t_ansi}\">content</a>"
