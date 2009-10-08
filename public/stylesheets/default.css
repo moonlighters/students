@@ -526,17 +526,23 @@ img.right {
   width: 100%;
   border: 3px double #999999;
 }
-.lesson-div {
-  border-bottom: 1px solid #999999;
-  border-top: 1px solid #999999; width: 100%
+
+/* vertical alignment */
+.outer{
+  height: 100%;
+  width: 100%;
+  display: table;
 }
-.lesson-div table { 
-  width:100%;
-  height:100%;
-}
-.lesson-div td {
+
+.container {
+  display: table-cell;
   vertical-align: middle;
   text-align: center;
+}
+
+.lesson-div {
+  border-bottom: 1px solid #999999;
+  border-top: 1px solid #999999;
 }
 .lessons-intervals {
   border-right: 1px solid #999999;
@@ -544,7 +550,7 @@ img.right {
 }
 .lessons {
   border-left: 1px solid #999999;
-  vertical-align: top
+  vertical-align: top;
 }
 .no-lessons {
   text-align: center;
@@ -552,33 +558,42 @@ img.right {
 }
 
 a.lesson-week-cell, a:hover.lesson-week-cell {
-  color: #999999;
+  color: #444444;
   text-decoration: none;
 }
 
 /* lesson types: */
+.interval {
+  background-color: #fffecc;
+  color: #444444;
+}
 .lektsiya {
+  color: #444444;
   font-weight: bold;
   background-color: #ccffce;
 }
 .seminar {
+  color: #444444;
   font-weight: normal;
   background-color: #ccecff;
 }
 .sdacha {
+  color: #444444;
   font-weight: normal;
   font-style: italic;
   background-color: #ffeccc;
 }
 .praktika {
+  color: #444444;
   font-weight: normal;
   text-decoration: underline;
   background-color: #ecdbff;
 }
 .konsultatsiya {
+  color: #444444;
   font-weight: bold;
   font-style: italic;
-  background-color: #fffecc;
+  background-color: #ffd7de;
 }
 .room {
   color: #0000dd;
@@ -592,6 +607,7 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
   text-align: center;
   vertical-align: middle;
   border: 1px solid #999999;
+  background-color: #fffebc;
 }
 .lesson-wday-link {
   text-decoration: none;

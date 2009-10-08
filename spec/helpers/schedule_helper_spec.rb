@@ -60,13 +60,13 @@ describe ScheduleHelper do
     end
     it "should return a formatted list of lesson intervals" do
       lessons_column( Lesson::INTERVALS[1..2] ).should == 
-        "<div class=\"lesson-div\" style=\"height: #{@int_height -2}px; margin-top: #{@int_height + @break_height}px;\"><table><td></td></table></div>"+
-        "<div class=\"lesson-div\" style=\"height: #{@int_height -2}px; margin-top: #{@break_height}px;\"><table><td></td></table></div>"
+        "<div class=\"outer\"><div class=\"lesson-div container\" style=\"height: #{@int_height -2}px; margin-top: #{@int_height + @break_height}px;\"></div></div>"+
+        "<div class=\"outer\"><div class=\"lesson-div container\" style=\"height: #{@int_height -2}px; margin-top: #{@break_height}px;\"></div></div>"
     end
     it "should return a formatted list of lessons" do
       ( lessons_column( @lessons ) {|l, i| i.to_s } ).should == 
-        "<div class=\"lesson-div\" style=\"height: #{@hour_height -2}px; margin-top: #{@hour_height}px;\"><table><td>0</td></table></div>"+
-        "<div class=\"lesson-div\" style=\"height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px;\"><table><td>1</td></table></div>"
+        "<div class=\"outer\"><div class=\"lesson-div container\" style=\"height: #{@hour_height -2}px; margin-top: #{@hour_height}px;\">0</div></div>"+
+        "<div class=\"outer\"><div class=\"lesson-div container\" style=\"height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px;\">1</div></div>"
     end
     it "should not fail given nil as a collection" do
       lessons_column( nil ).should == ""

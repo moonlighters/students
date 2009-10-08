@@ -18,7 +18,7 @@
         </tr>
         <tr>
           <td class="lessons-intervals">
-            <% lessons_column Lesson::INTERVALS do |interval, index| %>
+            <% lessons_column Lesson::INTERVALS, :class => "interval" do |interval, index| %>
               <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
             <% end %>
           </td>
