@@ -551,32 +551,40 @@ img.right {
   font-size: 2em;
 }
 
-/* lesson types: */
 a.lesson-week-cell, a:hover.lesson-week-cell {
   color: #999999;
   text-decoration: none;
 }
 
+/* lesson types: */
 .lektsiya {
   font-weight: bold;
+  background-color: #ccffce;
 }
 .seminar {
   font-weight: normal;
+  background-color: #ccecff;
 }
 .sdacha {
   font-weight: normal;
   font-style: italic;
+  background-color: #ffeccc;
 }
 .praktika {
   font-weight: normal;
   text-decoration: underline;
+  background-color: #ecdbff;
 }
 .konsultatsiya {
-  font-weight: normal;
-  text-decoration: underline;
+  font-weight: bold;
+  font-style: italic;
+  background-color: #fffecc;
 }
 .room {
   color: #0000dd;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
 }
 .lesson-wday-cell {
   height: 1.5em;

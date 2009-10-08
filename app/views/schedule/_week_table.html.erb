@@ -25,7 +25,7 @@
 
           <% 0.upto 5 do |i|  %>
             <td class="lessons" width="100px">
-              <% lessons_column @lessons_batches[i] do |lesson, index| %>
+              <% lessons_column @lessons_batches[i], :apply_style => true do |lesson, index| %>
                 <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
               <% end %>
             </td>

@@ -48,7 +48,7 @@ module ScheduleHelper
     link_to h( content ), url, options
   end
 
-  def lessons_column(collection)
+  def lessons_column(collection, options = {})
   # draws rectangles for lessons, putting the HTML returned by block into them
     return "" if collection.blank?
     html = ""
@@ -56,10 +56,13 @@ module ScheduleHelper
       height = (item.end_time - item.start_time)/Lesson::SECONDS_PER_PIXEL
       margin_top = ( i == 0 ?  ( item.start_time - Lesson::BEGIN_TIME_OBJ ) :
                                   (item.start_time - collection[i-1].end_time) ) / Lesson::SECONDS_PER_PIXEL
+      td_class = unless item.type.nil?
+        options[:apply_style] ? Russian.translit( item.type.name ) : ""
+      end
       div_style = "height: #{height - 2}px; margin-top: #{margin_top}px;"
       html += content_tag( :div, :class => "lesson-div", :style => div_style ) do
         content_tag :table do
-          content_tag :td do
+          content_tag :td, :class => td_class do
             block_given? ? yield( item, i ) : ""
           end
         end

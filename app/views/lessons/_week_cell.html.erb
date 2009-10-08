@@ -1,5 +1,5 @@
 <% link_to lesson_path( lesson), :class => "lesson-week-cell" do %>
-  <span class="<%= Russian.translit lesson.type.name %>"><%= lesson.subject.short_name %></span>
+  <%= lesson.subject.short_name %>
   <br/>
   <span class="room"><%=h lesson.room %>
 <% end %>
