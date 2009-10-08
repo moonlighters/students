@@ -65,7 +65,7 @@ class ScheduleController < ApplicationController
     @week_start = @day - ( (@day.wday - 1) % 7 ).days
     @week_end = @week_start + 6.days
 
-    @lessons_batches = [nil]*7
+    @lessons_batches = []
     begin
       6.downto 0 do |i|
         day = @week_start + i.days

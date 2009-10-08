@@ -18,16 +18,16 @@
         </tr>
         <tr>
           <td class="lessons-intervals">
-            <%= lessons_column Lesson::INTERVALS do |interval, index|
-                  render :partial => "lessons/interval", :locals => {:interval => interval, :index => index}
-                end %>
+            <% lessons_column Lesson::INTERVALS do |interval, index| %>
+              <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
+            <% end %>
           </td>
 
           <% 0.upto 5 do |i|  %>
             <td class="lessons" width="100px">
-              <%= lessons_column @lessons_batches[i] do |lesson, index|
-                    render :partial => "lessons/week_cell", :locals => {:lesson => lesson}
-                  end %>
+              <% lessons_column @lessons_batches[i] do |lesson, index| %>
+                <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
+              <% end %>
             </td>
           <% end %>
         </tr>

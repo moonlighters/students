@@ -3,15 +3,15 @@
     <col width="120px"><col>
     <tr>
       <td class="lessons-intervals">
-        <%= lessons_column Lesson::INTERVALS do |interval, index|
-              render :partial => "lessons/interval", :locals => {:interval => interval, :index => index}
-            end %>
+        <% lessons_column Lesson::INTERVALS do |interval, index| %>
+          <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
+        <% end %>
       </td>
 
       <td class="lessons">
-        <%= lessons_column @lessons do |lesson, index|
-              render :partial => "lessons/day_cell", :locals => {:lesson => lesson}
-            end %>
+        <% lessons_column @lessons do |lesson, index| %>
+          <%= render :partial => "lessons/day_cell", :locals => {:lesson => lesson} %>
+        <% end %>
       </td>
     </tr>
   </tbody>

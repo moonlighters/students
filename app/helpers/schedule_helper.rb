@@ -51,6 +51,6 @@ module ScheduleHelper
         end
       end
     end
-    html
+    concat html
   end
 end
