@@ -13,12 +13,17 @@
 </p>
 <% end %>
 
-<% unless @teacher.phone.nil? %>
+<% unless @teacher.email.nil? %>
 <p>
   <b>Email:</b>
   <%=h @teacher.email %>
 </p>
 <% end %>
+
+<h3>Ведет следующие занятия:</h3>
+<%= render  :partial => "lesson_subject_types/table",
+            :locals => {:lesson_subject_types => @lesson_subject_types,
+                        :format => [:lesson_type, :subject, :group] } %>
 
 <%= link_to 'Править', edit_teacher_path(@teacher) %> |
 <%= link_to 'Назад', teachers_path %>

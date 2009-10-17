@@ -8,6 +8,9 @@ describe ForumTopicsHelper do
       t = mock_model ForumTopic, :id => 3, :title => "Coolest"
       link_to_topic( t, :class => "klass" ).should == %{<a href="/forums/topics/3" class="klass">Coolest</a>}
     end
+    it "should return nil given nil" do
+      link_to_topic( nil ).should == nil
+    end
   end
   
 end

@@ -1,3 +1,5 @@
   <ul class="subject-types-list">
-    <%= render lesson_subject_types %>
+    <%= render  :partial => "lesson_subject_types/lesson_subject_type",
+                :collection => lesson_subject_types,
+                :locals => {:format => format } %>
   </ul>

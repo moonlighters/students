@@ -1,6 +1,7 @@
 module ForumTopicsHelper
 
   def link_to_topic(topic, options = {})
+    return nil if topic.nil?
     link_to h( topic.title ), forum_topic_path( topic ), options
   end
 

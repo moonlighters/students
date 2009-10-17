@@ -4,8 +4,6 @@
 <h2>Расписание > Просмотр типа занятия</h2>
 
 <% subject = @lesson_subject_type.subject %>
-<% group   = @lesson_subject_type.group %>
-<% teacher = @lesson_subject_type.teacher %>
 <% homepage = @lesson_subject_type.homepage %>
 
 <p>
@@ -14,17 +12,17 @@
 </p>
 <p>
   <b>Предмет:</b>
-  <%=link_to h( subject.name ), lesson_subject_path( subject ) %>
+  <%= link_to h( subject.name ), lesson_subject_path( subject ) %>
 </p>
 
 <p>
   <b>Группа:</b>
-  <%=link_to h( group.name ), group_path( group ) %>
+  <%= link_to_group @lesson_subject_type.group %>
 </p>
 
 <p>
   <b>Преподаватель:</b>
-  <%=link_to h( teacher.name+" "+teacher.surname ), teacher_path( teacher ) %>
+  <%= link_to_teacher @lesson_subject_type.teacher %>
 </p>
 <% unless homepage.nil? or homepage.empty? %>
   <p>

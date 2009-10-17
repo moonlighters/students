@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
 
+  #TODO: Acl9: only logged in can see "show"
   before_filter :find_teacher, :only => [:show, :edit, :update, :destroy]
   
   # GET /teachers
@@ -14,7 +15,9 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1
   def show
-
+    @lesson_subject_types = LessonSubjectType.find  :all,
+                                                    :order => "group_id, lesson_type_id",
+                                                    :conditions => ["teacher_id = ?", @teacher]
     respond_to do |format|
       format.html # show.html.erb
     end

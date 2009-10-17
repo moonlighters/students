@@ -1,5 +1,3 @@
     <li>
-      <%= link_to h( lesson_subject_type.lesson_type.name), lesson_subject_type_path(lesson_subject_type) %>
-      в
-      <%= link_to "группе "+h( lesson_subject_type.group.name ), group_path( lesson_subject_type.group ) %>
+      <%= link_to_subject_type( lesson_subject_type, false, *format ) %>
     </li>
