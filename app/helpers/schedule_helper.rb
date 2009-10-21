@@ -54,8 +54,12 @@ module ScheduleHelper
     html = ""
     collection.each_with_index do |item, i|
       height = (item.end_time - item.start_time)/Lesson::SECONDS_PER_PIXEL
-      margin_top = ( i == 0 ?  ( item.start_time - Lesson::BEGIN_TIME_OBJ ) :
-                                  (item.start_time - collection[i-1].end_time) ) / Lesson::SECONDS_PER_PIXEL
+      if i == 0
+        margin_top = ( item.start_time - Lesson::BEGIN_TIME_OBJ ) / Lesson::SECONDS_PER_PIXEL
+      else
+        margin_top = ( item.start_time - collection[i-1].end_time ) / Lesson::SECONDS_PER_PIXEL
+      end
+      
       type_class = unless item.type.nil?
         options[:apply_style] ? Russian.translit( item.type.name ) : nil
       end
@@ -66,8 +70,9 @@ module ScheduleHelper
 
       div_style = "height: #{height - 2}px; margin-top: #{margin_top}px;"
       div_class = "#{type_class}#{inherent_class}lesson-div container"
-      html += content_tag(:div, :class => "outer") do
-        content_tag( :div, :class => div_class, :style => div_style ) do
+      #FIXME: compatibility with IE
+      html += content_tag(:div, :class => "outer", :style => div_style) do
+        content_tag( :div, :class => div_class ) do
           block_given? ? yield( item, i ) : ""
         end
       end
