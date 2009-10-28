@@ -1,15 +1,15 @@
-<table class="lessons-table" cellpadding="0">
+<table class="lessons-table">
   <tbody>
     <col width="120px"><col>
     <tr>
       <td class="lessons-intervals">
-        <% lessons_column Lesson::INTERVALS do |interval, index| %>
+        <% lessons_column Lesson::INTERVALS, :class => "lesson-div" do |interval, index| %>
           <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
         <% end %>
       </td>
 
       <td class="lessons">
-        <% lessons_column @lessons do |lesson, index| %>
+        <% lessons_column @lessons, :class => "lesson-div" do |lesson, index| %>
           <%= render :partial => "lessons/day_cell", :locals => {:lesson => lesson} %>
         <% end %>
       </td>

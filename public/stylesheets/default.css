@@ -241,7 +241,7 @@ img.right {
 /* Content */
 
 #content {
-	width: 700px;
+	width: 980px;
 	margin: 0 auto;
 	padding: 20px 0;
 }
@@ -250,7 +250,7 @@ img.right {
 
 #main {
 	float: left;
-    width: 460px;
+    width: 740px;
 }
 
 /* Content > Main > Example */
@@ -526,6 +526,7 @@ img.right {
   border-collapse: collapse;
   border: 1px solid #999999;
   margin: 2px;
+  text-align: center;
 }
 td.lesson-wday-cell {
   height: 1.5em;
@@ -610,13 +611,20 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
   font-style: italic;
   background-color: #ffd7de;
 }
+/* end lesson types */
 .room {
   color: #0000dd;
   font-weight: normal;
   text-decoration: none;
   font-style: normal;
 }
-
+.lessons-grid
+{
+  position:absolute;
+  width: 670px;
+  border-top: 1px dashed #bbbbbb;
+  z-index: -1;
+}
 
 .online {
   font-weight: bold;

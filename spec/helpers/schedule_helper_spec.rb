@@ -62,14 +62,14 @@ describe ScheduleHelper do
       @break_height = Lesson::BREAK_DURATION/Lesson::SECONDS_PER_PIXEL
     end
     it "should return a formatted list of lesson intervals" do
-      lessons_column( Lesson::INTERVALS[1..2], :class => "interval" ).should == 
-        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@int_height + @break_height -1}px; margin-bottom: 0px"><span class="block"><span></span></span></div>}+
-        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@break_height}px; margin-bottom: -1px"><span class="block"><span></span></span></div>}
+      lessons_column( Lesson::INTERVALS[1..2], :class => "interval lesson-div" ).should == 
+        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@int_height + @break_height -1}px; margin-bottom: 0px"><span class="block"><span></span></span><span class=\"iefix\">&nbsp;</span></div>}+
+        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@break_height}px; margin-bottom: -1px"><span class="block"><span></span></span><span class=\"iefix\">&nbsp;</span></div>}
     end
     it "should return a formatted list of lessons" do
       ( lessons_column( @lessons, :apply_style => true ) {|l, i| i.to_s } ).should == 
-        %{<div class="lektsiya lesson-div container" style="line-height: #{@hour_height -2}px; margin-top: #{@hour_height -1}px; margin-bottom: 0px"><span class="block"><span>0</span></span></div>}+
-        %{<div class="lektsiya lesson-div container" style="line-height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px; margin-bottom: -1px"><span class="block"><span>1</span></span></div>}
+        %{<div class="lektsiya container" style="line-height: #{@hour_height -2}px; margin-top: #{@hour_height -1}px; margin-bottom: 0px"><span class="block"><span>0</span></span><span class=\"iefix\">&nbsp;</span></div>}+
+        %{<div class="lektsiya container" style="line-height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px; margin-bottom: -1px"><span class="block"><span>1</span></span><span class=\"iefix\">&nbsp;</span></div>}
     end
     it "should not fail given nil as a collection" do
       lessons_column( nil ).should == ""

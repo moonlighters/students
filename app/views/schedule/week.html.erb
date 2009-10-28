@@ -16,7 +16,9 @@
 <% if @no_week_schedule %>
   <%= render :partial => "no_schedule" %>
 <% else %>
-  <%= render :partial => "week_table", :locals => {:lessons_batches => @lessons_batches} %>
+  <center>
+    <%= render :partial => "week_table", :locals => {:lessons_batches => @lessons_batches} %>
+  </center>
 <% end %>
 
 <%= link_to "Добавить", new_lesson_path + "&group_id=#{@group.id}" %> |

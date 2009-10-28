@@ -54,7 +54,7 @@ module ScheduleHelper
     html = ""
     collection.each_with_index do |item, i|
       height = (item.end_time - item.start_time)/Lesson::SECONDS_PER_PIXEL
-      if i == 0
+      if i == 0 || options[:position] == :absolute
         margin_top = ( item.start_time - Lesson::BEGIN_TIME_OBJ ) / Lesson::SECONDS_PER_PIXEL - 1
       else
         margin_top = ( item.start_time - collection[i-1].end_time ) / Lesson::SECONDS_PER_PIXEL
@@ -70,14 +70,15 @@ module ScheduleHelper
       inherent_class += " " if inherent_class
 
       div_style = "line-height: #{height - 2}px; margin-top: #{margin_top}px; margin-bottom: #{margin_bottom}px"
-      div_class = "#{type_class}#{inherent_class}lesson-div container"
+      div_class = "#{type_class}#{inherent_class}container"
       html +=
         content_tag(:div, :class => div_class, :style => div_style) do
           content_tag( :span, :class => "block" ) do
             content_tag( :span ) do
               block_given? ? yield( item, i ) : ""
             end
-          end
+          end +
+          content_tag( :span, "&nbsp;" ,:class => "iefix" )
         end
     end
     concat html
