@@ -250,7 +250,7 @@ img.right {
 
 #main {
 	float: left;
-	width: 460px;
+    width: 460px;
 }
 
 /* Content > Main > Example */
@@ -521,35 +521,34 @@ img.right {
   text-decoration: none;
 }
 
-
 .lessons-table {
   width: 100%;
-  border: 3px double #999999;
+  border-collapse: collapse;
+  border: 1px solid #999999;
 }
-
-/* vertical alignment */
-.outer{
-  height: 100%;
-  width: 100%;
-  display: table;
-}
-
-.container {
-  display: table-cell;
-  vertical-align: middle;
+td.lesson-wday-cell {
+  height: 1.5em;
+  font-size: 1.5em;
   text-align: center;
+  vertical-align: middle;
+  border: 1px solid #999999;
+  background-color: #fffebc;
+  color: #555555;
 }
-
+.lesson-wday-link {
+  text-decoration: none;
+}
 .lesson-div {
   border-bottom: 1px solid #999999;
   border-top: 1px solid #999999;
+  text-align: center;
 }
-.lessons-intervals {
-  border-right: 1px solid #999999;
+td.lessons-intervals {
+  border: 1px solid #999999;
   vertical-align: top;
 }
-.lessons {
-  border-left: 1px solid #999999;
+td.lessons {
+  border: 1px solid #999999;
   vertical-align: top;
 }
 .no-lessons {
@@ -560,6 +559,21 @@ img.right {
 a.lesson-week-cell, a:hover.lesson-week-cell {
   color: #444444;
   text-decoration: none;
+}
+
+/* vertical align */
+.block {
+  width: 100%;
+  display: -moz-inline-stack;
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+.block span {
+  display: block;
+}
+.iefix {
+  display: none;
 }
 
 /* lesson types: */
@@ -586,7 +600,7 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
 .praktika {
   color: #444444;
   font-weight: normal;
-  text-decoration: underline;
+  /*text-decoration: underline;*/
   background-color: #ecdbff;
 }
 .konsultatsiya {
@@ -601,17 +615,8 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
   text-decoration: none;
   font-style: normal;
 }
-.lesson-wday-cell {
-  height: 1.5em;
-  font-size: 1.5em;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #999999;
-  background-color: #fffebc;
-}
-.lesson-wday-link {
-  text-decoration: none;
-}
+
+
 .online {
   font-weight: bold;
   font-size: 1.1em;

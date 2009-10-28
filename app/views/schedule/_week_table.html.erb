@@ -1,10 +1,13 @@
 <div style="width: 100%; overflow: auto;">
   <div style="width:720px;">
-    <table class="lessons-table" cellpadding="0">
+    <table class="lessons-table">
+    <%# FIXME: top and left border dissapear in FF3.5 %>
       <tbody>
-        <col width="120px"/><col/>
+        <col width="70px"/><col/>
         <tr>
-          <td class="lesson-wday-cell"/>
+          <td class="lesson-wday-cell">
+            <%=h @group.name %>
+          </td>
           <% 0.upto 5 do |i|  %>
             <td class="lesson-wday-cell">
               <% day = @week_start + i.days %>
