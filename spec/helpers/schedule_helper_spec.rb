@@ -50,23 +50,26 @@ describe ScheduleHelper do
   
   describe "#lessons_column" do
     before do
-      @lessons = [ Factory( :lesson, :duration => 1.hour ), Factory( :lesson, :duration => 2.hours ) ]
+      @st = Factory :lesson_subject_type, :lesson_type => Factory( :lesson_type, :name => "лекция" )
+      @lessons = [ Factory( :lesson, :duration => 1.hour, :subject_type => @st ), Factory( :lesson, :duration => 2.hours, :subject_type => @st ) ]
       @lessons[0].set_start_time Lesson::BEGIN_TIME[0] + 1, 0
       @lessons[1].set_start_time Lesson::BEGIN_TIME[0] + 2, 30
+      
+      @lessons[0].type.name.should == "лекция"
 
       @hour_height = 1.hour/Lesson::SECONDS_PER_PIXEL
       @int_height = Lesson::DURATION/Lesson::SECONDS_PER_PIXEL
       @break_height = Lesson::BREAK_DURATION/Lesson::SECONDS_PER_PIXEL
     end
     it "should return a formatted list of lesson intervals" do
-      lessons_column( Lesson::INTERVALS[1..2] ).should == 
-        "<div class=\"outer\" style=\"height: #{@int_height -2}px; margin-top: #{@int_height + @break_height}px;\"><div class=\"lesson-div container\"></div></div>"+
-        "<div class=\"outer\" style=\"height: #{@int_height -2}px; margin-top: #{@break_height}px;\"><div class=\"lesson-div container\"></div></div>"
+      lessons_column( Lesson::INTERVALS[1..2], :class => "interval" ).should == 
+        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@int_height + @break_height -1}px; margin-bottom: 0px"><span class="block"><span></span></span></div>}+
+        %{<div class="interval lesson-div container" style="line-height: #{@int_height -2}px; margin-top: #{@break_height}px; margin-bottom: -1px"><span class="block"><span></span></span></div>}
     end
     it "should return a formatted list of lessons" do
-      ( lessons_column( @lessons ) {|l, i| i.to_s } ).should == 
-        "<div class=\"outer\" style=\"height: #{@hour_height -2}px; margin-top: #{@hour_height}px;\"><div class=\"lesson-div container\">0</div></div>"+
-        "<div class=\"outer\" style=\"height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px;\"><div class=\"lesson-div container\">1</div></div>"
+      ( lessons_column( @lessons, :apply_style => true ) {|l, i| i.to_s } ).should == 
+        %{<div class="lektsiya lesson-div container" style="line-height: #{@hour_height -2}px; margin-top: #{@hour_height -1}px; margin-bottom: 0px"><span class="block"><span>0</span></span></div>}+
+        %{<div class="lektsiya lesson-div container" style="line-height: #{2*@hour_height -2}px; margin-top: #{@hour_height/2}px; margin-bottom: -1px"><span class="block"><span>1</span></span></div>}
     end
     it "should not fail given nil as a collection" do
       lessons_column( nil ).should == ""

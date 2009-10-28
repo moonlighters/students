@@ -11,7 +11,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 
 body {
 	background: #FFFFFF url(../images/img01.gif) repeat-x;
-	font: normal small Arial, Helvetica, sans-serif;
+	font: normal 13px Arial, Helvetica, sans-serif;
 	color: #999999;
 }
 
@@ -525,6 +525,7 @@ img.right {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #999999;
+  margin: 2px;
 }
 td.lesson-wday-cell {
   height: 1.5em;
