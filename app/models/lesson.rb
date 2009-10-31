@@ -89,7 +89,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def duration_min
-    self.duration%3600/60
+    ( self.duration % 3600 )/60
   end
 
   def end_time

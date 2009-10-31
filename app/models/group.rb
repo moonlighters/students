@@ -3,8 +3,7 @@ class Group < ActiveRecord::Base
   validates_presence_of   :name, :start_year
   validates_inclusion_of  :start_year,
                           :in => MIN_START_YEAR..Time.now.year,
-                          :message => "должен быть от #{MIN_START_YEAR} до #{Time.now.year}",
-                          :if => Proc.new {|g| not g.start_year.nil? }
+                          :message => "должен быть от #{MIN_START_YEAR} до #{Time.now.year}"
   has_many  :users,
             :dependent => :nullify
 

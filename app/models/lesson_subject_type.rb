@@ -15,14 +15,7 @@ class LessonSubjectType < ActiveRecord::Base
             :dependent => :destroy
 
   def process_homepage_url
-    unless self.homepage.nil? or self.homepage.empty?
-      if self.homepage.starts_with? "http://"
-        if self.homepage == "http://"
-          self.homepage = ""
-        end
-      else
-        self.homepage = "http://" + self.homepage
-      end
-    end
+    /(http:\/\/)?(.+)?/ =~ self.homepage
+    self.homepage = ($2) ? ("http://" + $2) : ""
   end
 end

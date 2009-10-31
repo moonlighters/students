@@ -43,7 +43,6 @@ module ApplicationHelper
     Russian::strftime datetime, format
   end
 
-  # A wrapper:
   def ansi_date(time)
     format_time time, :time => false, :format => :ansi
   end
