@@ -39,20 +39,6 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
 
-  map.new_root_forum "forums/new",     :controller => "forums", :action => "new_root"
-  map.new_sub_forum  "forums/:id/new", :controller => "forums", :action => "new_sub"
-  map.resources :forums, :except => [:new]
-
-  map.new_forum_topic "forums/:id/new_topic", :controller => "forum_topics", :action => "new"
-  map.resources :forum_topics, :as => "topics",
-                               :path_prefix => "forums",
-                               :except => [:index, :new]
-  
-  map.new_forum_post "forums/topics/:id/new_post", :controller => "forum_posts", :action => "new"
-  map.resources :forum_posts, :as => "posts",
-                              :path_prefix => "forums",
-                              :except => [:index, :new, :show]
-
   map.resources :lesson_subjects, :as => "subjects",
                                   :path_prefix => "schedule"
 

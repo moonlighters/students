@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'cd5d422483a22ae5412c6491ed1d740e'
 
   helper_method :current_user_session, :current_user,
-                :smart_post_path, :current_user_has_role?, :current_user_group
+                :current_user_has_role?, :current_user_group
   filter_parameter_logging :password, :password_confirmation
 
   rescue_from Acl9::AccessDenied, :with => :access_denied
@@ -73,13 +73,6 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end 
-
-    def smart_post_path(post)
-      return nil unless post
-      topic = post.topic
-      page = 1 + topic.posts.index( post ) / ForumPost.per_page
-      forum_topic_path( post.topic ) + "?page=#{page}#post#{post.id}"
-    end
 
     def current_user_has_role?(*args)
       current_user and current_user.has_role? *args

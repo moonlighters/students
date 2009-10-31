@@ -17,12 +17,6 @@ end
   login_as login, "123456"
 end
 
-Допустим /^я залогинился, будучи модератором на форуме (.+), как (.+)$/ do |forum, login|
-  Допустим "есть пользователь #{login} с паролем 123456"
-  Forum.find_by_title!( forum ).moderator! User.find_by_login( login )
-  login_as login, "123456"
-end
-
 Допустим /^я разлогинен$/ do
   visit root_path
   if response.body =~ /выйти/

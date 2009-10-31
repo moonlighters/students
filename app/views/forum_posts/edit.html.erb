@@ -1,8 +1,0 @@
-<% @page_title = "Редактирование сообщения" %>
-<h2>Редактирование сообщения в теме "<%=h @forum_post.topic.title %>"</h2>
-
-<%= render :partial => "form", :locals => {:forum_topic => @forum_topic, :forum_post => @forum_post } %>
-
-<%= button_to 'Удалить', forum_post_path( @forum_post ), :method => :delete %>
-
-<%= link_to 'Назад', forum_topic_path( @forum_post.topic ) %>

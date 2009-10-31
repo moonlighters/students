@@ -11,40 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20090924150648) do
 
-  create_table "forum_posts", :force => true do |t|
-    t.text     "body"
-    t.integer  "forum_topic_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "last_editor_id"
-  end
-
-  create_table "forum_topic_viewings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "forum_topic_id"
-    t.integer  "forum_post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "forum_topics", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "view_count"
-    t.integer  "forum_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "last_post_id"
-  end
-
-  create_table "forums", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.integer  "start_year"

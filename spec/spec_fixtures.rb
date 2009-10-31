@@ -2,11 +2,6 @@ require 'factory_girl'
 
 TERM = 4
 
-Factory.define :forum do |f|
-  f.title       "Cool forum"
-  f.description "This forum is the best!"
-end
-
 Factory.sequence :username do |n|
   "user#{n}"
 end
@@ -17,25 +12,6 @@ Factory.define :user do |u|
   u.password_confirmation "123456"
   u.sex         Sex.undefined
   u.association :group, :factory => :group
-end
-
-Factory.define :forum_topic do |t|
-  t.title       "cool topic"
-  t.description "sdefghj"
-  t.association :owner, :factory => :user
-  t.association :forum, :factory => :forum
-end
-
-Factory.define :forum_post do |f|
-  f.body "it's a post\nabout this and that"
-  f.association :owner, :factory => :user
-  f.association :topic, :factory => :forum_topic
-end
-
-Factory.define :forum_topic_viewing do |v|
-  v.association :user, :factory => :user
-  v.association :topic, :factory => :forum_topic
-  v.association :post, :factory => :forum_post
 end
 
 Factory.define :load do |l|

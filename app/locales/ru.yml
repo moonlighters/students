@@ -2,9 +2,6 @@ ru:
   activerecord:
     models:
       user: "Пользователь"
-      forum: "Форум"
-      forum topic: "Тема"
-      forum post: "Сообщение"
       load: "Загрузка"
       lesson subject: "Предмет"
       group: "Группа"
@@ -21,16 +18,6 @@ ru:
         time_zone: "Часовой пояс"
         sex_id: "Пол"
         group_id: "Группа"
-      forum:
-        title: "Название"
-        description: "Описание"
-      forum_topic:
-        title: "Название"
-        description: "Описание"
-        view_count: "Кол-во просмотров"
-        post: "Сообщение"
-      forum_post:
-        body: "Сообщение"
       load:
         file: "Файл"
         name: "Имя"

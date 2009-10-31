@@ -359,70 +359,6 @@ img.right {
 	font-size: x-small;
 }
 
-.posts-table table {
-  width: 100%;
-  margin: 10px;
-}
-
-.posts-table td {
-  vertical-align: top;
-}
-
-.topics-table table {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #E0E5EC;
-}
-
-.topics-table th, .topics-table td {
-  background-color: #F5F9F7;
-  padding:          5px;
-}
-
-.topics-table td {
-  vertical-align: middle;
-  text-align: center;
-}
-
-.topics-table .goto-first-unread {
-  font-size: 12px;
-}
-
-.forums-table table {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #D0E0E0;
-}
-
-.forums-table th, .forums-table td {
-  background-color: #EEF1F5;
-  padding:          5px;
-}
-
-.forums-table td a {
-  font-size: 120%;
-}
-
-.forums-table td {
-  vertical-align: top;
-}
-
-.forum-description, .topic-description {
-  font-weight: bold;
-  font-style:  italic;
-  text-align:  center;
-}
-
-.forums-table .button-to div,
-.forums-table .button-to,
-.topics-table .button-to div,
-.topics-table .button-to {
- /* float: right;*/
-  display: inline;
-}
-
 /* field with errors */
 .errorExplanation {
   padding: 10px;
@@ -454,32 +390,9 @@ img.right {
   padding: 3px;
   background: #FFD0D0;
 }
-.posts-table table {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.posts-table th, .posts-table td {
-  padding:          5px;
-  background-color: #D6E6E6;
-}
-
-.posts-table td {
-  vertical-align: top;
-}
 
 .time_small {
   font-size: x-small;
-}
-
-.post_edited {
-  font-style: italic;
-  font-size: x-small;
-}
-
-.last_posts_list h4 {
-  text-align: center;
 }
 
 .download_button {

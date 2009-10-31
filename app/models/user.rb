@@ -8,16 +8,6 @@ class User < ActiveRecord::Base
 
   attr_protected :login
 
-  has_many  :forum_topic_viewings,
-            :dependent => :destroy
-
-  has_many  :last_forum_posts,
-            :through => :forum_topic_viewings,
-            :source => :post do
-              def of_topic( topic )
-                find_by_forum_topic_id topic.id
-              end
-            end
   belongs_to :sex
   belongs_to :group
 
