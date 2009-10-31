@@ -39,21 +39,6 @@ describe ApplicationHelper do
     end
   end
 
-  describe "#gender" do
-    it "should return second arg if user is male" do
-      user = Factory :user, :sex => Sex.male
-      gender(user, :a, :b).should == :a
-    end
-    it "should return third arg if user is female" do
-      user = Factory :user, :sex => Sex.female
-      gender(user, :a, :b).should == :b
-    end
-    it "should return second arg if user not defined with his gender" do
-      user = Factory :user, :sex => Sex.undefined
-      gender(user, :a, :b).should == :a
-    end
-  end
-
   describe "#format_time" do
     before do
       @time = Time.mktime 2009, 3, 14, 21, 9, 46 # The time of the first commit in our project :)

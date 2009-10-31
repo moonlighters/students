@@ -1,77 +1,76 @@
 ru:
   activerecord:
     models:
-      user: "Пользователь"
-      load: "Загрузка"
-      lesson subject: "Предмет"
-      group: "Группа"
-      teacher: "Преподаватель"
-      lesson subject type: "Тип занятия"
-      lesson: "Занятие"
+      user: Пользователь
+      load: Загрузка
+      lesson subject: Предмет
+      group: Группа
+      teacher: Преподаватель
+      lesson subject type: Тип занятия
+      lesson: Занятие
     attributes:
       user:
-        login: "Логин"
-        password: "Пароль"
-        password_confirmation: "Повторите пароль"
-        email: "E-mail"
-        avatar: "Аватар"
-        time_zone: "Часовой пояс"
-        sex_id: "Пол"
-        group_id: "Группа"
+        nickname: Ник
+        password: Пароль
+        password_confirmation: Повторите пароль
+        email: E-mail
+        avatar: Аватар
+        time_zone: Часовой пояс
+        group_id: Группа
       load:
-        file: "Файл"
-        name: "Имя"
-        description: "Описание"
-        tag_list: "Теги"
+        file: Файл
+        name: Имя
+        description: Описание
+        tag_list: Теги
       lesson_subject:
-        name: "Название"
-        short_name: "Сокращённое название"
-        term: "Семестр"
+        name: Название
+        short_name: Сокращённое название
+        term: Семестр
       group:
-        name: "Название"
-        start_year: "Год начала обучения"
+        name: Название
+        start_year: Год начала обучения
       teacher:
-        name: "Имя"
-        surname: "Фамилия"
-        phone: "Телефон"
-        email: "E-mail"
+        name: Имя
+        surname: Фамилия
+        phone: Телефон
+        email: E-mail
       lesson_subject_type:
-        lesson_type_id: "Тип"
-        lesson_subject_id: "Предмет"
-        group_id: "Группа"
-        teacher_id: "Преподаватель"
-        homepage: "Домашняя страничка"
+        lesson_type_id: Тип
+        lesson_subject_id: Предмет
+        group_id: Группа
+        teacher_id: Преподаватель
+        homepage: Домашняя страничка
       lesson:
-        group_id: "Группа"
-        lesson_subject_id: "Предмет"
-        lesson_subject_type_id: "Тип занятия"
-        lesson_type_id: "Тип"
-        day_of_week: "День недели"
-        start_time: "Время начала"
-        duration: "Длительность"
-        everyweek: "Каждую неделю?"
-        odd_weeks: "Если не каждую, то по нечётным?"
-        room: "Аудитория"
+        group_id: Группа
+        lesson_subject_id: Предмет
+        lesson_subject_type_id: Тип занятия
+        lesson_type_id: Тип
+        day_of_week: День недели
+        start_time: Время начала
+        duration: Длительность
+        everyweek: Каждую неделю?
+        odd_weeks: Если не каждую, то по нечётным?
+        room: Аудитория
 
   authlogic:
     error_messages:
-      login_blank: "не должен быть пустым"
-      login_not_found: "не существует"
-      login_invalid: "должен содержать только буквы, цифры, пробелы и .-_@."
-      email_invalid: "имеет недопустимый формат"
-      password_blank: "не должен быть пустым"
-      password_invalid: "неверный"
-      not_active: "Ваш аккаунт не активирован"
-      not_confirmed: "Ваш аккаунт не подтвержден"
-      not_approved: "Ваш аккаунт не утвержден"
-      blank_record: "Нельзя войти с пустой записью"
-      new_record: "Нельзя войти с новой записью"
+      login_blank: не должен быть пустым
+      login_not_found: не существует
+      login_invalid: должен содержать только буквы, цифры, пробелы и .-_@.
+      email_invalid: имеет недопустимый формат
+      password_blank: не должен быть пустым
+      password_invalid: неверный
+      not_active: Ваш аккаунт не активирован
+      not_confirmed: Ваш аккаунт не подтвержден
+      not_approved: Ваш аккаунт не утвержден
+      blank_record: Нельзя войти с пустой записью
+      new_record: Нельзя войти с новой записью
     models:
       user_session: Вход
     attributes:
       user_session:
-        login: "Логин"
-        password: "Пароль"
-        remember_me: "Запомнить меня"
-  edit_account: "Аккаунт"
-  edit_profile: "Профиль"
+        nickname: Ник
+        password: Пароль
+        remember_me: Запомнить меня
+  edit_account: Аккаунт
+  edit_profile: Профиль

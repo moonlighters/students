@@ -30,7 +30,7 @@ module NavigationHelpers
       teacher_path( Teacher.find_by_name_and_surname! $1, $2 )
 
     when /страничк[аеу] пользователя (.+)/
-      user_path( User.find_by_login! $1 )
+      user_path( User.find_by_nickname! $1 )
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +

@@ -8,8 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new params[:user] 
-    @user.login = params[:user][:login]
-    @user.sex ||= Sex.undefined
+    @user.nickname = params[:user][:nickname]
     if @user.save
       flash[:notice] = "Пользователь зарегистрирован"
       redirect_back_or_default user_url( @user )

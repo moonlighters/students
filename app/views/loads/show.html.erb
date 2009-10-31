@@ -8,7 +8,7 @@
 <% end %>
 
 <p>
-  Этот файл <%= link_to_user resource.owner %> загрузил<%= gender( resource.owner, "", "а" ) %>
+  Этот файл <%= link_to_user resource.owner %> загрузил
   <%= time_ago_in_words resource.created_at %> назад
   <br/>Его <%= download_counter resource %>
 </p>

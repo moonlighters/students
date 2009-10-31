@@ -2,15 +2,14 @@ require 'factory_girl'
 
 TERM = 4
 
-Factory.sequence :username do |n|
+Factory.sequence :nickname do |n|
   "user#{n}"
 end
 
 Factory.define :user do |u|
-  u.login       { Factory.next :username }
+  u.nickname    { Factory.next :nickname }
   u.password    "123456"
   u.password_confirmation "123456"
-  u.sex         Sex.undefined
   u.association :group, :factory => :group
 end
 

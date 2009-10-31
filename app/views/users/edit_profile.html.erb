@@ -2,9 +2,7 @@
 <h2>Редактирование профиля</h2>
 
 <% semantic_form_for @user, :url => profile_url do |f| %>
-<%# TODO: set sex default value to undefined %>
   <%= f.input :group, :required => false %>
-  <%= f.input :sex %>
   <% f.buttons do %>
     <%= f.commit_button "Сохранить" %>
   <% end %>

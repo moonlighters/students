@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090924150648) do
+ActiveRecord::Schema.define(:version => 20091031124823) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -83,10 +83,6 @@ ActiveRecord::Schema.define(:version => 20090924150648) do
     t.datetime "updated_at"
   end
 
-  create_table "sexes", :force => true do |t|
-    t.string "name"
-  end
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -114,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20090924150648) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login"
+    t.string   "nickname"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
@@ -126,7 +122,6 @@ ActiveRecord::Schema.define(:version => 20090924150648) do
     t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sex_id"
     t.integer  "group_id"
   end
 

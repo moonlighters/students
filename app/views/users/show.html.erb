@@ -1,18 +1,13 @@
 <% @page_title = "Просмотр профиля" %>
-<h2>Пользователь <%= h @user.login %></h2>
+<h2>Пользователь <%= h @user.nickname %></h2>
 
 <% time_since_last_request = Time.now - @user.last_request_at %>
 <p align="center">
   <% if time_since_last_request < 5.minutes %>
     <span class="online">Online</span>
   <% else %>
-    <span class="offline">Offline</span>, <%=h gender(@user, "вышел", "вышла") %> <%= time_ago_in_words @user.last_request_at %> назад
+    <span class="offline">Offline</span>, вышел <%= time_ago_in_words @user.last_request_at %> назад
   <% end %>
-</p>
-
-<p>
-  <b>Пол:</b>
-  <%=h @user.sex.name %>
 </p>
 
 <p>
