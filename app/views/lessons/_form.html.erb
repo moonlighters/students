@@ -1,6 +1,6 @@
 <% form_for lesson do |f| %>
   <%= f.error_messages %>
-  <% wdays = (0..6).map{ |i| [day_of_week(i), i]} %>
+  <% wdays = (0..6).map{ |i| [day_of_week_name(i), i]} %>
 
   <p>
     <%= f.label :group_id %><br />

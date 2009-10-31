@@ -13,15 +13,13 @@
 
 <h1>Расписание</h1>
 <h2>Группа <%= link_to_group @group %></h2>
-<h3>На <%=h day_type %> <%=h format_time @day, :time => false %>, <%=h day_of_week( @day.wday ).downcase %></h1>
+<h3>На <%=h day_type %> <%= format_time @day, :time => false %>, <%= day_of_week_name( @day.wday ).downcase %></h1>
 <p>
   <%= link_to "Другое расписание", choose_schedule_path %> |
   <%= link_to_schedule @day, :week, :group => @group, :content => "На всю неделю" %>
 </p>
-<% yesterday = @day - 1.day %>
-<% tomorrow = @day + 1.day %>
-<%= link_to_schedule tomorrow, :day, :group => @group, :suffix => " >>", :style => "float:right;" %>
-<%= link_to_schedule yesterday, :day, :group => @group, :prefix => "<< " %>
+<%= link_to_schedule Date.tomorrow, :day, :group => @group, :suffix => " >>", :style => "float:right;" %>
+<%= link_to_schedule Date.yesterday, :day, :group => @group, :prefix => "<< " %>
 <br/>
 
 <% if @no_day_schedule %>

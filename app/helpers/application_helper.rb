@@ -48,7 +48,7 @@ module ApplicationHelper
     format_time time, :time => false, :format => :ansi
   end
 
-  def day_of_week(wday)
-    Russian::strftime Time.utc(1970, 1, 4) + wday.days, "%A"
+  def day_of_week_name(wday)
+    I18n.t(:day_names, :scope => 'date')[wday]
   end
 end
