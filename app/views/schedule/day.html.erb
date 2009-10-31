@@ -13,7 +13,7 @@
 
 <h1>Расписание</h1>
 <h2>Группа <%= link_to_group @group %></h2>
-<h3>На <%=h day_type %> <%=h format_time @day, :time => false %>, <%=h russian_downcase day_of_week( @day.wday ) %></h1>
+<h3>На <%=h day_type %> <%=h format_time @day, :time => false %>, <%=h day_of_week( @day.wday ).downcase %></h1>
 <p>
   <%= link_to "Другое расписание", choose_schedule_path %> |
   <%= link_to_schedule @day, :week, :group => @group, :content => "На всю неделю" %>

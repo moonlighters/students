@@ -51,8 +51,4 @@ module ApplicationHelper
   def day_of_week(wday)
     Russian::strftime Time.utc(1970, 1, 4) + wday.days, "%A"
   end
-
-  def russian_downcase(str)
-    str.downcase.tr "А-Я", "а-я"
-  end
 end

@@ -75,9 +75,10 @@ describe ApplicationHelper do
     end
   end
 
-  describe "#russian downcase" do
-    it "should return string with English and Russian characters downcased " do
-      russian_downcase("абвъыьГДЕЭЮЯabcuvwDEFXYZ").should == "абвъыьгдеэюяabcuvwdefxyz"
+  describe "String#downcase" do
+    # powered by unicode gem
+    it "should work for cyrillic" do
+      ("абвъыьГДЕЭЮЯabcuvwDEFXYZ").downcase.should == "абвъыьгдеэюяabcuvwdefxyz"
     end
   end
 end
