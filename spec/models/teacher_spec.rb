@@ -19,6 +19,10 @@ describe Teacher do
     it "should be valid without #{field}" do
       Factory :teacher, field => nil
     end
+
+    it "should be valid with blank #{field}" do
+      Factory :teacher, field => " "
+    end
   end
 
   %w{+0(000)000-00-00   8(123)456-78-910   (123)4545
