@@ -39,5 +39,5 @@
   <% end %>
 <% end %>
 
-<%= link_to "Добавить", new_lesson_path + "?day_of_week=#{@day.wday}&group_id=#{@group.id}" %> |
+<%= link_to "Добавить", new_lesson_path( :day_of_week => @day.wday, :group_id => @group.id ) %> |
 <%= link_to 'Назад', schedule_path %>

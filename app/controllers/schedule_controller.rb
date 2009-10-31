@@ -76,10 +76,10 @@ class ScheduleController < ApplicationController
       end
     rescue EarlierThenFirstTermError
       # if there are no lessons in array (therefore, an error occured at last week day)
-      raise EarlierThenFirstTermError if only_nils? @lessons_batches
+      raise EarlierThenFirstTermError if @lessons_batches.all?( &:nil? )
     end
     
-    @no_week_schedule = only_nils? @lessons_batches
+    @no_week_schedule = @lessons_batches.all?( &:nil? )
     respond_to do |format|
       format.html # week.html.erb
     end
@@ -133,7 +133,7 @@ class ScheduleController < ApplicationController
     def redirect_to_chooser(format)
       date = @day.nil? ? "" : ansi_date( @day )
       format.html do
-        redirect_to choose_schedule_path + "?group_id=#{params[:group_id]}&date=" + date
+        redirect_to choose_schedule_path( :group_id => params[:group_id], :date => date )
       end
     end
 
@@ -156,9 +156,5 @@ class ScheduleController < ApplicationController
 
     def set_collections
       @groups = Group.find :all, :order => "name"
-    end
-
-    def only_nils?(array)
-      array.count {|item| not item.nil? } == 0
     end
 end
