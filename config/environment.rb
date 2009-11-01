@@ -35,7 +35,6 @@ Rails::Initializer.run do |config|
   config.gem "justinfrench-formtastic", :lib => 'formtastic', :source  => 'http://gems.github.com'
   config.gem "thoughtbot-paperclip", :lib => "paperclip", :source => "http://gems.github.com"
   config.gem "mbleigh-acts-as-taggable-on", :lib => "acts-as-taggable-on", :source => "http://gems.github.com"
-  config.gem "unicode"
 
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
