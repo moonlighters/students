@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <style type="text/css">
             body {
-                font: normal 13px Arial, Helvetica, sans-serif; 
+                font: normal 16px Arial, Helvetica, sans-serif; 
             }
             .outer-wrapper {
                 margin: 0 auto;
@@ -18,7 +18,7 @@
             }
             .header h1 {
                 text-align: center;
-                font-size: 2em;
+                font-size: 170%;
                 color: #efdfef;
             }
             .navbar {
@@ -30,16 +30,42 @@
                 margin: 0 3px 0 3px;
                 float: left;
                 text-align: center;
-                font-size: 1.5em;
+                font-size: 130%;
                 padding: 3px;
             }
             .navbar #navitem-selected {
                 background-color: #8aec7b
             }
-            .navbar .navitem a {
+            .navbar .navitem:hover, .navbar #navitem-selected:hover {
+                background-color: #83ba00;
+            }
+            .navbar ul {
+                display: inline-block;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .navbar a {
+                display: block;
                 text-decoration: none;
                 color: #003300;
             }
+            .content {
+                padding: 10px;
+                margin-top: 6px;
+                clear: both;
+                background-color: #cccccc;
+            }
+            .discussion-list {
+                padding: 0 75px;
+            }
+            .footer {
+                margin-top: 6px;
+                background-color: #ee9999;
+                text-align: center;
+                padding: 3px;
+            }
+
         </style>
     </head>
     <body>
@@ -48,17 +74,38 @@
                 <h1>– Эй, Студент, чем мы займемся сегодня вечером?<br/>– Тем же чем и вчера...</h1>
             </div>
             <div class="navbar">
-                <div class="navitem">
-                    <a href="">Поговорим</a>
+                <ul>
+                    <li class="navitem"><a href="">Поговорим</a></li>
+                    <li class="navitem" id="navitem-selected"><a href="">Покачаем</a></li>
+                    <li class="navitem"><a href="">Поучимся</a></li>
+                </ul>
+            </div>
+            <div class="content">
+                <div class="sorting-selector">
+                    <a href="">О новом</a> |
+                    <a href="">О популярном</a>
                 </div>
-                <div class="navitem" id="navitem-selected">
-                    <a href="">Покачаем</a>
-                </div>
-                <div class="navitem">
-                    <a href="">Поучимся</a>
+                <div class="discussion-list">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
                 </div>
             </div>
+            <div class="footer">
+                <a href="www.moonlighters.ru">Moonlighters</a>, 2009
+            </div>
         </div>
-        
     </body>
 </html>
