@@ -3,14 +3,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe ApplicationHelper do
   include ApplicationHelper
 
-  describe "#add_br_to_text" do
+  describe "#format_text" do
     it "should add a <br/> tag to every newline character in text" do
-      add_br_to_text( "a\naaa\n\nd" ).should == "a<br/>\naaa<br/>\n<br/>\nd"
+      format_text( "a\naaa\n\nd" ).should == "a<br/>\naaa<br/>\n<br/>\nd"
     end
 
     it "should not change text without newline characters" do
       ["aaa", "aa\taa", "", "bb\r"].each do |s|
-        add_br_to_text( s ).should == s
+        format_text( s ).should == s
       end
     end
   end
@@ -36,6 +36,37 @@ describe ApplicationHelper do
       fm[0].should =~ /NNotice/
       fm[1].should =~ /Warnin'/
       fm[2].should =~ /ERROR/
+    end
+  end
+
+  describe "navitem selecting" do
+    it "#navitem_state should return some html if given navitem is selected" do
+      select_navitem :home
+      navitem_state(:home).should == "id=\"navitem-selected\""
+    end
+
+    it "#navitem_state should not return anything unless given navitem is selected" do
+      select_navitem :home
+      navitem_state(:news).should be_nil
+    end
+
+    it "#navitem_state should not return anything unless any navitem is selected" do
+      navitem_state(:news).should be_nil
+    end
+  end
+
+  describe "#title" do
+    ["Root page", "<b>Something other</b>"].each do |s|
+      it "should set title to '#{s}'" do
+        pending do
+          title( s )
+          assigns[:title].should == s # FIXME WTF?? Почему не работает??
+        end
+      end
+    end
+
+    it "should leave title nil if it was not called" do
+      assigns[:title].should be_nil
     end
   end
 

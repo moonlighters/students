@@ -1,105 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
--->
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>afti-students | <%= @page_title || "неофициальный сайт кафедры АФТИ" %></title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title><%=h @title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <%= stylesheet_link_tag *%w{default formtastic} %>
-	<!--[if lte IE 7]>
-	<style type="text/css">
-		.iefix {
-			display: inline-block;
-			width: 0;
-			overflow: hidden;
-			background: orange;
-		}
-	</style>
-	<![endif]-->
-	<!--[if lte IE 6]>
-	<style type="text/css">
+    <!--[if lte IE 7]>
+      <style type="text/css">
+        .iefix {
+          display: inline-block;
+          width: 0;
+          overflow: hidden;
+          background: orange;
+        }
+      </style>
+    <![endif]-->
+    <!--[if lte IE 6]>
+      <style type="text/css">
 
-	</style>
-	<![endif]-->
-</head>
-<body>
-    <div id="header">
-        <div id="topmenu">
-            <ul>
-                <li><%= link_to "", root_url, :id => "topmenu1", :accesskey => "1", :title => "На главную" %></li>
-            </ul>
-        </div>
-        <div id="logo">
-            <h1><%= link_to "afti-students", root_url %></h1>
-            <h2><%= link_to "неофициальный сайт", root_url %></h2>
-        </div>
-    </div>
-    <div id="menu">
+      </style>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="outer-wrapper">
+      <div class="header">
+        <h1>– Эй, Студент, чем мы займемся сегодня вечером?<br/>– Тем же чем и вчера...</h1>
+      </div>
+      <div class="navbar">
         <ul>
-            <li><%= link_to "Загрузки", loads_url %></li>
-            <li><%= link_to "INFO", info_url %></li>
-            <li><%= link_to "Расписание", schedule_url %></span></li>
+          <li class="navitem" <%= navitem_state :discussion %>>
+            <a href="">Поговорим</a>
+          </li>
+          <li class="navitem" <%= navitem_state :loads %>>
+            <a href="">Покачаем</a>
+          </li>
+          <li class="navitem" <%= navitem_state :schedule %>>
+            <a href="">Поучимся</a>
+          </li>
         </ul>
+      </div>
+      <div class="content">
+        <%= flash_messages %>
+        <%= yield :layout %>
+      </div>
+      <div class="footer">
+        <a href="www.moonlighters.ru">Moonlighters</a>, 2009
+      </div>
     </div>
-    <div id="content">
-        <div id="main">
-            <%= flash_messages %>
-            <%= yield :layout %>
-        </div>
-        <div id="sidebar">
-            <div id="login" class="boxed">
-                <h2 class="title">Учетная запись</h2>
-                <div class="content">
-                  <%= render "user_sessions/account" %>
-                </div>
-            </div>
-            <div id="updates" class="boxed">
-                <h2 class="title">Recent Updates</h2>
-                <div class="content">
-                    <ul>
-                        <li>
-                            <h3>March 5, 2007</h3>
-                            <p><a href="#">In posuere eleifend odio quisque semper augue mattis wisi maecenas&#8230;</a></p>
-                        </li>
-                        <li>
-                            <h3>March 3, 2007</h3>
-                            <p><a href="#">Quisque dictum integer nisl risus, sagittis convallis, rutrum id, congue, and nibh&#8230;</a></p>
-                        </li>
-                        <li>
-                            <h3>February 28, 2007</h3>
-                            <p><a href="#">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum&#8230;</a></p>
-                        </li>
-                        <li>
-                            <h3>February 25, 2007</h3>
-                            <p><a href="#">Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam nequea&#8230;</a></p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="partners" class="boxed">
-                <h2 class="title">Partners</h2>
-                <div class="content">
-                    <ul>
-                        <li><a href="#">Donec Dictum Metus</a></li>
-                        <li><a href="#">Etiam Rhoncus Volutpat</a></li>
-                        <li><a href="#">Integer Gravida Nibh</a></li>
-                        <li><a href="#">Maecenas Luctus Lectus</a></li>
-                        <li><a href="#">Mauris Vulputate Dolor</a></li>
-                        <li><a href="#">Nulla Luctus Eleifend</a></li>
-                        <li><a href="#">Posuere Augue Sit Nisl</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer">
-        <p id="legal">Дизайн <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.<br/>
-        2009 <a href="http://www.moonlighters.ru">Moonlighters</a>.</p>
-    </div>
-</body>
+  </body>
 </html>
