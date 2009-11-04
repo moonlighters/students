@@ -26,7 +26,7 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   config.gem "authlogic", :version => ">=2.1.1"
   config.gem "yaroslav-russian", :version => ">=0.2.2", :lib => "russian", :source => "http://gems.github.com"
-  config.gem "be9-acl9", :source => "http://gems.github.com", :lib => "acl9"
+  config.gem "acl9", :source => "http://gemcutter.org", :lib => "acl9"
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   config.gem "webrat", :version => ">=0.4.3"
   config.gem "cucumber", :version => ">=0.2.2"
