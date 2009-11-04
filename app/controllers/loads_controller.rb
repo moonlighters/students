@@ -6,7 +6,7 @@ class LoadsController < InheritedResources::Base
     allow all, :to => [:index, :show]
     allow logged_in, :to => :download
     allow :owner, :of => :load, :to => [:edit, :update, :destroy]
-    allow :upload_moderator, :to => [:new, :create]
+    allow :load_moderator, :to => [:new, :create]
   end
 
   # TODO: will_paginate
@@ -51,13 +51,13 @@ class LoadsController < InheritedResources::Base
 
     f = resource.file
     send_file f.path,
-              :filename => Russian.translit( params[:filename] || f.original_filename ),
+              :filename => Russian.translit( f.original_filename ),
               :type => f.content_type
   end
 
   private
 
-    def find_load; resource; end
+    def find_load; resource; end # FIXME допинать acl9 поддерживать instance_method
 
     # Override these 2 methods in the particular controller to change behavior when access denied
     def access_denied_redirect_url

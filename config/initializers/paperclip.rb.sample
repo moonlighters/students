@@ -1,9 +1,5 @@
-Paperclip.interpolates :load_top_secret do |attachment, style|
+Paperclip.interpolates :top_secret do |attachment, style|
   "put_here_your_MEGA_SECRET_string_and_DON'T_check_this_file_in_version_control_system"
-end
-
-Paperclip.interpolates :translit_filename do |attachment, style|
-  Russian.translit( attachment.original_filename )
 end
 
 Paperclip.interpolates :original_filename do |attachment, style|

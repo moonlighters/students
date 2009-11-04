@@ -1,43 +1,47 @@
-<% @page_title = "Загрузки" %>
-<h2>Список загрузок</h2>
+<% title "Загрузки" %>
+<% select_navitem :loads -%>
 
-<%# TODO: кнопку ввода своих тегов %>
+<div class="narrow-part">
+  <h2>Список загрузок</h2>
 
-<% if current_user_has_role? :upload_moderator %>
-<p>
-  <%= link_to "Добавить", new_resource_path %>
-</p>
-<% end %>
+  <%# TODO: кнопку ввода своих тегов %>
 
-<p>
-  <%= link_to "Все файлы", collection_path %>
-  <%= @tags.map {|t| "&gt; #{link_to_tag t} (#{link_to "X", {:remove_tag => t.name}, :id => "remove-tag-link-#{t}"}) "} %>
+  <% if current_user_has_role? :load_moderator %>
+  <p>
+    <%= link_to "Добавить", new_resource_path %>
+  </p>
+  <% end %>
 
-</p>
+  <p>
+    <%= link_to "Все файлы", collection_path %>
+    <%= @tags.map {|t| "&gt; #{link_to_tag t} (#{link_to "X", {:remove_tag => t.name}, :id => "remove-tag-link-#{t}"}) "} %>
 
-<div class="loads-list-column">
-  <h4>Файлы</h4>
-  <% unless collection.empty? %>
-    <ul class="loads-list">
-      <% collection.each do |res| %>
-        <li>
-          <%= link_to h(res.name), res, :title => h(res.description) %>
-          <i>(<%= download_counter res %>)</i><br/>
-          <%= links_to_tags res.tags, :class => "load-tag" %>
-        </li>
+  </p>
+
+  <div class="loads-list-column">
+    <h4>Файлы</h4>
+    <% unless collection.empty? %>
+      <ul class="loads-list">
+        <% collection.each do |res| %>
+          <li>
+            <%= link_to h(res.name), res, :title => h(res.description) %>
+            <i>(<%= download_counter res %>)</i><br/>
+            <%= links_to_tags res.tags, :class => "load-tag" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Нет загрузок удовлетворяющих заданным условиям</p>
+    <% end %>
+    <%= will_paginate collection if collection.is_a? WillPaginate::Collection %>
+  </div>
+  <div class="loads-tags-column">
+    <h4>Тэги</h4>
+    <ul class="tags-list">
+      <% @all_tags.each do |t| %>
+        <li><%= link_to "+", { :add_tag => t.name }, :class => "add-tag-link", :id => "add-tag-link-#{t}" %>
+          <%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
       <% end %>
     </ul>
-  <% else %>
-    <p>Нет загрузок удовлетворяющих заданным условиям</p>
-  <% end %>
-  <%= will_paginate collection if collection.is_a? WillPaginate::Collection %>
-</div>
-<div class="loads-tags-column">
-  <h4>Тэги</h4>
-  <ul class="tags-list">
-    <% @all_tags.each do |t| %>
-      <li><%= link_to "+", { :add_tag => t.name }, :class => "add-tag-link", :id => "add-tag-link-#{t}" %>
-        <%= link_to_tag(t) %> (<%= t.tagging_ids.count %>)</li>
-    <% end %>
-  </ul>
+  </div>
 </div>

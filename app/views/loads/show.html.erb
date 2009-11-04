@@ -19,7 +19,7 @@
 <p><strong>Размер:</strong> <%= number_to_human_size resource.file.size %></p>
 <p><strong>Тэги:</strong> <%= links_to_tags resource.tags %></p>
 <p>
-  <%= link_to( "Скачать", resource.file.url, :class => :download_button ) %>
+  <%= link_to( "Скачать", download_load_path, :class => :download_button ) %>
 </p>
 
 <%= link_to 'К списку загрузок', collection_path %>
