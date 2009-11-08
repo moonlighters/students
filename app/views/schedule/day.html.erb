@@ -18,8 +18,8 @@
   <%= link_to "Другое расписание", choose_schedule_path %> |
   <%= link_to_schedule @day, :week, :group => @group, :content => "На всю неделю" %>
 </p>
-<%= link_to_schedule Date.tomorrow, :day, :group => @group, :suffix => " >>", :style => "float:right;" %>
-<%= link_to_schedule Date.yesterday, :day, :group => @group, :prefix => "<< " %>
+<%= link_to_schedule @day + 1.day, :day, :group => @group, :suffix => " >>", :style => "float:right;" %>
+<%= link_to_schedule @day - 1.day, :day, :group => @group, :prefix => "<< " %>
 <br/>
 
 <% if @no_day_schedule %>

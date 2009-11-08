@@ -1,39 +1,42 @@
 <div style="width:670px;">
-  <table class="lessons-table">
-    <tbody>
-      <col width="70px"/><col/>
-      <tr>
-        <td class="lesson-wday-cell">
-          <%=h @group.name %>
-        </td>
-        <% 0.upto 5 do |i|  %>
+  <div style="z-index: 1; position: relative; top: 32px">
+    <% lessons_column Lesson::INTERVALS, :class => "lessons-grid", :borders_width => 1 %>
+  </div>
+  <div style="z-index: 2; position: relative; top: -433px;">
+    <table class="lessons-table" style="position: relative">
+      <tbody>
+        <col width="70px"/><col/>
+        <tr>
           <td class="lesson-wday-cell">
-            <% day = @week_start + i.days %>
-            <%= link_to_schedule  day,
-                                  :day,
-                                  :group => @group,
-                                  :content => Russian::strftime( day , "%a" ),
-                                  :class => "lesson-wday-link" %>
+            <%=h @group.name %>
           </td>
-        <% end %>
-      </tr>
-      <tr>
-        <td class="lessons-intervals">
-          <% lessons_column Lesson::INTERVALS, :class => "lessons-grid", :position => :absolute do |interval, index| %>
+          <% 0.upto 5 do |i|  %>
+            <td class="lesson-wday-cell">
+              <% day = @week_start + i.days %>
+              <%= link_to_schedule  day,
+                                    :day,
+                                    :group => @group,
+                                    :content => Russian::strftime( day , "%a" ),
+                                    :class => "lesson-wday-link" %>
+            </td>
           <% end %>
-          <% lessons_column Lesson::INTERVALS, :class => "interval lesson-div" do |interval, index| %>
-            <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
-          <% end %>
-        </td>
-
-        <% 0.upto 5 do |i|  %>
-          <td class="lessons" width="100px">
-            <% lessons_column @lessons_batches[i], :class => "lesson-div", :apply_style => true do |lesson, index| %>
-              <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
+        </tr>
+        <tr>
+          <td class="lessons-intervals">
+            <% lessons_column Lesson::INTERVALS, :class => "interval lesson-div" do |interval, index| %>
+              <%= render :partial => "lessons/interval", :locals => {:interval => interval, :index => index} %>
             <% end %>
           </td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+
+          <% 0.upto 5 do |i|  %>
+            <td class="lessons" width="100px">
+              <% lessons_column @lessons_batches[i], :class => "lesson-div", :apply_style => true do |lesson, index| %>
+                <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,3 +1,8 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
 body {
   font: normal 16px Arial, Helvetica, sans-serif; 
 }
@@ -77,3 +82,114 @@ body {
   padding: 3px;
 }
 
+/********** S H E D U L E *************/
+
+.lessons-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #999999;
+  margin: 2px;
+  text-align: center;
+}
+td.lesson-wday-cell {
+  height: 30px;
+  font-size: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #999999;
+  background-color: #fffebc;
+  color: #555555;
+}
+.lesson-wday-link {
+  text-decoration: none;
+}
+.lesson-div {
+  border-bottom: 1px solid #999999;
+  border-top: 1px solid #999999;
+  text-align: center;
+  z-index: 2;
+}
+td.lessons-intervals {
+  border: 1px solid #999999;
+  vertical-align: top;
+}
+td.lessons {
+  border: 1px solid #999999;
+  vertical-align: top;
+}
+.no-lessons {
+  text-align: center;
+  font-size: 2em;
+}
+
+a.lesson-week-cell, a:hover.lesson-week-cell {
+  color: #444444;
+  text-decoration: none;
+}
+
+/* vertical align */
+.block {
+  width: 100%;
+  display: -moz-inline-stack;
+  display: inline-block;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+.block span {
+  display: block;
+}
+.iefix {
+  display: none;
+}
+
+/* lesson types: */
+.interval {
+  background-color: #fffecc;
+  color: #444444;
+}
+.lektsiya {
+  color: #444444;
+  font-weight: bold;
+  background-color: #ccffce;
+}
+.seminar {
+  color: #444444;
+  font-weight: normal;
+  background-color: #ccecff;
+}
+.sdacha {
+  color: #444444;
+  font-weight: normal;
+  font-style: italic;
+  background-color: #ffeccc;
+}
+.praktika {
+  color: #444444;
+  font-weight: normal;
+  /*text-decoration: underline;*/
+  background-color: #ecdbff;
+}
+.konsultatsiya {
+  color: #444444;
+  font-weight: bold;
+  font-style: italic;
+  background-color: #ffd7de;
+}
+/* end lesson types */
+.room {
+  color: #0000dd;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+}
+.lessons-grid
+{
+  /*position: absolute;*/
+  width: 670px;
+  border-top: 1px dashed #eeeeee;
+  z-index: 0;
+}
+.lesson-day-cell
+{
+  font-size: 13px;
+}

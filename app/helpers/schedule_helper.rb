@@ -51,6 +51,7 @@ module ScheduleHelper
   def lessons_column(collection, options = {})
   # draws rectangles for lessons, putting the HTML returned by block into them
     return "" if collection.blank?
+    borders_width = options[:borders_width] || 2
     html = ""
     collection.each_with_index do |item, i|
       height = (item.end_time - item.start_time)/Lesson::SECONDS_PER_PIXEL
@@ -69,7 +70,7 @@ module ScheduleHelper
       inherent_class = options[:class]
       inherent_class += " " if inherent_class
 
-      div_style = "line-height: #{height - 2}px; margin-top: #{margin_top}px; margin-bottom: #{margin_bottom}px"
+      div_style = "line-height: #{height - borders_width}px; margin-top: #{margin_top}px; margin-bottom: #{margin_bottom}px"
       div_class = "#{type_class}#{inherent_class}container"
       html +=
         content_tag(:div, :class => div_class, :style => div_style) do

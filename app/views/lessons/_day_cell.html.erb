@@ -1,5 +1,6 @@
-<%# FIXME: achtung! margin-tops disappeared after table-in-table refactoring! %>
+<span class="lesson-day-cell">
 <%= link_to format_time( lesson.start_time, :date => false) + " - " + format_time( lesson.end_time, :date => false ),
             lesson_path( lesson)  %>
 <br/><%= link_to_subject_type lesson.subject_type, true, :subject, :lesson_type %>
 <br/><%=h lesson.room %>
+</span>
