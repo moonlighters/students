@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :discussions
+
   map.resources :lesson_subjects, :as => "subjects",
                                   :path_prefix => "schedule"
 

@@ -1,0 +1,10 @@
+  <% semantic_form_for resource do |f| %>
+    <%= f.errors_on :base %>
+
+    <% f.inputs do %>
+      <%= f.input :message, :input_html => { :rows => 3, :cols => 40 } %>
+    <% end %>
+    <% f.buttons do%>
+      <%= f.commit_button( resource.new_record? ? "Создать" : "Обновить" ) %>
+    <% end -%>
+  <% end %>

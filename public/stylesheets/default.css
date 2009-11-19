@@ -82,6 +82,20 @@ body {
   padding: 3px;
 }
 
+/**********  DISCUSSIONS  *************/
+
+.discussions-list {
+  list-style: none;
+}
+
+.discussions-list li {
+  margin: 8px 0 8px 15px;
+}
+
+.discussion-message {
+  font-size: 120%;
+}
+
 /********** S H E D U L E *************/
 
 .lessons-table {

@@ -61,3 +61,9 @@ Factory.define :lesson do |l|
   l.odd_weeks nil
   l.room "429"
 end
+
+Factory.define :discussion do |d|
+  d.message "бла-бла-бла!"
+  d.association :owner, :factory => :user
+end
+

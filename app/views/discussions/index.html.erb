@@ -1,0 +1,13 @@
+<% title "Поговорим" -%>
+<% select_navitem :discussions -%>
+
+<div class="narrow-part">
+  <h2>Последние дискуссии</h2>
+  <p><%= link_to "Начать дискуссию", new_discussion_path %></p>
+  <%= render "form" %>
+
+  <ul class="discussions-list">
+    <%= render collection %>
+  </ul>
+</div>
+

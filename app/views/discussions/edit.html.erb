@@ -1,0 +1,9 @@
+<% title "Поговорим" -%>
+<% select_navitem :discussions -%>
+
+<div class="narrow-part">
+  <h2>Редактировать дискуссию</h2>
+  <%= render "form" %>
+  <%= link_to 'Удалить', resource_path, :confirm => "Вы действительно хотите безвозвратно удалить дискуссию?", :method => :delete %> |
+  <%= link_to "Назад", resource_path %>
+</div>

@@ -1,0 +1,11 @@
+<% title "Поговорим" -%>
+<% select_navitem :discussions -%>
+
+<div class="narrow-part">
+  <h2><%= link_to_user resource.owner -%> говорит следующее..</h2>
+  <p class="discussion-message">
+    <%=h resource.message %>
+  </p>
+  <%= link_to "Редактировать", edit_resource_path %> |
+  <%= link_to "Назад", collection_path %>
+</div>

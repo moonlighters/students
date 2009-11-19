@@ -8,6 +8,7 @@ ru:
       teacher: Преподаватель
       lesson subject type: Тип занятия
       lesson: Занятие
+      discussion: Дискуссия
     attributes:
       user:
         nickname: Ник
@@ -51,6 +52,8 @@ ru:
         everyweek: Каждую неделю?
         odd_weeks: Если не каждую, то по нечётным?
         room: Аудитория
+      discussion:
+        message: Сообщение
 
   authlogic:
     error_messages:
