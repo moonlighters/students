@@ -184,10 +184,8 @@ a.lesson-week-cell, a:hover.lesson-week-cell {
 }
 .lessons-grid
 {
-  /*position: absolute;*/
-  width: 670px;
+  width: 100px;
   border-top: 1px dashed #eeeeee;
-  z-index: 0;
 }
 .lesson-day-cell
 {

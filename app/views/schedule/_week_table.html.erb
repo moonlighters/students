@@ -1,8 +1,4 @@
-<div style="width:670px;">
-  <div style="z-index: 1; position: relative; top: 32px">
-    <% lessons_column Lesson::INTERVALS, :class => "lessons-grid", :borders_width => 1 %>
-  </div>
-  <div style="z-index: 2; position: relative; top: -433px;">
+<div style="width:678px;">
     <table class="lessons-table" style="position: relative">
       <tbody>
         <col width="70px"/><col/>
@@ -28,11 +24,22 @@
             <% end %>
           </td>
 
+          <% interval_height = Lesson::DURATION / Lesson::SECONDS_PER_PIXEL %>
+          <% break_height = Lesson::BREAK_DURATION / Lesson::SECONDS_PER_PIXEL %>
+          <% all_intervals_height = 7*interval_height + 6*break_height - 2 %>
+          <% all_but_one_intervals_height = all_intervals_height - interval_height - break_height %>
           <% 0.upto 5 do |i|  %>
             <td class="lessons" width="100px">
-              <% lessons_column @lessons_batches[i], :class => "lesson-div", :apply_style => true do |lesson, index| %>
-                <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
-              <% end %>
+              <div style="height: <%= all_but_one_intervals_height.to_i %>px">
+                <div style="z-index: 1; position: relative; height: <%= all_but_one_intervals_height.to_i %>px;">
+                  <% lessons_column Lesson::INTERVALS[1..-1], :class => "lessons-grid", :borders_width => 1 %>
+                </div>
+                <div style="z-index: 2; position: relative; top: <%= -all_intervals_height.to_i + 1 %>px;">
+                  <% lessons_column @lessons_batches[i], :class => "lesson-div", :apply_style => true do |lesson, index| %>
+                    <%= render :partial => "lessons/week_cell", :locals => {:lesson => lesson} %>
+                  <% end %>
+                </div>
+              </div>
             </td>
           <% end %>
         </tr>

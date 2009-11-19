@@ -78,8 +78,8 @@ module ScheduleHelper
             content_tag( :span ) do
               block_given? ? yield( item, i ) : ""
             end
-          end +
-          content_tag( :span, "&nbsp;" ,:class => "iefix" )
+          end# +
+          #content_tag( :span, "&nbsp;" ,:class => "iefix" )
         end
     end
     concat html
