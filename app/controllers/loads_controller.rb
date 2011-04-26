@@ -21,6 +21,7 @@ class LoadsController < InheritedResources::Base
 
       if need_redirect && !splitted.empty?
         redirect_to load_tags_path( splitted * ", " )
+        return
       end
       
 
